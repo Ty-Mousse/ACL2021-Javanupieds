@@ -6,6 +6,14 @@ public class GameEngine {
 		
 	}
 	
+	public void update() {
+		
+	}
+	
+	public void display() {
+		
+	}
+	
 	public void start() {
 		while(true) {
 			
