@@ -20,12 +20,12 @@ public class Level {
 	}
 
 	public List<List<Element>> getLevel() {
-<<<<<<< Updated upstream
-=======
 		for(int i=0; i<4; i++){
 			i+=1;
+			if(i>3) {
+				i+=4;
+			}
 		}
->>>>>>> Stashed changes
 		return level;
 	}
 
