@@ -1,8 +1,6 @@
-package game;
+package engine;
 
 import java.io.IOException;
-
-import Game;
 
 public class Main {
 

@@ -1,4 +1,6 @@
-package game;
+package engine;
+
+import java.io.IOException;
 
 import elements.Level;
 import elements.Player;
@@ -8,7 +10,7 @@ public class Game {
 	private Level level;
 	private Player player;
 	
-	public Game() {
+	public Game() throws IOException {
 		this.level = new Level("src/level.txt");
 		this.player = new Player(10, 10);
 	}
