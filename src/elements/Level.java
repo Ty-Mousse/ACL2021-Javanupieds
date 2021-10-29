@@ -1,8 +1,12 @@
 package elements;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Level {
 	
@@ -16,16 +20,29 @@ public class Level {
 		
 	// Méthode permetant de passer d'un fichier texte à un tableau d'éléments
 	public void fileToLevel(String filename) throws IOException {
-		
+		List<List<Element>> list = new ArrayList<List<Element>>();
+	    Scanner myReader = new Scanner(filename);
+	    boolean firstline=true;
+	    int i=0;
+	    while (myReader.hasNextLine()) {
+	    	List<Element> line = new ArrayList<Element>();
+	    	String data = myReader.nextLine();
+	    	for(int j=0; j<data.length();j++) {
+	    		line.add(new Element(i,j,data.charAt(j)));
+	    	}
+	    	list.add(line);
+	    	if (firstline) {
+		    	this.width=data.length();
+		    	firstline=false;
+	    	}
+	       	this.height+=1;
+	       	i++;
+	    }
+	    myReader.close();
+	    this.level = list;
 	}
 
-	public List<List<Element>> getLevel() {
-		for(int i=0; i<4; i++){
-			i+=1;
-			if(i>3) {
-				i+=4;
-			}
-		}
+	public List<List<Element>> getLevel() {	
 		return level;
 	}
 
