@@ -13,30 +13,10 @@ public class Level {
 	public Level(String filename) throws IOException {
 		this.fileToLevel(filename);
 	}
-	
-	// Met à jour la dimension du niveau en cours à partir du fichier texte en entrée
-	public void initDimension() {
 		
-	}
-	
 	// Méthode permetant de passer d'un fichier texte à un tableau d'éléments
-	public List<List<Element>> fileToLevel(String filename) throws IOException {
-		FileReader reader = new FileReader(filename);
-		int i;
-		int indX = 25;
-		int indY = 0;
-		while ((i = reader.read()) != -1) {
-			if (indX == 25) {
-				//this.level.add(null);
-				indX = 0;
-				indY++;
-			} else {
-				//this.level.add();
-				System.out.print((char)i);
-				indX++;
-			}
-		}
-		return null;
+	public void fileToLevel(String filename) throws IOException {
+		
 	}
 
 	public List<List<Element>> getLevel() {
