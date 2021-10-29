@@ -25,7 +25,9 @@ public class Game {
 	}
 	
 	public void update() {
-		
+		for (int i = 0; i < 1; i++) {
+			System.out.println("test");
+		}
 	}
 	
 	public void render() {
