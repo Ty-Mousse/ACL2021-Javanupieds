@@ -21,13 +21,14 @@ public class Level {
 	// Méthode permetant de passer d'un fichier texte à un tableau d'éléments
 	public void fileToLevel(String filename) throws IOException {
 		List<List<Element>> list = new ArrayList<List<Element>>();
-	    Scanner myReader = new Scanner(filename);
+		File file = new File(filename);
+	    Scanner myReader = new Scanner(file);
 	    boolean firstline=true;
 	    int i=0;
 	    while (myReader.hasNextLine()) {
-	    	List<Element> line = new ArrayList<Element>();
 	    	String data = myReader.nextLine();
-	    	for(int j=0; j<data.length();j++) {
+	    	List<Element> line = new ArrayList<Element>();
+	    	for (int j = 0; j < data.length(); j++) {
 	    		line.add(new Element(i,j,data.charAt(j)));
 	    	}
 	    	list.add(line);
