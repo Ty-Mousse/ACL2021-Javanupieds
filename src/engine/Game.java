@@ -1,9 +1,12 @@
 package engine;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Scanner;
 
 import elements.Level;
 import elements.Player;
+import elements.Element;
 
 public class Game {
 	
@@ -17,21 +20,42 @@ public class Game {
 	
 	public void start() {
 		
-		while(true) {
-			this.update();
+		Scanner input = new Scanner(System.in);
+		
+		while(true /* à remplacer par la(les) condition(s) de fin de niveau */) {
 			this.render();
+			System.out.println("Déplacement (U/D/L/R) : ");
+			String key = input.nextLine();
+			this.update(key);
 		}
 		
 	}
 	
-	public void update() {
-		for (int i = 0; i < 1; i++) {
-			System.out.println("test");
+	public void update(String key) {
+		if (key == "U") {
+			this.player.setY(this.player.getY() + this.player.getVy());
+		} else if (key == "D") {
+			this.player.setY(this.player.getY() - this.player.getVy());
+		} else if (key == "L") {
+			this.player.setX(this.player.getX() - this.player.getVx());
+		} else if (key == "R") {
+			this.player.setX(this.player.getX() + this.player.getVx());
 		}
 	}
 	
 	public void render() {
-		
+		int player_x = this.player.getX();
+		int player_y = this.player.getY();
+		for (List<Element> line:this.level.getLevel()) {
+			for (Element element:line) {
+				if ((element.getX() == player_x) && (element.getY() == player_y)) {
+					System.out.print(this.player.getType());
+				} else {
+					System.out.print(element.getType());
+				}
+			}
+			System.out.print("\n");
+		}
 	}
 	
 	public Level getLevel() {

@@ -6,9 +6,10 @@ public class Element {
 	private int y; // Position en y de l'élément
 	private char type; // Charactère définissant le type de l'élément
 	
-	public Element(int x, int y) {
+	public Element(int x, int y, char type) {
 		this.x = x;
 		this.y = y;
+		this.type = type;
 	}
 
 	public void setX(int x) {
