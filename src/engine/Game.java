@@ -24,6 +24,8 @@ public class Game {
 		
 		while(true /* à remplacer par la(les) condition(s) de fin de niveau */) {
 			this.render();
+			String data = "Position joueur : (" + this.player.getX() + ", " + this.player.getY() + ")";
+			System.out.println(data);
 			System.out.println("Déplacement (U/D/L/R) : ");
 			String key = input.nextLine();
 			this.update(key);
