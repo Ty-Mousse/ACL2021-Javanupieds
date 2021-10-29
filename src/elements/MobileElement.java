@@ -15,7 +15,6 @@ public class MobileElement extends Element {
 		return vx;
 	}
 
-
 	public int getVy() {
 		return vy;
 	}
