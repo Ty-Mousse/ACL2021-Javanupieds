@@ -32,13 +32,13 @@ public class Game {
 	}
 	
 	public void update(String key) {
-		if (key == "U") {
-			this.player.setY(this.player.getY() + this.player.getVy());
-		} else if (key == "D") {
+		if (key.equals("U")) {
 			this.player.setY(this.player.getY() - this.player.getVy());
-		} else if (key == "L") {
+		} else if (key.equals("D")) {
+			this.player.setY(this.player.getY() + this.player.getVy());
+		} else if (key.equals("L")) {
 			this.player.setX(this.player.getX() - this.player.getVx());
-		} else if (key == "R") {
+		} else if (key.equals("R")) {
 			this.player.setX(this.player.getX() + this.player.getVx());
 		}
 	}

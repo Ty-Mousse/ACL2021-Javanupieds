@@ -29,7 +29,7 @@ public class Level {
 	    	String data = myReader.nextLine();
 	    	List<Element> line = new ArrayList<Element>();
 	    	for (int j = 0; j < data.length(); j++) {
-	    		line.add(new Element(i,j,data.charAt(j)));
+	    		line.add(new Element(j,i,data.charAt(j)));
 	    	}
 	    	list.add(line);
 	    	if (firstline) {
