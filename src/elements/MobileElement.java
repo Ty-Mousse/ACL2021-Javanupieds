@@ -1,4 +1,4 @@
-package rpgGame;
+package elements;
 
 public class MobileElement extends Element {
 
