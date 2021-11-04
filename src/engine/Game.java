@@ -34,7 +34,7 @@ public class Game {
 	}
 	
 	public void update(String key) {
-		if (key.equals("U")) {
+		if (key.equals("U")) { /* obsolète */
 			this.player.setY(this.player.getY() - this.player.getVy());
 		} else if (key.equals("D")) {
 			this.player.setY(this.player.getY() + this.player.getVy());
