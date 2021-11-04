@@ -35,8 +35,10 @@ public class Element {
 		x+=dx;
 		y+=dy;
 	}
-	public boolean isCollision() {
-		
+	public boolean inHitBox(int x, int y) { /* différente pour chaque élément différent,
+											donc à écrire dans les classes filles d'élément ? 
+											Renvoie faux dans le doute (aucune hitbox) (Rémi) */
+		return false
 	}
 	
 }
