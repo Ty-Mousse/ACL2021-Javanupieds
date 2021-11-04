@@ -30,5 +30,12 @@ public class Element {
 	public char getType() {
 		return type;
 	}
+	public void move(int dx, int dy) {
+		x+=dx;
+		y+=dy;
+	}
+	public boolean isCollision() {
+		
+	}
 	
 }
