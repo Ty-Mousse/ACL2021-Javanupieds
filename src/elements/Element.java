@@ -31,7 +31,10 @@ public class Element {
 	public char getType() {
 		return type;
 	}
-	public void move(int dx, int dy) {
+	public void move(int dx, int dy) { /* Est-ce utile ? Les déplacements ne devraient pas être
+	faits de cette manière il me semble. On détermine la position d'arrivée et on met à jour 
+	x et y, il ne devrait pas y avoir de notion de distance de déplacement au sein de la classe
+	Element. A discuter ! */
 		x+=dx;
 		y+=dy;
 	}
