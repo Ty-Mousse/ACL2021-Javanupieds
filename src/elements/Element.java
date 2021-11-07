@@ -54,6 +54,9 @@ public class Element {
 		 * mouvement avant de l'effectuer réellement (pas comme dans inHitBox).
 		 */
 		
+		List<List<Integer>> HitBox = new List<List<Integer>>;
+		return HitBox;
+		
 	}
 	
 }
