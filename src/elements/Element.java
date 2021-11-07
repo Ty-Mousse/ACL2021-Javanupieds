@@ -38,7 +38,22 @@ public class Element {
 	public boolean inHitBox(int x, int y) { /* différente pour chaque élément différent,
 											donc à écrire dans les classes filles d'élément ? 
 											Renvoie faux dans le doute (aucune hitbox) (Rémi) */
+		/**
+		 * Vérifie que le point (x,y) se trouve dans la hitbox de l'élément.
+		 */
 		return false
+	}
+	
+	public List<List<Integer>> getHitBox(int x, int y){ /* idem inHitBox */
+		/**
+		 * Renvoie la liste des points qui forment la surface de la hitbox
+		 * de l'élément s'il se trouve au point (x,y).
+		 * 
+		 * ATTENTION, on utilise pas la position réelle de l'élement (this.x, this.y)
+		 * mais une position (x,y) théorique passée en paramètre. Permet de vérifier une
+		 * mouvement avant de l'effectuer réellement (pas comme dans inHitBox).
+		 */
+		
 	}
 	
 }
