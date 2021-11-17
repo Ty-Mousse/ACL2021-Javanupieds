@@ -38,13 +38,13 @@ public class Element {
 		x+=dx;
 		y+=dy;
 	}
-	public boolean inHitBox(int x, int y) { /* différente pour chaque élément différent,
+/*	public boolean inHitBox(int x, int y) { /* différente pour chaque élément différent,
 											donc à écrire dans les classes filles d'élément ? 
 											Renvoie faux dans le doute (aucune hitbox) (Rémi) */
 		/**
 		 * Vérifie que le point (x,y) se trouve dans la hitbox de l'élément.
-		 */
-		return false
+		 **/
+/*		return false
 	}
 	
 	public List<List<Integer>> getHitBox(int x, int y){ /* idem inHitBox */
@@ -57,9 +57,9 @@ public class Element {
 		 * mouvement avant de l'effectuer réellement (pas comme dans inHitBox).
 		 */
 		
-		List<List<Integer>> HitBox = new List<List<Integer>>;
+/*		List<List<Integer>> HitBox = new List<List<Integer>>;
 		return HitBox;
 		
-	}
+	}*/
 	
 }
