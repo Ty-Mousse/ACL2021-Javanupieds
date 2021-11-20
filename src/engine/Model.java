@@ -41,11 +41,6 @@ public class Model extends JPanel implements ActionListener {
 	private int pacman_x, pacman_y, pacmand_x, pacmand_y;
 	private int req_dx, req_dy;
 	
-	private final int validSpeeds[] = {1,2,3,4,6,8};
-	private final int maxSpeed =6;
-	private int currentSpeed = 3;
-	private short [] screenData;
-	private Timer timer;
 	
 	public final short levelData[] = {
     	19, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 22,
@@ -65,6 +60,12 @@ public class Model extends JPanel implements ActionListener {
         25, 24, 24, 24, 26, 24, 24, 24, 24, 24, 24, 24, 24, 24, 28	
 	};
 	
+	private final int validSpeeds[] = {1,2,3,4,6,8};
+	private final int maxSpeed =6;
+	private int currentSpeed = 3;
+	private short [] screenData;
+	private Timer timer;
+	
 	public Model() {
 		loadImages();
 		initVariables();
@@ -74,12 +75,12 @@ public class Model extends JPanel implements ActionListener {
 	}
 	
 	private void loadImages() {
-		up = new ImageIcon("/src/images/up.gif").getImage();//Make that for all images
-		down = new ImageIcon("/src/images/down.gif").getImage();//Make that for all images
-		left = new ImageIcon("/src/images/left.gif").getImage();//Make that for all images
-		right = new ImageIcon("/src/images/right.gif").getImage();//Make that for all images
-		heart = new ImageIcon("/src/images/heart.png").getImage();//Make that for all images
-		ghost = new ImageIcon("/src/images/ghost.gif").getImage();//Make that for all images
+		up = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\up.gif").getImage();//Make that for all images
+		down = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\down.gif").getImage();//Make that for all images
+		left = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\left.gif").getImage();//Make that for all images
+		right = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\right.gif").getImage();//Make that for all images
+		heart = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\heart.png").getImage();//Make that for all images
+		ghost = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\ghost.gif").getImage();//Make that for all images
 	}
 	
 	private void initVariables() {
@@ -98,30 +99,17 @@ public class Model extends JPanel implements ActionListener {
 		
 	}
 	
-	private void initGame() {
-		lives = 3;
-		score = 0;
-		initLevel();
-		nGhosts = 2;
-		currentSpeed=3;
-	}
-	
-	private void initLevel() {
-		for(int i=0;i<nBlocks*nBlocks;i++) {
-			screenData[i]=levelData[i];
-		}
-	}
-	
 	private void playGame(Graphics2D g2d) {
 		if (dying) {
 			death();
-		}else {
+		} else {
 			movePacman();
 			drawPacman(g2d);
 			moveGhosts(g2d);
 			checkMaze();
 		}
 	}
+
 	
     private void showIntroScreen(Graphics2D g2d) {
     	 
@@ -141,53 +129,56 @@ public class Model extends JPanel implements ActionListener {
         }
     }
 	
-	public void  movePacman() {
-		int pos = 0;
-		short ch = 0;
-		
-		if(pacman_x%blockSize ==0 && pacman_y % blockSize ==0) {
-			pos = pacman_x / blockSize + nBlocks * (int) (pacman_y / blockSize);
-					ch=screenData[pos];
-		}
-		if ((ch & 16) !=0) {
-			screenData[pos] = (short) (ch & 15);
-			score++;
-		}
-		if (req_dx != 0 || req_dy !=0) {
-			if(!((req_dx == -1 && req_dy ==0 && (ch & 1) != 0)
-			|| (req_dx == 1 && req_dy ==0 && (ch & 4) != 0)
-			|| (req_dx == 0 && req_dy ==-1 && (ch & 2) != 0)
-			|| (req_dx == 0 && req_dy ==1 && (ch & 8) != 0))) {
-				pacmand_x = req_dx;
-				pacmand_y = req_dy;
-			}
-		}
-		
-		if(!((pacmand_x == -1 && pacmand_y ==0 && (ch & 1) != 0)
-		|| (pacmand_x == 1 && pacmand_y ==0 && (ch & 4) != 0)
-		|| (pacmand_x == 0 && pacmand_y ==-1 && (ch & 2) != 0)
-		|| (pacmand_x == 0 && pacmand_y ==1 && (ch & 8) != 0))) {
-			pacmand_x = 0;
-			pacmand_y = 0;
-		}
-		
-		pacman_x = pacman_x+ pacmanSpeed + pacmand_x;
-		pacman_y = pacman_y+ pacmanSpeed + pacmand_y;
-	}
+    private void movePacman() {
+
+        int pos;
+        short ch;
+
+        if (pacman_x % blockSize == 0 && pacman_y % blockSize == 0) {
+            pos = pacman_x / blockSize + nBlocks * (int) (pacman_y / blockSize);
+            ch = screenData[pos];
+
+            if ((ch & 16) != 0) {
+                screenData[pos] = (short) (ch & 15);
+                score++;
+            }
+
+            if (req_dx != 0 || req_dy != 0) {
+                if (!((req_dx == -1 && req_dy == 0 && (ch & 1) != 0)
+                        || (req_dx == 1 && req_dy == 0 && (ch & 4) != 0)
+                        || (req_dx == 0 && req_dy == -1 && (ch & 2) != 0)
+                        || (req_dx == 0 && req_dy == 1 && (ch & 8) != 0))) {
+                    pacmand_x = req_dx;
+                    pacmand_y = req_dy;
+                }
+            }
+
+            // Check for standstill
+            if ((pacmand_x == -1 && pacmand_y == 0 && (ch & 1) != 0)
+                    || (pacmand_x == 1 && pacmand_y == 0 && (ch & 4) != 0)
+                    || (pacmand_x == 0 && pacmand_y == -1 && (ch & 2) != 0)
+                    || (pacmand_x == 0 && pacmand_y == 1 && (ch & 8) != 0)) {
+                pacmand_x = 0;
+                pacmand_y = 0;
+            }
+        } 
+        pacman_x = pacman_x + pacmanSpeed * pacmand_x;
+        pacman_y = pacman_y + pacmanSpeed * pacmand_y;
+    }
+
+    private void drawPacman(Graphics2D g2d) {
+        if (req_dx == -1) {
+        	g2d.drawImage(left, pacman_x + 1, pacman_y + 1, this);
+        } else if (req_dx == 1) {
+        	g2d.drawImage(right, pacman_x + 1, pacman_y + 1, this);
+        } else if (req_dy == -1) {
+        	g2d.drawImage(up, pacman_x + 1, pacman_y + 1, this);
+        } else {
+        	g2d.drawImage(down, pacman_x + 1, pacman_y + 1, this);
+        }
+    }
 	
-	public void drawPacman(Graphics2D g2d) {
-		if (req_dx == -1) {
-			g2d.drawImage(left,  pacman_x +1, pacman_y+1,this);
-		}else if (req_dx == 1) {
-			g2d.drawImage(right,  pacman_x +1, pacman_y+1,this);
-		}else if (req_dy == -1) {
-			g2d.drawImage(up,  pacman_x +1, pacman_y+1,this);
-		}else {
-			g2d.drawImage(down,  pacman_x +1, pacman_y+1,this);
-		}
-	}
-	
-	public void moveGhosts(Graphics2D g2d) {
+    private void moveGhosts(Graphics2D g2d) {
 		int pos;
 		int count;
 		for (int i =0; i<nGhosts;i++) {
@@ -245,19 +236,19 @@ public class Model extends JPanel implements ActionListener {
 		}
 	}
 	
-	public void drawGhost(Graphics2D g2d, int x, int y) {
+	private void drawGhost(Graphics2D g2d, int x, int y) {
 		g2d.drawImage(ghost, x, y, this);
 	}
 	
-	public void checkMaze() {
+	private void checkMaze() {
 		int i=0;
 		boolean finished =true;
 		
 		while(i<nBlocks * nBlocks && finished) {
-			if((screenData[i] & 48) !=0) {
+			if((screenData[i]) !=0) {
 			finished = false;
-			}
-		}i++;
+			}i++;
+		}
 		if (finished) {
 			score+=50;
 			
@@ -267,7 +258,8 @@ public class Model extends JPanel implements ActionListener {
 			if (currentSpeed < maxSpeed) {
 				currentSpeed++;
 			}
-		} initLevel();
+			initLevel();
+		} 
 	}
 	
 	private void death() {
@@ -277,35 +269,9 @@ public class Model extends JPanel implements ActionListener {
 		}
 		continueLevel();
 	}
-	
-	private void continueLevel() {
-		int dx=1;
-		int random;
-		
-		for(int i = 0; i<nGhosts;i++) {
-			ghost_y[i]=4*blockSize;
-			ghost_x[i]=4*blockSize;
-			ghost_dy[i]=0;
-			ghost_dx[i]=dx;
-			dx=-dx;
-			random= (int) (Math.random() * (currentSpeed + 1));
-			
-			if (random>currentSpeed) {
-				random= currentSpeed;
-			}
-			ghostSpeed[i]=validSpeeds[random];
-		}
-		
-		pacman_x = 7*nBlocks;
-		pacman_y = 11*nBlocks;
-		pacmand_x = 0;
-		pacmand_y = 0;
-		req_dx=0;
-		req_dy=0;
-		dying=false;
-	}
-	
-	public void drawMaze(Graphics2D g2d) {
+
+    private void drawMaze(Graphics2D g2d) {
+
         short i = 0;
         int x, y;
 
@@ -317,7 +283,7 @@ public class Model extends JPanel implements ActionListener {
                 
                 if ((levelData[i] == 0)) { 
                 	g2d.fillRect(x, y, blockSize, blockSize);
-                 }
+                }
 
                 if ((screenData[i] & 1) != 0) { 
                     g2d.drawLine(x, y, x, y + blockSize - 1);
@@ -345,6 +311,48 @@ public class Model extends JPanel implements ActionListener {
                 i++;
             }
         }
+    }
+	
+	private void initGame() {
+		lives = 3;
+		score = 0;
+		initLevel();
+		nGhosts = 2;
+		currentSpeed=3;
+	}
+	
+	private void initLevel() {
+		for(int i=0;i<nBlocks*nBlocks;i++) {
+			screenData[i]=levelData[i];
+		}
+		continueLevel();
+	}
+	
+	private void continueLevel() {
+		int dx=1;
+		int random;
+		
+		for(int i = 0; i<nGhosts;i++) {
+			ghost_y[i]=4*blockSize; //start position
+			ghost_x[i]=4*blockSize;
+			ghost_dy[i]=0;
+			ghost_dx[i]=dx;
+			dx=-dx;
+			random= (int) (Math.random() * (currentSpeed + 1));
+			
+			if (random>currentSpeed) {
+				random= currentSpeed;
+			}
+			ghostSpeed[i]=validSpeeds[random];
+		}
+		
+		pacman_x = 7*blockSize; //start position
+		pacman_y = 11*blockSize;
+		pacmand_x = 0; //reset direction move
+		pacmand_y = 0;
+		req_dx=0; //reset direction controls
+		req_dy=0;
+		dying=false;
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -363,6 +371,7 @@ public class Model extends JPanel implements ActionListener {
 			showIntroScreen(g2d);
 		}
 		Toolkit.getDefaultToolkit().sync();
+		g2d.dispose();
 	}
 
 	class TAdapter extends KeyAdapter{
@@ -391,16 +400,15 @@ public class Model extends JPanel implements ActionListener {
 					inGame = false;
 				}
 			} else {
-				if (key == KeyEvent.VK_SPACE) {
+				if(key == KeyEvent.VK_SPACE) {
 					inGame=true;
 					initGame();
-				}
 			}
 		}
 	}
-
+}
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		repaint();
 		
 	}
