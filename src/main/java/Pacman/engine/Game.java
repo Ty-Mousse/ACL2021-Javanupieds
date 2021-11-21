@@ -48,13 +48,11 @@ public class Game {
 	public void render() {
 		int player_x = this.player.getX();
 		int player_y = this.player.getY();
-		for (List<Element> line:this.level.getLevel()) {
-			for (Element element:line) {
-				if ((element.getX() == player_x) && (element.getY() == player_y)) {
-					System.out.print(this.player.getType());
-				} else {
-					System.out.print(element.getType());
-				}
+		for (Element element : this.level.getLevel()) {
+			if ((element.getX() == player_x) && (element.getY() == player_y)) {
+				System.out.print(this.player.getType());
+			} else {
+				System.out.print(element.getType());
 			}
 			System.out.print("\n");
 		}
@@ -68,4 +66,9 @@ public class Game {
 		return player;
 	}
 	
+	public char getObstacle(int x, int y) throws Exception {
+		Element res = this.level.getElement(x, y);
+		return res.getType();
+		
+	}
 }
