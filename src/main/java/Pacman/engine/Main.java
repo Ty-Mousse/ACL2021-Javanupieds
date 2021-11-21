@@ -1,4 +1,4 @@
-package engine;
+package main.java.Pacman.engine;
 
 import java.io.IOException;
 

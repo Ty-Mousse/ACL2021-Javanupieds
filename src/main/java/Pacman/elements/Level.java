@@ -1,4 +1,4 @@
-package elements;
+package main.java.Pacman.elements;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Level {
 	
-	private List<List<Element>> level; // Tableau d'éléments définissant le niveau en cours
+	private List<List<Element>> level; // Tableau d'elements definissant le niveau en cours
 	private int width; // Largeur du niveau en case
 	private int height; // Longueur du niveau en case
 	
@@ -18,7 +18,7 @@ public class Level {
 		this.fileToLevel(filename);
 	}
 		
-	// Méthode permetant de passer d'un fichier texte à un tableau d'éléments
+	// Methode permetant de passer d'un fichier texte a un tableau d'elements
 	public void fileToLevel(String filename) throws IOException {
 		List<List<Element>> list = new ArrayList<List<Element>>();
 		File file = new File(filename);

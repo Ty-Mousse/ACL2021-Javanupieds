@@ -1,4 +1,4 @@
-package elements;
+package main.java.Pacman.elements;
 
 public class Player extends MobileElement{
 	

@@ -1,12 +1,12 @@
-package engine;
+package main.java.Pacman.engine;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import elements.Level;
-import elements.Player;
-import elements.Element;
+import main.java.Pacman.elements.Level;
+import  main.java.Pacman.elements.Player;
+import  main.java.Pacman.elements.Element;
 
 public class Game {
 	
@@ -22,11 +22,11 @@ public class Game {
 		
 		Scanner input = new Scanner(System.in);
 		
-		while(true /* à remplacer par la(les) condition(s) de fin de niveau */) {
+		while(true /* a remplacer par la(les) condition(s) de fin de niveau */) {
 			this.render();
 			String data = "Position joueur : (" + this.player.getX() + ", " + this.player.getY() + ")";
 			System.out.println(data);
-			System.out.println("Déplacement (U/D/L/R) : ");
+			System.out.println("Deplacement (U/D/L/R) : ");
 			String key = input.nextLine();
 			this.update(key);
 		}
@@ -34,7 +34,7 @@ public class Game {
 	}
 	
 	public void update(String key) {
-		if (key.equals("U")) { /* obsolète */
+		if (key.equals("U")) { /* obsolete */
 			this.player.setY(this.player.getY() - this.player.getVy());
 		} else if (key.equals("D")) {
 			this.player.setY(this.player.getY() + this.player.getVy());

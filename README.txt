@@ -13,3 +13,6 @@ Clément : boucles du jeu (classe game)
 Paul : isFranchissable + Player + NPC
 Xavier : interface graphique (classe interface)
 Rémi : getobstacle (classe game), maven
+
+pour lancer le programme entrer la commande (utilise maven) :
+java -cp target/Pacman-1.0.jar main.java.Pacman.engine.Main

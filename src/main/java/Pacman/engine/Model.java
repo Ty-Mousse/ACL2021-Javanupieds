@@ -1,4 +1,4 @@
-package engine;
+package main.java.Pacman.engine;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -85,7 +85,7 @@ public class Model extends JPanel implements ActionListener {
 	
 	private void initVariables() {
 		screenData = new short[nBlocks*nBlocks];
-		d = new Dimension(400,400);//pas sur que c'est height et width a try
+		d = new Dimension(400,400);//pas sur que c est height et width a try
 		ghost_x = new int[maxGhosts];
 		ghost_dx = new int[maxGhosts];
 		ghost_y = new int[maxGhosts];
