@@ -75,12 +75,12 @@ public class Model extends JPanel implements ActionListener {
 	}
 	
 	private void loadImages() {
-		up = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\up.gif").getImage();//Make that for all images
-		down = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\down.gif").getImage();//Make that for all images
-		left = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\left.gif").getImage();//Make that for all images
-		right = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\right.gif").getImage();//Make that for all images
-		heart = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\heart.png").getImage();//Make that for all images
-		ghost = new ImageIcon("C:\\Users\\Utilisateur\\Documents\\GitHub\\ACL2021-Javanupieds\\src\\images\\ghost.gif").getImage();//Make that for all images
+		up = new ImageIcon("src\\main\\java\\Pacman\\images\\up.gif").getImage();//Make that for all images
+		down = new ImageIcon("src\\main\\java\\Pacman\\images\\down.gif").getImage();//Make that for all images
+		left = new ImageIcon("src\\main\\java\\Pacman\\images\\left.gif").getImage();//Make that for all images
+		right = new ImageIcon("src\\main\\java\\Pacman\\images\\right.gif").getImage();//Make that for all images
+		heart = new ImageIcon("src\\main\\java\\Pacman\\images\\heart.png").getImage();//Make that for all images
+		ghost = new ImageIcon("src\\main\\java\\Pacman\\images\\ghost.gif").getImage();//Make that for all images
 	}
 	
 	private void initVariables() {
