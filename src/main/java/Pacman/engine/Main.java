@@ -19,6 +19,9 @@ public class Main extends JFrame{
 		
 		/*Game game = new Game();
 		game.start();*/
+		int num = 26;
+		System.out.println((num & 2));
+		System.out.println((num & 8));
 		
 		Main pac = new Main();
 		pac.setVisible(true);

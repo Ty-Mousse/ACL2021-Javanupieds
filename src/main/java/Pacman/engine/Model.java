@@ -25,7 +25,7 @@ public class Model extends JPanel implements ActionListener {
 	private boolean dying = false;
 	
 	private final int blockSize = 24;
-	private final int nBlocks = 15;
+	private final int nBlocks = 12;
 	private final int screenSize = nBlocks*blockSize;
 	private final int maxGhosts = 4;
 	private final int pacmanSpeed = 6;
@@ -43,21 +43,18 @@ public class Model extends JPanel implements ActionListener {
 	
 	
 	public final short levelData[] = {
-    	19, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 22,
-        17, 16, 16, 16, 16, 24, 16, 16, 16, 16, 16, 16, 16, 16, 20,
-        25, 24, 24, 24, 28, 0, 17, 16, 16, 16, 16, 16, 16, 16, 20,
-        0,  0,  0,  0,  0,  0, 17, 16, 16, 16, 16, 16, 16, 16, 20,
-        19, 18, 18, 18, 18, 18, 16, 16, 16, 16, 24, 24, 24, 24, 20,
-        17, 16, 16, 16, 16, 16, 16, 16, 16, 20, 0,  0,  0,   0, 21,
-        17, 16, 16, 16, 16, 16, 16, 16, 16, 20, 0,  0,  0,   0, 21,
-        17, 16, 16, 16, 24, 16, 16, 16, 16, 20, 0,  0,  0,   0, 21,
-        17, 16, 16, 20, 0, 17, 16, 16, 16, 16, 18, 18, 18, 18, 20,
-        17, 24, 24, 28, 0, 25, 24, 24, 16, 16, 16, 16, 16, 16, 20,
-        21, 0,  0,  0,  0,  0,  0,   0, 17, 16, 16, 16, 16, 16, 20,
-        17, 18, 18, 22, 0, 19, 18, 18, 16, 16, 16, 16, 16, 16, 20,
-        17, 16, 16, 20, 0, 17, 16, 16, 16, 16, 16, 16, 16, 16, 20,
-        17, 16, 16, 20, 0, 17, 16, 16, 16, 16, 16, 16, 16, 16, 20,
-        25, 24, 24, 24, 26, 24, 24, 24, 24, 24, 24, 24, 24, 24, 28	
+	    	19, 26, 18, 26, 26, 18, 26, 26, 26, 26, 26, 22,
+	    	21, 0, 21, 0, 0, 21, 0, 0, 0, 0, 0, 21,
+	    	21, 0, 21, 0, 0, 17, 26, 26, 26, 26, 26, 20,
+	    	21, 0, 21, 0, 0, 21, 0, 0, 0, 0, 0, 21,
+	    	17, 26, 24, 26, 26, 16, 26, 18, 26, 18, 26, 20,
+	    	21, 0, 0, 0, 0, 21, 0, 21, 0, 21, 0, 21,
+	    	21, 0, 0, 0, 0, 21, 0, 21, 0, 21, 0, 21,
+	    	21, 0, 19, 26, 26, 20, 0, 21, 0, 21, 0, 21,
+	    	21, 0, 21, 0, 0, 21, 0, 17, 26, 24, 26, 20,
+	    	21, 0, 21, 0, 0, 21, 0, 21, 0, 0, 0, 21,
+	    	21, 0, 21, 0, 0, 21, 0, 21, 0, 0, 0, 21,
+	    	25, 26, 24, 26, 26, 24, 26, 24, 26, 26, 26, 28
 	};
 	
 	private final int validSpeeds[] = {1,2,3,4,6,8};
@@ -245,8 +242,8 @@ public class Model extends JPanel implements ActionListener {
 		boolean finished =true;
 		
 		while(i<nBlocks * nBlocks && finished) {
-			if((screenData[i]) !=0) {
-			finished = false;
+			if((screenData[i] & 48) != 0) {
+				finished = false;
 			}i++;
 		}
 		if (finished) {
@@ -258,6 +255,7 @@ public class Model extends JPanel implements ActionListener {
 			if (currentSpeed < maxSpeed) {
 				currentSpeed++;
 			}
+			inGame=false;
 			initLevel();
 		} 
 	}
