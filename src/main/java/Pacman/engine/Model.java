@@ -29,9 +29,8 @@ public class Model extends JPanel implements ActionListener {
 	private final int screenSize = nBlocks*blockSize;
 	private final int pacmanSpeed = 6;
 	
-	private int nGhosts = 2;//initialisation
 	private int[] dx, dy;
-	private int[] ghost_x, ghost_y, ghost_dx, ghost_dy, ghostSpeed;
+	private int ghost_x, ghost_y, ghost_dx, ghost_dy, ghostSpeed;
 	
 	private Image ghost; //For the lives 
 	private Image up, down, left, right; //Pacman in every direction
@@ -68,21 +67,24 @@ public class Model extends JPanel implements ActionListener {
 	}
 	
 	private void loadImages() {
-		up = new ImageIcon("src\\main\\java\\Pacman\\images\\up.gif").getImage();//Make that for all images
-		down = new ImageIcon("src\\main\\java\\Pacman\\images\\down.gif").getImage();//Make that for all images
-		left = new ImageIcon("src\\main\\java\\Pacman\\images\\left.gif").getImage();//Make that for all images
-		right = new ImageIcon("src\\main\\java\\Pacman\\images\\right.gif").getImage();//Make that for all images
-		ghost = new ImageIcon("src\\main\\java\\Pacman\\images\\ghost.gif").getImage();//Make that for all images
+		/*
+		 * Load the images for the game all the image must be load
+		 */
+		up = new ImageIcon("src\\main\\java\\Pacman\\images\\up.gif").getImage();
+		down = new ImageIcon("src\\main\\java\\Pacman\\images\\down.gif").getImage();
+		left = new ImageIcon("src\\main\\java\\Pacman\\images\\left.gif").getImage();
+		right = new ImageIcon("src\\main\\java\\Pacman\\images\\right.gif").getImage();
+		ghost = new ImageIcon("src\\main\\java\\Pacman\\images\\ghost.gif").getImage();
 	}
 	
 	private void initVariables() {
 		screenData = new short[nBlocks*nBlocks];
-		d = new Dimension(400,400);//pas sur que c est height et width a try
-		ghost_x = new int[nGhosts];
-		ghost_dx = new int[nGhosts];
-		ghost_y = new int[nGhosts];
-		ghost_dy = new int[nGhosts];
-		ghostSpeed = new int[nGhosts];
+		d = new Dimension(400,400);
+		ghost_x = 0;
+		ghost_dx = 0;
+		ghost_y = 0;
+		ghost_dy = 0;
+		ghostSpeed = 0;
 		dx = new int[4];
 		dy = new int[4];
 		
@@ -99,7 +101,6 @@ public class Model extends JPanel implements ActionListener {
 			drawPacman(g2d);
 			moveGhosts(g2d);
 			checkMaze();
-			System.out.println(pacman_x+" "+pacman_y);
 		}
 	}
 
@@ -114,7 +115,9 @@ public class Model extends JPanel implements ActionListener {
 
 	
     private void movePacman() {
-
+    	/*
+    	 * Check if the pacman can move and if he can we update it position
+    	 */
         int pos;
         short ch;
 
@@ -174,73 +177,75 @@ public class Model extends JPanel implements ActionListener {
     }
 	
     private void moveGhosts(Graphics2D g2d) {
+    	/*
+    	 * Check if the ghost can go to this direction and if he can we update it position
+    	 */
 		int pos;
 		int count;
-		for (int i =0; i<nGhosts;i++) {
-			if (ghost_x[i]%blockSize ==0 && ghost_y[i] % blockSize ==0) {
-				pos = ghost_x[i] / blockSize + nBlocks * (int) (ghost_y[i] / blockSize);
-				count=0;
-				if((screenData[pos] & 1) == 0 && ghost_dx[i]!= 1) {
-					dx[count] = -1;
-					dy[count] =0;
-					count++;
+		if (ghost_x%blockSize ==0 && ghost_y % blockSize ==0) {
+			pos = ghost_x / blockSize + nBlocks * (int) (ghost_y / blockSize);
+			count=0;
+			if((screenData[pos] & 1) == 0 && ghost_dx!= 1) {
+				dx[count] = -1;
+				dy[count] =0;
+				count++;
+			}
+			if((screenData[pos] & 2) == 0 && ghost_dy!= 1) {
+				dx[count] = 0;
+				dy[count] =-1;
+				count++;
+			}
+			if((screenData[pos] & 4) == 0 && ghost_dx!=-1) {
+				dx[count] = 1;
+				dy[count] =0;
+				count++;
+			}
+			if((screenData[pos] & 8) == 0 && ghost_dy!=-1) {
+				dx[count] = 0;
+				dy[count] =1;
+				count++;
+			}
+			
+			if (count == 0) {
+				if ((screenData[pos] & 15)==15) {
+					ghost_dy=0;
+					ghost_dx=0;
+				}else {
+					ghost_dy=-ghost_dy;
+					ghost_dx=-ghost_dx;
 				}
-				if((screenData[pos] & 2) == 0 && ghost_dy[i]!= 1) {
-					dx[count] = 0;
-					dy[count] =-1;
-					count++;
-				}
-				if((screenData[pos] & 4) == 0 && ghost_dx[i]!=-1) {
-					dx[count] = 1;
-					dy[count] =0;
-					count++;
-				}
-				if((screenData[pos] & 8) == 0 && ghost_dy[i]!=-1) {
-					dx[count] = 0;
-					dy[count] =1;
-					count++;
+			}else {
+				count = (int) (Math.random()*count);
+				if (count>3) {
+					count=3;
 				}
 				
-				if (count == 0) {
-					if ((screenData[pos] & 15)==15) {
-						ghost_dy[i]=0;
-						ghost_dx[i]=0;
-					}else {
-						ghost_dy[i]=-ghost_dy[i];
-						ghost_dx[i]=-ghost_dx[i];
-					}
-				}else {
-					count = (int) (Math.random()*count);
-					if (count>3) {
-						count=3;
-					}
-					
-					ghost_dx[i]=dx[count];
-					ghost_dy[i]=dy[count];
-				}
-			}
-			ghost_x[i] = ghost_x[i] + (ghost_dx[i]*ghostSpeed[i]);
-			ghost_y[i] = ghost_y[i] + (ghost_dy[i]*ghostSpeed[i]);
-	        if (ghost_x[i]>264) {
-	        	ghost_x[i]=0;
-	        }
-	        if (ghost_x[i]<0) {
-	        	ghost_x[i]=264;
-	        }
-	        if (ghost_y[i]>264) {
-	        	ghost_y[i]=0;
-	        }
-	        if (ghost_y[i]<0) {
-	        	ghost_y[i]=264;
-	        }
-			drawGhost(g2d,ghost_x[i]+1,ghost_y[i]+1);
-			
-			if (pacman_x > (ghost_x[i] - 12) && pacman_x < (ghost_x[i]+12)
-				&& pacman_y > (ghost_y[i] - 12) && pacman_y < (ghost_y[i]+12)
-				&& inGame) {
-				dying=true;
+				ghost_dx=dx[count];
+				ghost_dy=dy[count];
 			}
 		}
+		ghost_x = ghost_x + (ghost_dx*ghostSpeed);
+		ghost_y = ghost_y + (ghost_dy*ghostSpeed);
+        if (ghost_x>264) {
+        	ghost_x=0;
+        }
+        if (ghost_x<0) {
+        	ghost_x=264;
+        }
+        if (ghost_y>264) {
+        	ghost_y=0;
+        }
+        if (ghost_y<0) {
+        	ghost_y=264;
+        }
+		drawGhost(g2d,ghost_x+1,ghost_y+1);
+		
+		if (pacman_x > (ghost_x - 12) && pacman_x < (ghost_x+12)
+			&& pacman_y > (ghost_y - 12) && pacman_y < (ghost_y+12)
+			&& inGame) {
+			dying=true;
+		}
+
 	}
 	
 	private void drawGhost(Graphics2D g2d, int x, int y) {
@@ -248,6 +253,9 @@ public class Model extends JPanel implements ActionListener {
 	}
 	
 	private void checkMaze() {
+		/*
+		 * Check if the game is finished
+		 */
 		int i=0;
 		boolean finished =true;
 		
@@ -258,11 +266,7 @@ public class Model extends JPanel implements ActionListener {
 		}
 		if (finished) {
 			
-			if(nGhosts < nGhosts) {
-				nGhosts++;
-			}
 			inGame=false;
-			initLevel();
 		} 
 	}
 	
@@ -271,6 +275,12 @@ public class Model extends JPanel implements ActionListener {
 	}
 
     private void drawMaze(Graphics2D g2d) {
+    	/*
+    	 * Draw the maze : 
+    	 * With a coin : 18 top border, 17 left border, 20 right border, 24 bottom border, 16 no border, 19 top and left border, 25 bottom and left border
+    	 * 				 28 bottom and right border, 22 top and right border, 21 left and right border, 26 top and bottom border
+    	 * Without a coin: 0	
+    	 */
 
         short i = 0;
         int x, y;
@@ -314,27 +324,25 @@ public class Model extends JPanel implements ActionListener {
     }
 	
 	private void initGame() {
+		/*
+		 * initialize the game
+		 */
 		initLevel();
 	}
 	
 	private void initLevel() {
+		/*
+		 * Initialize the level
+		 */
 		for(int i=0;i<nBlocks*nBlocks;i++) {
 			screenData[i]=levelData[i];
 		}
-		continueLevel();
-	}
-	
-	private void continueLevel() {
-		int dx=1;
 		
-		for(int i = 0; i<nGhosts;i++) {
-			ghost_y[i]=4*blockSize; //start position
-			ghost_x[i]=4*blockSize;
-			ghost_dy[i]=0;
-			ghost_dx[i]=dx;
-			dx=-dx;
-			ghostSpeed[i]=3;
-		}
+		ghost_y=4*blockSize; //start position
+		ghost_x=4*blockSize;
+		ghost_dy=0;
+		ghost_dx=1;
+		ghostSpeed=3;
 		
 		pacman_x = 7*blockSize; //start position
 		pacman_y = 11*blockSize;
@@ -364,7 +372,9 @@ public class Model extends JPanel implements ActionListener {
 	}
 
 	class TAdapter extends KeyAdapter{
-		
+		/*
+		 * Get the key you pressed
+		 */
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
