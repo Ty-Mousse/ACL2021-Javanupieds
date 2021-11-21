@@ -27,15 +27,13 @@ public class Model extends JPanel implements ActionListener {
 	private final int blockSize = 24;
 	private final int nBlocks = 12;
 	private final int screenSize = nBlocks*blockSize;
-	private final int maxGhosts = 4;
 	private final int pacmanSpeed = 6;
 	
 	private int nGhosts = 2;//initialisation
-	private int lives, score; // nbr de vie + score
 	private int[] dx, dy;
 	private int[] ghost_x, ghost_y, ghost_dx, ghost_dy, ghostSpeed;
 	
-	private Image heart, ghost; //For the lives 
+	private Image ghost; //For the lives 
 	private Image up, down, left, right; //Pacman in every direction
 	
 	private int pacman_x, pacman_y, pacmand_x, pacmand_y;
@@ -57,9 +55,7 @@ public class Model extends JPanel implements ActionListener {
 	    	25, 26, 24, 18, 26, 24, 26, 24, 26, 18, 18, 28
 	};
 	
-	private final int validSpeeds[] = {1,2,3,4,6,8};
-	private final int maxSpeed =6;
-	private int currentSpeed = 3;
+
 	private short [] screenData;
 	private Timer timer;
 	
@@ -76,18 +72,17 @@ public class Model extends JPanel implements ActionListener {
 		down = new ImageIcon("src\\main\\java\\Pacman\\images\\down.gif").getImage();//Make that for all images
 		left = new ImageIcon("src\\main\\java\\Pacman\\images\\left.gif").getImage();//Make that for all images
 		right = new ImageIcon("src\\main\\java\\Pacman\\images\\right.gif").getImage();//Make that for all images
-		heart = new ImageIcon("src\\main\\java\\Pacman\\images\\heart.png").getImage();//Make that for all images
 		ghost = new ImageIcon("src\\main\\java\\Pacman\\images\\ghost.gif").getImage();//Make that for all images
 	}
 	
 	private void initVariables() {
 		screenData = new short[nBlocks*nBlocks];
 		d = new Dimension(400,400);//pas sur que c est height et width a try
-		ghost_x = new int[maxGhosts];
-		ghost_dx = new int[maxGhosts];
-		ghost_y = new int[maxGhosts];
-		ghost_dy = new int[maxGhosts];
-		ghostSpeed = new int[maxGhosts];
+		ghost_x = new int[nGhosts];
+		ghost_dx = new int[nGhosts];
+		ghost_y = new int[nGhosts];
+		ghost_dy = new int[nGhosts];
+		ghostSpeed = new int[nGhosts];
 		dx = new int[4];
 		dy = new int[4];
 		
@@ -112,20 +107,11 @@ public class Model extends JPanel implements ActionListener {
     private void showIntroScreen(Graphics2D g2d) {
     	 
     	String start = "Press SPACE to start";
+    	g2d.setFont(smallFont);
         g2d.setColor(Color.yellow);
         g2d.drawString(start, (screenSize)/4, 150);
     }
 
-    private void drawScore(Graphics2D g2d) {
-        g2d.setFont(smallFont);
-        g2d.setColor(new Color(5, 181, 79));
-        String s = "Score: " + score;
-        g2d.drawString(s, screenSize / 2 + 96, screenSize + 16);
-
-        for (int i = 0; i < lives; i++) {
-            g2d.drawImage(heart, i * 28 + 8, screenSize + 1, this);
-        }
-    }
 	
     private void movePacman() {
 
@@ -138,7 +124,6 @@ public class Model extends JPanel implements ActionListener {
 
             if ((ch & 16) != 0) {
                 screenData[pos] = (short) (ch & 15);
-                score++;
             }
 
             if (req_dx != 0 || req_dy != 0) {
@@ -272,13 +257,9 @@ public class Model extends JPanel implements ActionListener {
 			}i++;
 		}
 		if (finished) {
-			score+=50;
 			
-			if(nGhosts < maxGhosts) {
+			if(nGhosts < nGhosts) {
 				nGhosts++;
-			}
-			if (currentSpeed < maxSpeed) {
-				currentSpeed++;
 			}
 			inGame=false;
 			initLevel();
@@ -286,11 +267,7 @@ public class Model extends JPanel implements ActionListener {
 	}
 	
 	private void death() {
-		lives--;
-		if (lives ==0) {
-			inGame=false;
-		}
-		continueLevel();
+		inGame=false;
 	}
 
     private void drawMaze(Graphics2D g2d) {
@@ -337,11 +314,7 @@ public class Model extends JPanel implements ActionListener {
     }
 	
 	private void initGame() {
-		lives = 3;
-		score = 0;
 		initLevel();
-		nGhosts = 2;
-		currentSpeed=3;
 	}
 	
 	private void initLevel() {
@@ -353,7 +326,6 @@ public class Model extends JPanel implements ActionListener {
 	
 	private void continueLevel() {
 		int dx=1;
-		int random;
 		
 		for(int i = 0; i<nGhosts;i++) {
 			ghost_y[i]=4*blockSize; //start position
@@ -361,12 +333,7 @@ public class Model extends JPanel implements ActionListener {
 			ghost_dy[i]=0;
 			ghost_dx[i]=dx;
 			dx=-dx;
-			random= (int) (Math.random() * (currentSpeed + 1));
-			
-			if (random>currentSpeed) {
-				random= currentSpeed;
-			}
-			ghostSpeed[i]=validSpeeds[random];
+			ghostSpeed[i]=3;
 		}
 		
 		pacman_x = 7*blockSize; //start position
@@ -386,8 +353,7 @@ public class Model extends JPanel implements ActionListener {
 		g2d.fillRect(0, 0, d.width, d.height);
 		
 		drawMaze(g2d);
-		drawScore(g2d);
-		
+
 		if(inGame) {
 			playGame(g2d);
 		}else {
