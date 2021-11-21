@@ -32,17 +32,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-    <groupId>clojure-interop</groupId>
-    <artifactId>java.awt</artifactId>
-    <version>1.0.2</version>
-	</dependency>
-    
-    <dependency>
-  <groupId>io.github.duckasteroid.progress</groupId>
-  <artifactId>swing</artifactId>
-  <version>1.2.0</version>
-</dependency>
-            
+    <dependency></dependency>
   </dependencies>
 </project>

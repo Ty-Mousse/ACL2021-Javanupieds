@@ -47,7 +47,7 @@ public class Level {
 	}
 	
 	public Element getElement(int x, int y) throws Exception {
-		/*
+		/**
 		 * Prend en parametres des coordonnees x,y et renvoie l'element qui correspond.
 		 * Leve une exception si coo ne correspondent pas a la hauteur et largeur de la
 		 * grille.

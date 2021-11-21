@@ -67,6 +67,10 @@ public class Game {
 	}
 	
 	public char getObstacle(int x, int y) throws Exception {
+		/**
+		 * Prend en parametres des coordonnees et renvoie le type d'obstacle qui
+		 * correspond parmis ceux de l'objet this.level
+		 */
 		Element res = this.level.getElement(x, y);
 		return res.getType();
 		
