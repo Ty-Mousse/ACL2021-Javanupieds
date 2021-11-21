@@ -43,7 +43,7 @@ public class Model extends JPanel implements ActionListener {
 	
 	
 	public final short levelData[] = {
-	    	19, 26, 18, 26, 26, 18, 26, 26, 26, 26, 26, 22,
+	    	19, 26, 18, 24, 26, 18, 26, 26, 26, 24, 24, 22,
 	    	21, 0, 21, 0, 0, 21, 0, 0, 0, 0, 0, 21,
 	    	21, 0, 21, 0, 0, 17, 26, 26, 26, 26, 26, 20,
 	    	21, 0, 21, 0, 0, 21, 0, 0, 0, 0, 0, 21,
@@ -52,9 +52,9 @@ public class Model extends JPanel implements ActionListener {
 	    	21, 0, 0, 0, 0, 21, 0, 21, 0, 21, 0, 21,
 	    	21, 0, 19, 26, 26, 20, 0, 21, 0, 21, 0, 21,
 	    	21, 0, 21, 0, 0, 21, 0, 17, 26, 24, 26, 20,
-	    	21, 0, 21, 0, 0, 21, 0, 21, 0, 0, 0, 21,
-	    	21, 0, 21, 0, 0, 21, 0, 21, 0, 0, 0, 21,
-	    	25, 26, 24, 26, 26, 24, 26, 24, 26, 26, 26, 28
+	    	20, 0, 21, 0, 0, 21, 0, 21, 0, 0, 0, 17,
+	    	20, 0, 21, 0, 0, 21, 0, 21, 0, 0, 0, 17,
+	    	25, 26, 24, 18, 26, 24, 26, 24, 26, 18, 18, 28
 	};
 	
 	private final int validSpeeds[] = {1,2,3,4,6,8};
@@ -104,6 +104,7 @@ public class Model extends JPanel implements ActionListener {
 			drawPacman(g2d);
 			moveGhosts(g2d);
 			checkMaze();
+			System.out.println(pacman_x+" "+pacman_y);
 		}
 	}
 
@@ -158,9 +159,21 @@ public class Model extends JPanel implements ActionListener {
                 pacmand_x = 0;
                 pacmand_y = 0;
             }
-        } 
+        }
         pacman_x = pacman_x + pacmanSpeed * pacmand_x;
         pacman_y = pacman_y + pacmanSpeed * pacmand_y;
+        if (pacman_x>264) {
+        	pacman_x=0;
+        }
+        if (pacman_x<-5) {
+        	pacman_x=264;
+        }
+        if (pacman_y>264) {
+        	pacman_y=0;
+        }
+        if (pacman_y<-5) {
+        	pacman_y=264;
+        }
     }
 
     private void drawPacman(Graphics2D g2d) {
@@ -223,6 +236,18 @@ public class Model extends JPanel implements ActionListener {
 			}
 			ghost_x[i] = ghost_x[i] + (ghost_dx[i]*ghostSpeed[i]);
 			ghost_y[i] = ghost_y[i] + (ghost_dy[i]*ghostSpeed[i]);
+	        if (ghost_x[i]>264) {
+	        	ghost_x[i]=0;
+	        }
+	        if (ghost_x[i]<0) {
+	        	ghost_x[i]=264;
+	        }
+	        if (ghost_y[i]>264) {
+	        	ghost_y[i]=0;
+	        }
+	        if (ghost_y[i]<0) {
+	        	ghost_y[i]=264;
+	        }
 			drawGhost(g2d,ghost_x[i]+1,ghost_y[i]+1);
 			
 			if (pacman_x > (ghost_x[i] - 12) && pacman_x < (ghost_x[i]+12)
