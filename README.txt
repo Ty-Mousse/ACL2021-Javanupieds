@@ -42,3 +42,6 @@ Décisions pour le sprint suivant:
 	3 - Mettre au clair la direction que le jeu va prendre afin d’éviter toutes incompréhensions
 	4 - Lister de façon non exhaustive les tâches à réaliser pour la fin du sprint
 _________________________________________________________________________
+
+Pour lancer le programme, entrer la commande (Maven) :
+java -cp target/Pacman-1.0.jar main.java.Pacman.engine.Main
