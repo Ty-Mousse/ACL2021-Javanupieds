@@ -1,8 +1,8 @@
-main\java\Pacman\elements\Element.class
-main\java\Pacman\engine\Game.class
-main\java\Pacman\engine\Model.class
-main\java\Pacman\elements\Level.class
-main\java\Pacman\engine\Main.class
-main\java\Pacman\elements\MobileElement.class
-main\java\Pacman\elements\Player.class
-main\java\Pacman\engine\Model$TAdapter.class
+main/java/Pacman/elements/Player.class
+main/java/Pacman/engine/Model.class
+main/java/Pacman/elements/MobileElement.class
+main/java/Pacman/engine/Game.class
+main/java/Pacman/engine/Main.class
+main/java/Pacman/engine/Model$TAdapter.class
+main/java/Pacman/elements/Element.class
+main/java/Pacman/elements/Level.class
