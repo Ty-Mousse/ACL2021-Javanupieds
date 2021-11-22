@@ -17,10 +17,11 @@ public class Interface extends JFrame{
 		super();
 		this.windowWidth = width * this.tileSize;
 		this.windowHeight = height * this.tileSize;
-		this.setTitle("Pacman");
+		this.setTitle("Loading ...");
 		this.setIconImage(icon);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(this.windowWidth, this.windowHeight);
+		this.setResizable(false);
 		this.setVisible(true);
 	};
 	

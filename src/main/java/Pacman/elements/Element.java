@@ -12,6 +12,7 @@ public class Element {
 		this.type = type;
 	}
 	
+	// Pourquoi move est dans Element ??? C'est plutôt dans mobile Element non ? 
 	public void move(int dx, int dy) { /* Est-ce utile ? Les deplacements ne devraient pas etre
 	faits de cette maniere il me semble. On determine la position d'arrivee et on met a jour 
 	x et y, il ne devrait pas y avoir de notion de distance de deplacement au sein de la classe
