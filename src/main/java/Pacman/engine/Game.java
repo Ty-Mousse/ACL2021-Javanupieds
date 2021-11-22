@@ -12,11 +12,12 @@ public class Game {
 	
 	private Level level;
 	private Player player;
+	//private NPC[] npcs;
 	private Interface displayer;
 	
 	public Game() throws IOException {
 		this.level = new Level("src/main/java/Pacman/level.txt");
-		this.player = new Player(10, 10);
+		this.initPlayer(this.level.getMobiles());
 		this.displayer = new Interface(this.level.getWidth(), this.level.getHeight());
 	}
 	
@@ -27,6 +28,15 @@ public class Game {
 			this.update();
 		}
 		
+	}
+	
+	// Méthode permettant d'initialiser une instance de player à partir du tableau d'initialisation venant de la classe Level
+	public void initPlayer(List<Element> initList) {
+		for (Element e:initList) {
+			if (e.getType() == 'O') {
+				this.player = new Player(e.getX(), e.getY());
+			}
+		}
 	}
 	
 	public void update(String key) {
