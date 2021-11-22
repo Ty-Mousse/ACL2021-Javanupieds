@@ -34,7 +34,7 @@ public class Game {
 			
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
-				System.out.println(1000/(time - timeRef) + "fps");
+				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
 				//displayer.render(this.level); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
