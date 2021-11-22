@@ -2,7 +2,6 @@ package main.java.Pacman.engine;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 import main.java.Pacman.elements.Level;
 import main.java.Pacman.elements.Player;
@@ -10,9 +9,13 @@ import main.java.Pacman.elements.Element;
 
 public class Game {
 	
+	private int delay = 17; // Delai de temps en ms (permet 60fps)
+	private long timeRef = System.currentTimeMillis();;
+	private long time;
+	
 	private Level level;
 	private Player player;
-	//private NPC[] npcs;
+	//private NPC[] npcs; // Future liste de NPC à instancier en fonction du level en cours
 	private Interface displayer;
 	
 	public Game() throws IOException {
@@ -24,8 +27,18 @@ public class Game {
 	public void start() {
 		
 		while(true /* a remplacer par la(les) condition(s) de fin de niveau */) {
-			displayer.render(this.level);
-			this.update();
+			
+			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
+			this.updateState(); // Mise a jour des etats en fonction des possibilitites de deplacement
+			this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
+			
+			time= System.currentTimeMillis();
+			if (time - timeRef >= delay) {
+				System.out.println(1000/(time - timeRef) + "fps");
+				timeRef = System.currentTimeMillis();
+				//displayer.render(this.level); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+			}
+
 		}
 		
 	}
@@ -39,8 +52,16 @@ public class Game {
 		}
 	}
 	
-	public void update(String key) {
-		// Met à jour la direction
+	public void updateInput() {
+		
+	}
+	
+	public void updateState() {
+	
+	}
+	
+	public void updatePosition() {
+		
 	}
 	
 	public char getObstacle(int x, int y) throws Exception {

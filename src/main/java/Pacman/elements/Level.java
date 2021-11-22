@@ -20,7 +20,7 @@ public class Level {
 	*/
 	
 	private List<Element> level; // Tableau d'elements definissant la structure du niveau en cours
-	private List<Element> pieces; // Tableau d'element definissant la position initiales des pieces du niveau en cours (en cas de defaite permet de memoriser les pieces deja prises)
+	private List<Element> pieces; // Tableau d'element definissant la position des pieces du niveau en cours (en cas de defaite permet de memoriser les pieces deja prises)
 	private List<Element> mobiles; // Tableau des positions initiales des elements mobiles du niveau en cours (a utiliser en cas de defaite => sauvegarde des positions initiales)
 	private int width; // Largeur du niveau en case
 	private int height; // Longueur du niveau en case
