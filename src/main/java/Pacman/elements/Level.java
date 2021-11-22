@@ -24,7 +24,7 @@ public class Level {
 		File file = new File(filename);
 	    Scanner myReader = new Scanner(file);
 	    boolean firstline=true;
-	    int i=0;
+	    int i = 0;
 	    while (myReader.hasNextLine()) {
 	    	String data = myReader.nextLine();
 	    	for (int j = 0; j < data.length(); j++) {
