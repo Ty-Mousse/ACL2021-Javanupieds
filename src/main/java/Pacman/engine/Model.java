@@ -70,11 +70,11 @@ public class Model extends JPanel implements ActionListener {
 		/*
 		 * Load the images for the game all the image must be load
 		 */
-		up = new ImageIcon("src\\main\\java\\Pacman\\images\\up.gif").getImage();
-		down = new ImageIcon("src\\main\\java\\Pacman\\images\\down.gif").getImage();
-		left = new ImageIcon("src\\main\\java\\Pacman\\images\\left.gif").getImage();
-		right = new ImageIcon("src\\main\\java\\Pacman\\images\\right.gif").getImage();
-		ghost = new ImageIcon("src\\main\\java\\Pacman\\images\\ghost.gif").getImage();
+		up = new ImageIcon("src/main/java/Pacman/images/up.gif").getImage();
+		down = new ImageIcon("src/main/java/Pacman/images/down.gif").getImage();
+		left = new ImageIcon("src/main/java/Pacman/images/left.gif").getImage();
+		right = new ImageIcon("src/main/java/Pacman/images/right.gif").getImage();
+		ghost = new ImageIcon("src/main/java/Pacman/images/ghost.gif").getImage();
 	}
 	
 	private void initVariables() {
