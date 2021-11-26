@@ -58,6 +58,15 @@ public class Game {
 		}
 	}
 	
+	public void initNPC(List<Element> initList) {
+		for (Element e:initList) {
+			if (e.getType() == 'N') { // pas sur pour le 'N', a modifier si besoin !
+				NPC npc = new NPC(e.getX(), e.getY());
+				npcs.add(npc);				
+			}
+		}
+	}
+	
 	private void updateInput() {
 		/**
 		 * Recupere la direction grace au controller.
@@ -109,6 +118,38 @@ public class Game {
 		this.player.setY(newy);
 	}
 	
+	private void updateNPCPositions() throws Exception {
+		/**
+		 * Pour chaque ncp :
+		 * - Genere une direction grace a NPC.deplacementRandom()
+		 * - Recupere la position et vitesse 
+		 * - Appelle la fonction checkMouvement, qui renvoie la nouvelle
+		 * position du npc.
+		 * - Met a jour la position du npc
+		 */
+		
+		for(NPC npc : npcs) {
+			int[] direction = npc.deplacementRandom(this.level);
+			
+			int x = npc.getX();
+			int y = npc.getY();
+			int v = npc.getV();
+			
+			int dx = direction[0];
+			int dy = direction[1];
+			
+			int[] newPosition = this.checkMouvement(npc, x, y, dx, dy, v);
+			
+			int newx = newPosition[0];
+			int newy = newPosition[1];
+			
+			npc.setX(newx);
+			npc.setY(newy);
+			
+		}
+		
+	}
+	
 	private int[] checkMouvement(MobileElement objet, int x, int y, int dx, int dy, int cpt) throws Exception {
 		/**
 		 * A partir d'un element mobile, de sa position, de sa vitesse et
@@ -132,29 +173,6 @@ public class Game {
 				int[] newposition = {x,y};
 				return newposition; 
 			}
-		}
-		
-	}
-	
-	private void updateNPCPositions() throws Exception {
-		for(NPC npc : npcs) {
-			int[] direction = npc.deplacementRandom(this.level);
-			
-			int x = npc.getX();
-			int y = npc.getY();
-			int v = npc.getV();
-			
-			int dx = direction[0];
-			int dy = direction[1];
-			
-			int[] newPosition = this.checkMouvement(npc, x, y, dx, dy, v);
-			
-			int newx = newPosition[0];
-			int newy = newPosition[1];
-			
-			npc.setX(newx);
-			npc.setY(newy);
-			
 		}
 		
 	}
