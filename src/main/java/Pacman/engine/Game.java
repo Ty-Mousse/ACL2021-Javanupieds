@@ -26,7 +26,7 @@ public class Game {
 	
 	public void start() {
 		
-		while(true /* a remplacer par la(les) condition(s) de fin de niveau */) {
+		while(this.player.getLives() > 0) {
 			
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
 			this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
