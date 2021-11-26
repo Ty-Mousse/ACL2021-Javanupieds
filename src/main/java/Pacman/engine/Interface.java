@@ -6,9 +6,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+
+import main.java.Pacman.elements.Element;
+import main.java.Pacman.elements.Level;
 
 public class Interface extends JFrame{
 	
@@ -16,6 +20,7 @@ public class Interface extends JFrame{
 	
 	private int windowWidth;
 	private int windowHeight;
+	private Level level;
 	private Image icon = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
 	
 	public Interface(int width, int height) {
@@ -37,19 +42,34 @@ public class Interface extends JFrame{
 		g2d.setColor(Color.black);
 		g2d.fillRect(0, 0, windowWidth, windowHeight);
 		
-		drawMaze(g2d);
+		drawMaze(g2d, level.getLevel());
 	};
 	
-	   private void drawMaze(Graphics2D g2d) {
+	   private void drawMaze(Graphics2D g2d, List<Element> level) {
 	    	/*
 	    	 * Draw the maze : 
 	    	 * # wall   . coin   O player   N NPC
 	    	 */
 
-	        short i = 0;
 	        int x, y;
+	        
+	        for(Element e:level) {
+	        	x=e.getX();
+	        	y=e.getY();
+	        	if(e.getType() == '#') {
+	        		g2d.fillRect(x, y, 24, 24);
+	        	}
+	        	else if(e.getType() == '.') {
+	        		g2d.fillRect(x, y, 24, 24);
+	        	}
+	        	else if(e.getType() == 'O') {
+	        		g2d.fillRect(x, y, 24, 24);
+	        	}else {
+	        		g2d.fillRect(x, y, 24, 24);
+	        	}
+	        }
 
-	        for (y = 0; y < screenSize; y += blockSize) {
+/*	        for (y = 0; y < screenSize; y += blockSize) {
 	            for (x = 0; x < screenSize; x += blockSize) {
 
 	                g2d.setColor(new Color(0,72,251));
@@ -84,7 +104,7 @@ public class Interface extends JFrame{
 
 	                i++;
 	            }
-	        }
+	        }*/
 	    }
 }
  
