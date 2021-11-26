@@ -52,7 +52,6 @@ public class Game {
 		}
 	}
 	
-<<<<<<< HEAD
 	private void updateInput() {
 		/**
 		 * Recupere la direction grace au controller.
@@ -70,23 +69,15 @@ public class Game {
 			this.inputX=dx;
 			this.inputY=dy;
 		}
-=======
-	public void updateInput() {
->>>>>>> parent of 0f17cf4 (création classe controller)
-		
-	}
 	
 	private void updateState() {
 	
 	}
 	
-<<<<<<< HEAD
+
 	private void updatePosition() {
 		this.updatePlayerPosition();
 		this.updateNPCPositions();
-=======
-	public void updatePosition() {
->>>>>>> parent of 0f17cf4 (création classe controller)
 		
 	}
 	
