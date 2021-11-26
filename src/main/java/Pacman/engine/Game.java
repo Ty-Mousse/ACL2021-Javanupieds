@@ -18,10 +18,6 @@ public class Game {
 	//private NPC[] npcs; // Future liste de NPC � instancier en fonction du level en cours
 	private Interface displayer;
 	
-	private Controller controller;
-	private int inputX;
-	private int inputY;
-	
 	public Game() throws IOException {
 		this.level = new Level("src/main/java/Pacman/level.txt");
 		this.initPlayer(this.level.getMobiles());
@@ -56,6 +52,7 @@ public class Game {
 		}
 	}
 	
+<<<<<<< HEAD
 	private void updateInput() {
 		/**
 		 * Recupere la direction grace au controller.
@@ -73,6 +70,9 @@ public class Game {
 			this.inputX=dx;
 			this.inputY=dy;
 		}
+=======
+	public void updateInput() {
+>>>>>>> parent of 0f17cf4 (création classe controller)
 		
 	}
 	
@@ -80,9 +80,13 @@ public class Game {
 	
 	}
 	
+<<<<<<< HEAD
 	private void updatePosition() {
 		this.updatePlayerPosition();
 		this.updateNPCPositions();
+=======
+	public void updatePosition() {
+>>>>>>> parent of 0f17cf4 (création classe controller)
 		
 	}
 	
