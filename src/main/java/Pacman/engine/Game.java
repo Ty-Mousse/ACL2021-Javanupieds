@@ -5,6 +5,7 @@ import java.util.List;
 
 import main.java.Pacman.elements.Level;
 import main.java.Pacman.elements.MobileElement;
+import main.java.Pacman.elements.NPC;
 import main.java.Pacman.elements.Player;
 import main.java.Pacman.elements.Element;
 
@@ -16,7 +17,7 @@ public class Game {
 	
 	private Level level;
 	private Player player;
-	//private NPC[] npcs; // Future liste de NPC à instancier en fonction du level en cours
+	private List<NPC> npcs;
 	private Interface displayer;
 	
 	private Controller controller;
@@ -135,7 +136,26 @@ public class Game {
 		
 	}
 	
-	private void updateNPCPositions() {
+	private void updateNPCPositions() throws Exception {
+		for(NPC npc : npcs) {
+			int[] direction = npc.deplacementRandom(this.level);
+			
+			int x = npc.getX();
+			int y = npc.getY();
+			int v = npc.getV();
+			
+			int dx = direction[0];
+			int dy = direction[1];
+			
+			int[] newPosition = this.checkMouvement(npc, x, y, dx, dy, v);
+			
+			int newx = newPosition[0];
+			int newy = newPosition[1];
+			
+			npc.setX(newx);
+			npc.setY(newy);
+			
+		}
 		
 	}
 	
