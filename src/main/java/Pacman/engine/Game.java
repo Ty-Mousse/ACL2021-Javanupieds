@@ -18,10 +18,6 @@ public class Game {
 	//private NPC[] npcs; // Future liste de NPC ‡ instancier en fonction du level en cours
 	private Interface displayer;
 	
-	private Controller controller;
-	private int inputX;
-	private int inputY;
-	
 	public Game() throws IOException {
 		this.level = new Level("src/main/java/Pacman/level.txt");
 		this.initPlayer(this.level.getMobiles());
@@ -33,8 +29,8 @@ public class Game {
 		while(this.player.getLives() > 0) {
 			
 			this.updateInput(); // Recuperation de l'entrÈe clavier du joueur (si presente) et envoi au controlleur
-			this.updateState(); // Mise a jour des etats en fonction des possibilitites de deplacement
 			this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
+			this.updateState(); // Mise a jour des etats en fonction des deplacements
 			
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
@@ -56,12 +52,13 @@ public class Game {
 		}
 	}
 	
-	public void updateInput() {
+<<<<<<< HEAD
+	private void updateInput() {
 		/**
-		 * RÈcupËre la direction gr‚ce au controller.
-		 * Met ‡ jour les input seulement s'ils sont
-		 * diffÈrents de 0 chacun (autrement : aucun
-		 * input donc la direction reste la mÍme).
+		 * Recupere la direction grace au controller.
+		 * Met a jour les input seulement s'ils sont
+		 * differents de 0 chacun (autrement : aucun
+		 * input donc la direction reste la meme).
 		 */
 		String input = this.controller.getInput();
 		int[] direction = this.controller.getDirection(input);
@@ -73,20 +70,31 @@ public class Game {
 			this.inputX=dx;
 			this.inputY=dy;
 		}
+=======
+	public void updateInput() {
+>>>>>>> parent of 0f17cf4 (cr√©ation classe controller)
 		
 	}
 	
-	public void updateState() {
+	private void updateState() {
 	
 	}
 	
-	public void updatePosition() {
+<<<<<<< HEAD
+	private void updatePosition() {
 		this.updatePlayerPosition();
 		this.updateNPCPositions();
+=======
+	public void updatePosition() {
+>>>>>>> parent of 0f17cf4 (cr√©ation classe controller)
 		
 	}
 	
-	public char getObstacle(int x, int y) throws Exception {
+	private void updatePlayerPosition() {
+		int[] position = this.
+	}
+	
+	private char getObstacle(int x, int y) throws Exception {
 		/**
 		 * Prend en parametres des coordonnees et renvoie le type d'obstacle qui
 		 * correspond parmis ceux de l'objet this.level
