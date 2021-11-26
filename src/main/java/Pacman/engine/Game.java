@@ -29,7 +29,7 @@ public class Game {
 		this.displayer = new Interface(this.level.getWidth(), this.level.getHeight());
 	}
 	
-	public void start() {
+	public void start() throws Exception {
 		
 		while(this.player.getLives() > 0) {
 			
@@ -81,20 +81,57 @@ public class Game {
 	}
 	
 
-	private void updatePosition() {
+	private void updatePosition() throws Exception {
+		/**
+		 * Met a jour les positions des elements mobiles du jeu
+		 */
 		this.updatePlayerPosition();
 		this.updateNPCPositions();
 		
 	}
 	
-	private void updatePlayerPosition() {
+	private void updatePlayerPosition() throws Exception {
+		/**
+		 * Recupere la position et vitesse du personnage, les input, et 
+		 * appelle la fonction checkMouvement, qui renvoie la nouvelle
+		 * position du personnage.
+		 */
 		int x = this.player.getX();
 		int y = this.player.getY();
+		int v = this.player.getV();
 		
-		this.checkMouvement(this.player,x,y,this.inputX,this.inputY,this.player.getVx(),this.player.getVy());
+		int[] newposition = this.checkMouvement(this.player,x,y,this.inputX,this.inputY,v);
+		int newx = newposition[0];
+		int newy = newposition[1];
+		
+		this.player.setX(newx);
+		this.player.setY(newy);
 	}
 	
-	private int[] checkMouvement(MobileElement objet, int x, int y, int dx, int dy, int vx, int vy) {
+	private int[] checkMouvement(MobileElement objet, int x, int y, int dx, int dy, int cpt) throws Exception {
+		/**
+		 * A partir d'un element mobile, de sa position, de sa vitesse et
+		 * d'une direction, renvoie sa nouvelle position. Procede par recurence
+		 * afin de ne pas traverser un mur si la vitesse est grande.
+		 */
+		if (cpt == 0) {
+			int[] newposition = {x,y};
+			return newposition;
+		}
+		else {
+			x=x+dx;
+			y=y+dy;
+			char obstacle = getObstacle(x,y);
+			boolean franchissable = objet.isFranchissable(obstacle);
+			
+			if (franchissable) {
+				return this.checkMouvement(objet, x, y, dx, dy, cpt-1);
+			}
+			else {
+				int[] newposition = {x,y};
+				return newposition; 
+			}
+		}
 		
 	}
 	
