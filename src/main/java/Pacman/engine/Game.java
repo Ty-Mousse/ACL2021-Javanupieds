@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import main.java.Pacman.elements.Level;
+import main.java.Pacman.elements.MobileElement;
 import main.java.Pacman.elements.Player;
 import main.java.Pacman.elements.Element;
 
@@ -89,6 +90,16 @@ public class Game {
 	private void updatePlayerPosition() {
 		int x = this.player.getX();
 		int y = this.player.getY();
+		
+		this.checkMouvement(this.player,x,y,this.inputX,this.inputY,this.player.getVx(),this.player.getVy());
+	}
+	
+	private int[] checkMouvement(MobileElement objet, int x, int y, int dx, int dy, int vx, int vy) {
+		
+	}
+	
+	private void updateNPCPositions() {
+		
 	}
 	
 	private char getObstacle(int x, int y) throws Exception {
