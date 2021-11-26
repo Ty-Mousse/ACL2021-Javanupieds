@@ -33,8 +33,8 @@ public class Game {
 		while(true /* a remplacer par la(les) condition(s) de fin de niveau */) {
 			
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
-			this.updateState(); // Mise a jour des etats en fonction des possibilitites de deplacement
 			this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
+			this.updateState(); // Mise a jour des etats en fonction des deplacements
 			
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
@@ -56,12 +56,12 @@ public class Game {
 		}
 	}
 	
-	public void updateInput() {
+	private void updateInput() {
 		/**
-		 * Récupère la direction grâce au controller.
-		 * Met à jour les input seulement s'ils sont
-		 * différents de 0 chacun (autrement : aucun
-		 * input donc la direction reste la même).
+		 * Recupere la direction grace au controller.
+		 * Met a jour les input seulement s'ils sont
+		 * differents de 0 chacun (autrement : aucun
+		 * input donc la direction reste la meme).
 		 */
 		String input = this.controller.getInput();
 		int[] direction = this.controller.getDirection(input);
@@ -76,17 +76,21 @@ public class Game {
 		
 	}
 	
-	public void updateState() {
+	private void updateState() {
 	
 	}
 	
-	public void updatePosition() {
+	private void updatePosition() {
 		this.updatePlayerPosition();
 		this.updateNPCPositions();
 		
 	}
 	
-	public char getObstacle(int x, int y) throws Exception {
+	private void updatePlayerPosition() {
+		int[] position = this.
+	}
+	
+	private char getObstacle(int x, int y) throws Exception {
 		/**
 		 * Prend en parametres des coordonnees et renvoie le type d'obstacle qui
 		 * correspond parmis ceux de l'objet this.level
