@@ -1,23 +1,26 @@
 package main.java.Pacman.engine;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.util.List;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Level;
 
 public class Interface extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int tileSize = 16;
-	
+	InterfacePainter interfacepainter;
 	private int windowWidth;
 	private int windowHeight;
 	private Level level;
@@ -33,78 +36,64 @@ public class Interface extends JFrame{
 		this.setSize(this.windowWidth, this.windowHeight);
 		this.setResizable(false);
 		this.setVisible(true);
-	};
-	
-	public void render(Graphics g) {
-		super.paintComponents(g);
-		
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.black);
-		g2d.fillRect(0, 0, windowWidth, windowHeight);
-		
-		drawMaze(g2d, level.getLevel());
-	};
-	
-	   private void drawMaze(Graphics2D g2d, List<Element> level) {
-	    	/*
-	    	 * Draw the maze : 
-	    	 * # wall   . coin   O player   N NPC
-	    	 */
+		JPanel content = new JPanel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			
 
-	        int x, y;
-	        
-	        for(Element e:level) {
-	        	x=e.getX();
-	        	y=e.getY();
-	        	if(e.getType() == '#') {
-	        		g2d.fillRect(x, y, 24, 24);
-	        	}
-	        	else if(e.getType() == '.') {
-	        		g2d.fillRect(x, y, 24, 24);
-	        	}
-	        	else if(e.getType() == 'O') {
-	        		g2d.fillRect(x, y, 24, 24);
-	        	}else {
-	        		g2d.fillRect(x, y, 24, 24);
-	        	}
-	        }
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponents(g);
+				
+				Graphics2D g2d = (Graphics2D) g;
+				g2d.setColor(Color.black);
+				g2d.fillRect(0, 0, windowWidth, windowHeight);
+				
+				Interface.this.interfacepainter.drawMaze(g2d, level.getLevel());
+			}
+			
+		};
 
-/*	        for (y = 0; y < screenSize; y += blockSize) {
-	            for (x = 0; x < screenSize; x += blockSize) {
+	/**
+	 * Calcul/Affichage
+	 */
 
-	                g2d.setColor(new Color(0,72,251));
-	                g2d.setStroke(new BasicStroke(5));
-	                
-	                if ((levelData[i] == 0)) { 
-	                	g2d.fillRect(x, y, blockSize, blockSize);
-	                }
+	// creer un thread infini (lien entre deux programmes en prallèles)
+	// ici, le thread fais le lien Modele/Fenetre
+	Thread thread = new Thread(new Runnable() {
+		@Override
+		public void run() {
+			while (true)
+			/*
+			 * boucle infinie chaque fois que la boucle est executee, la
+			 * methode de calcul du jeu est appelee. comme la boucle est
+			 * infinie, la methode de calcul sera appelee indefiniement.
+			 */
+			{
+				// demande à l'EDT de redessiner le conteneur
+				content.repaint();
 
-	                if ((screenData[i] & 1) != 0) { 
-	                    g2d.drawLine(x, y, x, y + blockSize - 1);
-	                }
+				// temporisation
+				try {
+					Thread.sleep(17);
+				} catch (InterruptedException e) {
+					//
+				}
+			}
+		}
+	});
 
-	                if ((screenData[i] & 2) != 0) { 
-	                    g2d.drawLine(x, y, x + blockSize - 1, y);
-	                }
+	// lancer le thread
+	thread.start();
 
-	                if ((screenData[i] & 4) != 0) { 
-	                    g2d.drawLine(x + blockSize - 1, y, x + blockSize - 1,
-	                            y + blockSize - 1);
-	                }
+	// par default, le focus (des touches) s'applique à la fenetre
+	// on indique donc au focus
+	// de se concentrer sur le conteneur et pas sur la fenetre
+	setFocusable(false);
+	content.setFocusable(true);
 
-	                if ((screenData[i] & 8) != 0) { 
-	                    g2d.drawLine(x, y + blockSize - 1, x + blockSize - 1,
-	                            y + blockSize - 1);
-	                }
-
-	                if ((screenData[i] & 16) != 0) { 
-	                    g2d.setColor(new Color(255,255,255));
-	                    g2d.fillOval(x + 10, y + 10, 6, 6);
-	               }
-
-	                i++;
-	            }
-	        }*/
-	    }
+}
 }
  

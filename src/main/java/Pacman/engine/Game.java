@@ -74,7 +74,7 @@ public class Game {
 		 * differents de 0 chacun (autrement : aucun
 		 * input donc la direction reste la meme).
 		 */
-		String input = this.controller.getInput();
+/*		String input = this.controller.getInput();
 		int[] direction = this.controller.getDirection(input);
 		
 		int dx = direction[0];
@@ -84,7 +84,7 @@ public class Game {
 			this.inputX=dx;
 			this.inputY=dy;
 		}
-	}
+*/	}
 	
 	private void updateState() {
 	
@@ -95,9 +95,9 @@ public class Game {
 		/**
 		 * Met a jour les positions des elements mobiles du jeu
 		 */
-		this.updatePlayerPosition();
+/*		this.updatePlayerPosition();
 		this.updateNPCPositions();
-		
+*/		
 	}
 	
 	private void updatePlayerPosition() throws Exception {
@@ -106,7 +106,7 @@ public class Game {
 		 * appelle la fonction checkMouvement, qui renvoie la nouvelle
 		 * position du personnage.
 		 */
-		int x = this.player.getX();
+/*		int x = this.player.getX();
 		int y = this.player.getY();
 		int v = this.player.getV();
 		
@@ -116,7 +116,7 @@ public class Game {
 		
 		this.player.setX(newx);
 		this.player.setY(newy);
-	}
+*/	}
 	
 	private void updateNPCPositions() throws Exception {
 		/**
@@ -128,7 +128,7 @@ public class Game {
 		 * - Met a jour la position du npc
 		 */
 		
-		for(NPC npc : npcs) {
+/*		for(NPC npc : npcs) {
 			int[] direction = npc.deplacementRandom(this.level);
 			
 			int x = npc.getX();
@@ -148,7 +148,7 @@ public class Game {
 			
 		}
 		
-	}
+*/	}
 	
 	private int[] checkMouvement(MobileElement objet, int x, int y, int dx, int dy, int cpt) throws Exception {
 		/**
