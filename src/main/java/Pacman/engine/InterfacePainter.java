@@ -44,7 +44,6 @@ public class InterfacePainter extends JPanel{
 	public void paintComponent(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, windowWidth*tileSize, windowHeight*tileSize);
-		System.out.println(level.getWidth()+" et "+level.getHeight());
         int x, y;
     	for(Element p:level.getPieces()) {
         	x=p.getX()*15;
@@ -61,7 +60,6 @@ public class InterfacePainter extends JPanel{
         	}else {
         	}
         	for(Element p:level.getMobiles()) {
-        		System.out.println(p.getType());
             	x=p.getX()*15;
             	y=p.getY()*15-15;
             	if(p.getType() == 'O') {
