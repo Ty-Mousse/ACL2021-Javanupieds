@@ -1,6 +1,7 @@
 package main.java.Pacman.engine;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import main.java.Pacman.elements.Level;
@@ -25,8 +26,13 @@ public class Game {
 	private int inputY;
 	
 	public Game() throws IOException {
+		this.controller = new Controller();
+		this.inputX = 0;
+		this.inputY = 0;
+		
 		this.level = new Level("src/main/java/Pacman/level.txt");
 		this.initPlayer(this.level.getMobiles());
+		this.initNPC(this.level.getMobiles());
 		this.displayer = new Interface(this.level.getWidth(), this.level.getHeight());
 	}
 	
@@ -59,12 +65,14 @@ public class Game {
 	}
 	
 	public void initNPC(List<Element> initList) {
+		List<NPC> npcs = new ArrayList<NPC>();
 		for (Element e:initList) {
 			if (e.getType() == 'N') { // pas sur pour le 'N', a modifier si besoin !
 				NPC npc = new NPC(e.getX(), e.getY());
 				npcs.add(npc);				
 			}
 		}
+		this.npcs = npcs;
 	}
 	
 	private void updateInput() {
@@ -74,7 +82,7 @@ public class Game {
 		 * differents de 0 chacun (autrement : aucun
 		 * input donc la direction reste la meme).
 		 */
-/*		String input = this.controller.getInput();
+		String input = this.controller.getInput();
 		int[] direction = this.controller.getDirection(input);
 		
 		int dx = direction[0];
@@ -84,7 +92,7 @@ public class Game {
 			this.inputX=dx;
 			this.inputY=dy;
 		}
-*/	}
+	}
 	
 	private void updateState() {
 	
@@ -95,9 +103,9 @@ public class Game {
 		/**
 		 * Met a jour les positions des elements mobiles du jeu
 		 */
-/*		this.updatePlayerPosition();
+		this.updatePlayerPosition();
 		this.updateNPCPositions();
-*/		
+		
 	}
 	
 	private void updatePlayerPosition() throws Exception {
@@ -106,7 +114,7 @@ public class Game {
 		 * appelle la fonction checkMouvement, qui renvoie la nouvelle
 		 * position du personnage.
 		 */
-/*		int x = this.player.getX();
+		int x = this.player.getX();
 		int y = this.player.getY();
 		int v = this.player.getV();
 		
@@ -116,7 +124,7 @@ public class Game {
 		
 		this.player.setX(newx);
 		this.player.setY(newy);
-*/	}
+	}
 	
 	private void updateNPCPositions() throws Exception {
 		/**
@@ -128,7 +136,7 @@ public class Game {
 		 * - Met a jour la position du npc
 		 */
 		
-/*		for(NPC npc : npcs) {
+		for(NPC npc : this.npcs) {
 			int[] direction = npc.deplacementRandom(this.level);
 			
 			int x = npc.getX();
@@ -148,7 +156,7 @@ public class Game {
 			
 		}
 		
-*/	}
+	}
 	
 	private int[] checkMouvement(MobileElement objet, int x, int y, int dx, int dy, int cpt) throws Exception {
 		/**
@@ -183,7 +191,12 @@ public class Game {
 		 * correspond parmis ceux de l'objet this.level
 		 */
 		Element res = this.level.getElement(x, y);
-		return res.getType();
+		if (res==null) {
+			return ' ';
+		}
+		else {
+			return res.getType();
+		}
 	}
 	
 	public Level getLevel() {

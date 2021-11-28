@@ -9,6 +9,7 @@ public class NPC extends MobileElement {
 	}
 	
 	public int[] deplacementRandom(Level level){
-		return null;
+		int[] dir = {0,0};
+		return dir;
 	}
 }

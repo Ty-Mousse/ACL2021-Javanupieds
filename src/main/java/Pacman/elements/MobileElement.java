@@ -14,7 +14,7 @@ public class MobileElement extends Element {
 	}
 	
 	public boolean isFranchissable(char obstacle) {
-		
+		return true;
 	}
 
 }
