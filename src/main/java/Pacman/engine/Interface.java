@@ -1,16 +1,13 @@
 package main.java.Pacman.engine;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+
 import java.awt.Image;
 
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
-import main.java.Pacman.elements.Element;
+
 import main.java.Pacman.elements.Level;
 
 public class Interface extends JFrame{
@@ -22,7 +19,6 @@ public class Interface extends JFrame{
 	private int tileSize = 16;
 	private int windowWidth;
 	private int windowHeight;
-	private Level level;
 	private Image icon = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
 	
 	public Interface(int width, int height) {
