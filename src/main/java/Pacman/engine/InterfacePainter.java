@@ -15,7 +15,7 @@ import main.java.Pacman.elements.Level;
 import main.java.Pacman.elements.NPC;
 import main.java.Pacman.elements.Player;
 
-public class InterfacePainter extends JPanel{
+public class InterfacePainter{
 	
 	private Level level;
 	
@@ -23,39 +23,17 @@ public class InterfacePainter extends JPanel{
 	private static boolean gameOver;
 	private boolean victory;
 
-	public InterfacePainter(Level level) {
-		this.level = level;
+	public InterfacePainter() {
 		this.gameOver = false;
 		this.victory = false;
 	}
-	
-	public void paintComponent(Graphics g) {
-        int x, y;
-        for(Element e:level.getLevel()) {
-        	x=e.getX()*15;
-        	y=e.getY()*15-10;
-        	System.out.println("x: "+x+" y: "+y+" elem: "+e.getType());
-        	if(e.getType() == '#') {
-        		g.fillRect(x, y, 20, 20);
-        	}
-        	else if(e.getType() == '.') {
-                g.setColor(new Color(255,255,255));
-                g.fillOval(x + 10, y + 10, 6, 6);
-        	}
-        	else if(e.getType() == 'O') {
-        		g.fillRect(x, y, 24, 24);
-        	}else {
-        	}
-        }
-	  }
 
-
-/*	   public void drawMaze(Graphics2D g2d, List<Element> level) {
+	   public void drawMaze(Graphics2D g2d, List<Element> level) {
 	    	/*
 	    	 * Draw the maze : 
 	    	 * # wall   . coin   O player   N NPC
 	    	 */
-/*			for(Element e:level) {
+			for(Element e:level) {
 				System.out.println(e.getType());
 				};
 	        int x, y;
@@ -131,6 +109,6 @@ public class InterfacePainter extends JPanel{
 
 	                i++;
 	            }
-	        }
-	    }*/
+	        }*/
+	    }
 }
