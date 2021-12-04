@@ -47,16 +47,16 @@ public class InterfacePainter extends JPanel{
         int x, y;
     	for(Element p:level.getPieces()) {
         	x=p.getX()*15;
-        	y=p.getY()*15-15;
+        	y=p.getY()*15-10;
             g.setColor(new Color(255,255,255));
-            g.fillOval(x + 10, y + 10, 6, 6);
+            g.fillOval(x + 5, y + 5, 6, 6);
         	}
         for(Element e:level.getLevel()) {
             g.setColor(new Color(0,72,251));
         	x=e.getX()*15;
         	y=e.getY()*15-10;
         	if(e.getType() == '#') {
-        		g.fillRect(x, y, 20, 20);
+        		g.fillRect(x, y, 15, 15);
         	}else {
         	}
         	for(Element p:level.getMobiles()) {
