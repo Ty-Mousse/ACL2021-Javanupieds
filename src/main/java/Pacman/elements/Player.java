@@ -12,4 +12,8 @@ public class Player extends MobileElement{
 		return lives;
 	}
 	
+	public void setLives(int newLives) {
+		this.lives = newLives;
+	}
+	
 }

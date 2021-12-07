@@ -1,5 +1,7 @@
 package main.java.Pacman.elements;
 
+import java.util.Random;
+
 public class NPC extends MobileElement {
 	
 	
@@ -9,7 +11,23 @@ public class NPC extends MobileElement {
 	}
 	
 	public int[] deplacementRandom(Level level){
-		int[] dir = {0,0};
+		Random rn = new Random();
+		int dx;
+		int dy;
+		boolean bloque = true;
+		
+		while (bloque) {
+			dx = rn.nextInt(1);
+			dy = rn.nextInt(1);
+			
+			if (dx!=0 & dy==0 | dx==0 & dy!=0) {
+				
+				bloque=false;
+				int[] dir = {dx,dy};	
+			}
+			
+		}
+		
 		return dir;
 	}
 }

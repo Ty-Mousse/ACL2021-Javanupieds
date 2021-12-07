@@ -95,10 +95,32 @@ public class Game {
 	}
 	
 	private void updateState() {
-	
-	}
-	
-
+		
+		int xPlayer = this.player.getX();
+		int yPlayer = this.player.getY();
+		
+		this.level.removeCoin(xPlayer,yPlayer); // on onlève la pièce		
+		
+		for (NPC npc : this.npcs) { //on regarde pour chaque npc s'il est en contact avec le player
+			if (npc.getX()==xPlayer & npc.getY()==yPlayer) {
+				int curentLife = this.player.getLives();
+				this.player.setLives(curentLife-1);
+			
+				for (Element e: this.level.getMobiles()) { // si oui vie-=1 et on reset position joueur/npc
+					if (e.getType() == 'O') {
+						this.player.setX(e.getX());
+						this.player.setY(e.getY());
+						}
+					}
+				
+				this.initNPC(this.level.getMobiles());
+				
+				}
+		
+			}
+		
+		}
+		
 	private void updatePosition() throws Exception {
 		/**
 		 * Met a jour les positions des elements mobiles du jeu
