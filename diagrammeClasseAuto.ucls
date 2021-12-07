@@ -2,18 +2,18 @@
 <class-diagram version="1.2.4" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
   router="FAN">  
-  <class id="1" language="java" name="main.java.Pacman.engine.Game" project="Jeu" 
-    file="/Jeu/src/main/java/Pacman/engine/Game.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="214" width="199" x="733" y="37"/>    
+  <class id="1" language="java" name="main.java.Pacman.engine.InterfacePainter" project="Jeu" 
+    file="/Jeu/src/main/java/Pacman/engine/InterfacePainter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="232" y="79"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="main.java.Pacman.elements.NPC" project="Jeu" 
-    file="/Jeu/src/main/java/Pacman/elements/NPC.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="88" width="167" x="648" y="1071"/>    
+  <class id="2" language="java" name="main.java.Pacman.engine.Game" project="Jeu" 
+    file="/Jeu/src/main/java/Pacman/engine/Game.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="466" width="337" x="386" y="-33"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,16 +22,16 @@
   </class>  
   <class id="3" language="java" name="main.java.Pacman.engine.Main" project="Jeu" 
     file="/Jeu/src/main/java/Pacman/engine/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1169" y="94"/>    
+    <position height="106" width="153" x="763" y="-33"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="main.java.Pacman.engine.Interface" project="Jeu" 
-    file="/Jeu/src/main/java/Pacman/engine/Interface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="153" x="486" y="291"/>    
+  <class id="4" language="java" name="main.java.Pacman.engine.Controller" project="Jeu" 
+    file="/Jeu/src/main/java/Pacman/engine/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="184" x="274" y="473"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -40,7 +40,7 @@
   </class>  
   <class id="5" language="java" name="main.java.Pacman.elements.Element" project="Jeu" 
     file="/Jeu/src/main/java/Pacman/elements/Element.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="250" width="167" x="679" y="581"/>    
+    <position height="-1" width="-1" x="99" y="642"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,92 +49,114 @@
   </class>  
   <class id="6" language="java" name="main.java.Pacman.elements.Level" project="Jeu" 
     file="/Jeu/src/main/java/Pacman/elements/Level.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="250" width="186" x="679" y="291"/>    
+    <position height="-1" width="-1" x="109" y="361"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="main.java.Pacman.elements.Player" project="Jeu" 
+  <class id="7" language="java" name="main.java.Pacman.elements.NPC" project="Jeu" 
+    file="/Jeu/src/main/java/Pacman/elements/NPC.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-5" y="1033"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="main.java.Pacman.elements.Player" project="Jeu" 
     file="/Jeu/src/main/java/Pacman/elements/Player.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="88" width="167" x="886" y="1071"/>    
+    <position height="-1" width="-1" x="224" y="1042"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="main.java.Pacman.elements.MobileElement" project="Jeu" 
+  <class id="9" language="java" name="main.java.Pacman.elements.MobileElement" project="Jeu" 
     file="/Jeu/src/main/java/Pacman/elements/MobileElement.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="217" x="648" y="871"/>    
+    <position height="-1" width="-1" x="115" y="869"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="9">    
-    <bendpoint x="895" y="291"/>    
-    <bendpoint x="895" y="581"/>    
-    <bendpoint x="895" y="871"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="10" name="player"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="12">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="13" name="displayer"/>      
-      <multiplicity id="14" minimum="0" maximum="1"/>    
+  <association id="10">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="11" name="controller"/>      
+      <multiplicity id="12" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="15">    
+  <association id="13">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="14" name="level"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="17" name="level"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="16" name="level"/>      
-      <multiplicity id="17" minimum="0" maximum="2147483647"/>    
+      <attribute id="20" name="pieces"/>      
+      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="18">    
-    <end type="SOURCE" refId="8"/>    
+  <generalization id="22">    
+    <end type="SOURCE" refId="9"/>    
     <end type="TARGET" refId="5"/>  
   </generalization>  
-  <generalization id="19">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <association id="20">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="21" name="mobiles"/>      
-      <multiplicity id="22" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <association id="23">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="24" name="pieces"/>      
-      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="24" name="player"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="26">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
   </generalization>  
   <association id="27">    
-    <end type="SOURCE" refId="1" navigable="false">      
+    <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="28" name="level"/>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
+      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="30">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <association id="31">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="32" name="mobiles"/>      
+      <multiplicity id="33" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="35" name="npcs"/>      
+      <multiplicity id="36" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

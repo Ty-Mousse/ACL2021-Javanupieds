@@ -41,7 +41,7 @@ public class InterfacePainter extends JPanel{
 	}
 	
 	
-	public void paintComponent(Graphics g) {
+	public void render(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, windowWidth*tileSize, windowHeight*tileSize);
         int x, y;
