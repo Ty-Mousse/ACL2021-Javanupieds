@@ -1,11 +1,16 @@
 package main.java.Pacman.engine;
 
-import java.util.List;
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.util.List;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import main.java.Pacman.elements.Element;
@@ -17,35 +22,82 @@ public class InterfacePainter2 extends JPanel{
 	
 	private Level level;
 	
-	private int c; /* compteur de calcul affiché sur la fenêtre */
 	private static boolean gameOver;
 	private boolean victory;
+	private int tileSize;
+	private int windowWidth;
+	private int windowHeight;
+	private Image ghost = new ImageIcon("src/main/java/Pacman/images/ghost.gif").getImage();
+	private Image pacman = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
+
 
 	public InterfacePainter2(Level level) {
 		this.level = level;
 		this.gameOver = false;
 		this.victory = false;
+		this.tileSize = 16;
+		this.windowWidth = level.getWidth();
+		this.windowHeight= level.getHeight();
 	}
 	
+	
 	public void paintComponent(Graphics g) {
+		g.setColor(Color.black);
+		g.fillRect(0, 0, windowWidth*tileSize, windowHeight*tileSize);
         int x, y;
+    	for(Element p:level.getPieces()) {
+        	x=p.getX()*15;
+        	y=p.getY()*15-10;
+            g.setColor(new Color(255,255,255));
+            g.fillOval(x + 5, y + 5, 6, 6);
+        	}
         for(Element e:level.getLevel()) {
+            g.setColor(new Color(0,72,251));
         	x=e.getX()*15;
         	y=e.getY()*15-10;
-        	System.out.println("x: "+x+" y: "+y+" elem: "+e.getType());
+        	if(e.getType() == ' ') {
+        		g.setColor(new Color(255,255,255));
+        		g.fillRect(x, y, 15, 15);
+        	}
         	if(e.getType() == '#') {
-        		g.fillRect(x, y, 20, 20);
-        	}
-        	else if(e.getType() == '.') {
-                g.setColor(new Color(255,255,255));
-                g.fillRect(x, y, 20, 20);
-                //g.fillOval(x + 10, y + 10, 6, 6);
-        	}
-        	else if(e.getType() == 'O') {
-        		g.fillRect(x, y, 24, 24);
+        		g.fillRect(x, y, 15, 15);
         	}else {
         	}
+        	for(Element p:level.getMobiles()) {
+            	x=p.getX()*15;
+            	y=p.getY()*15-15;
+            	if(p.getType() == 'O') {
+            		g.drawImage(pacman, x, y, this);
+            	}else{
+            		g.drawImage(ghost, x, y, this);
+            	}
         }
 	  }
 
+
+
+
+/*		// affichage du game over
+			if (this.gameOver) {
+
+				String str = "Game Over!";
+				g.setColor(Color.RED);
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+				FontMetrics fm = g.getFontMetrics();
+				int x = (g.getClipBounds().width - fm.stringWidth(str)) / 2;
+				int y = (g.getClipBounds().height / 2) + fm.getMaxDescent();
+				g.drawString(str, x, y);
+			}
+			if (this.victory) {
+				String str = "Victoire!";
+				g.setColor(Color.BLUE);
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
+				FontMetrics fm = g.getFontMetrics();
+				int x = (g.getClipBounds().width - fm.stringWidth(str)) / 2;
+				int y = (g.getClipBounds().height / 2) + fm.getMaxDescent();
+				g.drawString(str, x, y);
+			}
+*/
 }
+}
+
