@@ -40,6 +40,8 @@ public class Interface extends JFrame{
 		public void render(Level level) {
 			InterfacePainter interfacepainter = new InterfacePainter(level);
 			this.add(interfacepainter);
+			InterfacePainter2 interfacepainter2 = new InterfacePainter2(level);
+			this.add(interfacepainter2);
 			
 		}
 	}
