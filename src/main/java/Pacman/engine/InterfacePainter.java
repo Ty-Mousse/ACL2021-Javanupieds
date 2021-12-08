@@ -41,7 +41,7 @@ public class InterfacePainter extends JPanel{
 	}
 	
 	
-	public void render(Graphics g) {
+	public void paintComponent(Graphics g) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, windowWidth*tileSize, windowHeight*tileSize);
         int x, y;
@@ -55,6 +55,10 @@ public class InterfacePainter extends JPanel{
             g.setColor(new Color(0,72,251));
         	x=e.getX()*15;
         	y=e.getY()*15-10;
+        	if(e.getType() == ' ') {
+        		g.setColor(new Color(255,255,255));
+        		g.fillRect(x, y, 15, 15);
+        	}
         	if(e.getType() == '#') {
         		g.fillRect(x, y, 15, 15);
         	}else {
@@ -69,6 +73,7 @@ public class InterfacePainter extends JPanel{
             	}
         }
 	  }
+
 
 
 

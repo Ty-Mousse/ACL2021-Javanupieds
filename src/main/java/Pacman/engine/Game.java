@@ -19,7 +19,7 @@ public class Game {
 	private Level level;
 	private Player player;
 	private List<NPC> npcs;
-	private InterfacePainter displayer;
+	private Interface displayer;
 	
 	private Controller controller;
 	private int inputX;
@@ -33,7 +33,7 @@ public class Game {
 		this.level = new Level("src/main/java/Pacman/level.txt");
 		this.initPlayer(this.level.getMobiles());
 		this.initNPC(this.level.getMobiles());
-		this.displayer = new InterfacePainter(this.level);
+		this.displayer = new Interface(this.level.getWidth(), this.level.getHeight());
 	}
 	
 	public void start() throws Exception {
@@ -48,7 +48,7 @@ public class Game {
 			if (time - timeRef >= delay) {
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
-				this.displayer.render(); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+				this.displayer.render(this.level); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
 
 		}
