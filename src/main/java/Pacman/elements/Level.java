@@ -85,10 +85,9 @@ public class Level {
 	}	
 	
 	public void removeCoin(int x, int y) {
-		for (int i=0;i<this.pieces.size();i++) {
-			Element piece = this.pieces.get(i);
+		for (Element piece : this.pieces) {
 			if (piece.getX()==x & piece.getY()==y) {
-				this.pieces.remove(i);
+				piece.setType(' '); //on enleve virtuellement la piece
 			}
 		}
 	}

@@ -20,6 +20,10 @@ public class Element {
 		this.y = y;
 	}
 	
+	public void setType(char type) {
+		this.type = type;
+	}
+	
 	public int getX() {
 		return x;
 	}

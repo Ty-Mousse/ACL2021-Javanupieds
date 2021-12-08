@@ -140,7 +140,10 @@ public class Game {
 		int y = this.player.getY();
 		int v = this.player.getV();
 		
-		int[] newposition = this.checkMouvement(this.player,x,y,this.inputX,this.inputY,v);
+		int width = this.level.getWidth();
+		int height = this.level.getHeight();
+		
+		int[] newposition = this.checkMouvement(this.player, x, y, this.inputX, this.inputY, v, width,height);
 		int newx = newposition[0];
 		int newy = newposition[1];
 		
@@ -159,28 +162,39 @@ public class Game {
 		 */
 		
 		for(NPC npc : this.npcs) {
-			int[] direction = npc.deplacementRandom(this.level);
 			
 			int x = npc.getX();
 			int y = npc.getY();
 			int v = npc.getV();
+			int[] newDir;
 			
-			int dx = direction[0];
-			int dy = direction[1];
+			int dx = npc.getdx();
+			int dy = npc.getdy();
 			
-			int[] newPosition = this.checkMouvement(npc, x, y, dx, dy, v);
+			int width = this.level.getWidth();
+			int height = this.level.getHeight();
 			
-			int newx = newPosition[0];
-			int newy = newPosition[1];
+			int[] newPosition = this.checkMouvement(npc, x, y, dx, dy, v, width, height);
 			
-			npc.setX(newx);
-			npc.setY(newy);
+			while(newPosition[0]==x & newPosition[1]==y) {
+				newDir = npc.deplacementRandom();
+				dx=newDir[0];
+				dy=newDir[1];
+				newPosition = this.checkMouvement(npc, x, y, dx, dy, v, width, height);
+				
+			}
+			
+			npc.setdx(dx);
+			npc.setdy(dy);
+			
+			npc.setX(newPosition[0]);
+			npc.setY(newPosition[1]);
 			
 		}
 		
 	}
 	
-	private int[] checkMouvement(MobileElement objet, int x, int y, int dx, int dy, int cpt) throws Exception {
+	private int[] checkMouvement(MobileElement objet, int x, int y, int dx, int dy, int cpt, int width, int height) throws Exception {
 		/**
 		 * A partir d'un element mobile, de sa position, de sa vitesse et
 		 * d'une direction, renvoie sa nouvelle position. Procede par recurence
@@ -193,18 +207,27 @@ public class Game {
 		else {
 			x=x+dx;
 			y=y+dy;
+			
+			// labirynthe infini
+			if (x>width) {
+				x=x-width;
+			}
+			
+			if (y>height) {
+				y=y-height;
+			}
+			
 			char obstacle = getObstacle(x,y);
 			boolean franchissable = objet.isFranchissable(obstacle);
 			
 			if (franchissable) {
-				return this.checkMouvement(objet, x, y, dx, dy, cpt-1);
+				return this.checkMouvement(objet, x, y, dx, dy, cpt-1, width, height);
 			}
 			else {
 				int[] newposition = {x,y};
 				return newposition; 
 			}
 		}
-		
 	}
 	
 	private char getObstacle(int x, int y) throws Exception {

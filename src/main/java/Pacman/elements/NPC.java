@@ -3,6 +3,8 @@ package main.java.Pacman.elements;
 import java.util.Random;
 
 public class NPC extends MobileElement {
+	int dx;
+	int dy;
 	
 	
 	public NPC(int x, int y) {
@@ -10,24 +12,43 @@ public class NPC extends MobileElement {
 		
 	}
 	
-	public int[] deplacementRandom(Level level){
+	public int[] deplacementRandom(){
 		Random rn = new Random();
-		int dx;
-		int dy;
-		boolean bloque = true;
+		int[] dir = {0,0};
+		int newdx;
+		int newdy;
+		boolean invalid = true;
 		
-		while (bloque) {
-			dx = rn.nextInt(1);
-			dy = rn.nextInt(1);
+		while (invalid) {
+			newdx = rn.nextInt(1);
+			newdy = rn.nextInt(1);
 			
 			if (dx!=0 & dy==0 | dx==0 & dy!=0) {
 				
-				bloque=false;
-				int[] dir = {dx,dy};	
+				invalid=false;
+				dir[0] = newdx;
+				dir[1] = newdy;
 			}
 			
 		}
 		
 		return dir;
+	}
+	
+	public int getdx() {
+		return this.dx;
+	}
+	
+	public int getdy() {
+		return this.dy;
+	}
+	
+	
+	public void setdx(int dx) {
+		this.dx = dx;
+	}
+	
+	public void setdy(int dy) {
+		this.dy = dy;
 	}
 }
