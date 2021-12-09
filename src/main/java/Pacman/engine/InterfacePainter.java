@@ -21,6 +21,7 @@ import main.java.Pacman.elements.Player;
 public class InterfacePainter extends JPanel{
 	
 	private List<Element> level;
+	private Interface dimension;
 	
 	private static boolean gameOver;
 	private boolean victory;
@@ -31,11 +32,13 @@ public class InterfacePainter extends JPanel{
 	private Image pacman = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
 
 
-	public InterfacePainter(List<Element> level) {
+	public InterfacePainter(List<Element> level, int height, int width) {
 		this.level = level;
 		this.gameOver = false;
 		this.victory = false;
 		this.tileSize = 16;
+		this.windowHeight= height;
+		this.windowWidth= width;
 	}
 	
 	
@@ -45,8 +48,25 @@ public class InterfacePainter extends JPanel{
         int x, y;
         for(Element e:level) {
         	x=e.getX()*15;
-        	y=e.getY()*15-10;
-        	System.out.println(e);
+        	y=e.getY()*15-5;
+        	if(e.getType() == ' ') {
+        		g.setColor(Color.black);
+        		g.fillRect(x, y, 15, 15);
+        	}if(e.getType() == '#') {
+        		g.setColor(new Color(0,72,251));
+        		g.fillRect(x, y, 15, 15);
+        	}if(e.getType() == '.') {
+                g.setColor(new Color(255,255,255));
+                g.fillOval(x + 5, y + 5, 6, 6);
+        	}if(e.getType() == '2') {
+        		x-=3;
+        		y-=3;
+        		g.drawImage(pacman, x, y, this);
+        	}if(e.getType() == '3') {
+        		g.drawImage(ghost, x, y, this);
+        	}
+        	
+        	
         }
     	/*for(Element p:level.getPieces()) {
         	x=p.getX()*15;

@@ -16,6 +16,7 @@ public class Interface extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private int tileSize = 16;
 	private int windowWidth;
 	private int windowHeight;
@@ -34,7 +35,7 @@ public class Interface extends JFrame{
 		};
 		
 		public void render(List<Element> level) {
-			InterfacePainter interfacepainter = new InterfacePainter(level);
+			InterfacePainter interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth);
 			this.add(interfacepainter);
 		}
 
