@@ -2,12 +2,12 @@ package main.java.Pacman.engine;
 
 
 import java.awt.Image;
-
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-
+import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Level;
 
 public class Interface extends JFrame{
@@ -33,7 +33,7 @@ public class Interface extends JFrame{
 		this.setVisible(true);		
 		};
 		
-		public void render(Level level) {
+		public void render(List<Element> level) {
 			InterfacePainter interfacepainter = new InterfacePainter(level);
 			this.add(interfacepainter);
 		}

@@ -20,7 +20,7 @@ import main.java.Pacman.elements.Player;
 
 public class InterfacePainter extends JPanel{
 	
-	private Level level;
+	private List<Element> level;
 	
 	private static boolean gameOver;
 	private boolean victory;
@@ -31,13 +31,11 @@ public class InterfacePainter extends JPanel{
 	private Image pacman = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
 
 
-	public InterfacePainter(Level level) {
+	public InterfacePainter(List<Element> level) {
 		this.level = level;
 		this.gameOver = false;
 		this.victory = false;
 		this.tileSize = 16;
-		this.windowWidth = level.getWidth();
-		this.windowHeight= level.getHeight();
 	}
 	
 	
@@ -45,7 +43,12 @@ public class InterfacePainter extends JPanel{
 		g.setColor(Color.black);
 		g.fillRect(0, 0, windowWidth*tileSize, windowHeight*tileSize);
         int x, y;
-    	for(Element p:level.getPieces()) {
+        for(Element e:level) {
+        	x=e.getX()*15;
+        	y=e.getY()*15-10;
+        	System.out.println(e);
+        }
+    	/*for(Element p:level.getPieces()) {
         	x=p.getX()*15;
         	y=p.getY()*15-10;
             g.setColor(new Color(255,255,255));
@@ -56,7 +59,6 @@ public class InterfacePainter extends JPanel{
         	x=e.getX()*15;
         	y=e.getY()*15-10;
         	if(e.getType() == ' ') {
-        		g.setColor(new Color(255,255,255));
         		g.fillRect(x, y, 15, 15);
         	}
         	if(e.getType() == '#') {
@@ -71,7 +73,7 @@ public class InterfacePainter extends JPanel{
             	}else{
             		g.drawImage(ghost, x, y, this);
             	}
-        }
+        }*/
 	  }
 
 
@@ -99,5 +101,5 @@ public class InterfacePainter extends JPanel{
 			}
 */
 }
-}
+
 
