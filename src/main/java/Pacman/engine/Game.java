@@ -3,6 +3,8 @@ package main.java.Pacman.engine;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import main.java.Pacman.elements.Level;
 import main.java.Pacman.elements.MobileElement;
@@ -43,12 +45,12 @@ public class Game {
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
 			this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
 			this.updateState(); // Mise a jour des etats en fonction des deplacements
-			
+			List<Element> allElement = this.getListAll();
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
-				this.displayer.render(this.level); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+				this.displayer.render(allElement); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
 
 		}
@@ -254,6 +256,21 @@ public class Game {
 	
 	public Interface getDisplayer() {
 		return displayer;
+	}
+	
+	@SuppressWarnings("null")
+	private List<Element> getListAll() {
+		List<Element> murs = this.level.getLevel();
+		List<Element> pieces = this.level.getPieces();
+		List<Element> mobiles = null;
+		mobiles.add(this.player);
+		for (NPC npc : this.npcs) {
+			mobiles.add(npc);
+		}
+		List<Element> listImobiles = Stream.concat(murs.stream(), pieces.stream()).collect(Collectors.toList());
+		List<Element> listAll = Stream.concat(listImobiles.stream(), mobiles.stream()).collect(Collectors.toList());
+		
+		return listAll;
 	}
 	
 }
