@@ -1,12 +1,17 @@
 package main.java.Pacman.elements;
 
-public class MobileElement extends Element {
+import java.util.ArrayList;
+import java.util.List;
 
+public class MobileElement extends Element {
+	
 	private int v;
+	private List<Object> infranchissable = new ArrayList<>();
 	
 	public MobileElement(int x, int y, int v, char type) {
 		super(x, y, type);
 		this.v = v;
+		this.infranchissable.add('#');
 	}
 
 	public int getV() {
@@ -14,7 +19,15 @@ public class MobileElement extends Element {
 	}
 	
 	public boolean isFranchissable(char obstacle) {
-		return true;
+		Boolean franchissable = true;
+		if (this.infranchissable.contains(obstacle)) {
+			System.out.println("non !");
+			franchissable = false;
+		}
+		else {
+			System.out.println("oui !");
+		}
+		return franchissable;
 	}
 
 }

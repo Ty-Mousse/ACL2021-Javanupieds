@@ -19,7 +19,7 @@ public class NPC extends MobileElement {
 		int newdy;
 		boolean invalid = true;
 		
-		while (invalid) {
+		while (invalid) { // tourne a l'infini,Remi doit corriger
 			newdx = rn.nextInt(1);
 			newdy = rn.nextInt(1);
 			
@@ -42,7 +42,6 @@ public class NPC extends MobileElement {
 	public int getdy() {
 		return this.dy;
 	}
-	
 	
 	public void setdx(int dx) {
 		this.dx = dx;

@@ -1,19 +1,24 @@
 package main.java.Pacman.engine;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Controller {
+public class Controller implements KeyListener{
+	int[] inputEnCours= {0,0};
+
 	
 	public Controller() {
-		
+
 	}
 	
-	public String getInput() {
-		String nul = "nul";
-		return nul;
+	public int[] getInputEnCours() {
+		System.out.println("bbs");
+		return inputEnCours;
 	}
+
 	
-	public int[] getDirection(KeyEvent e) {
+	@Override
+	public void keyPressed(KeyEvent e) {
 		int[] dir = {0,0};
 		switch( e.getKeyCode() ) {
 		case KeyEvent.VK_UP:
@@ -33,7 +38,17 @@ public class Controller {
 			dir[1]=-1;
 			break;
 		}
-		return dir;
+		this.inputEnCours=dir;
+		System.out.println(Integer.toString(dir[0])+Integer.toString(dir[1]));
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
 		
 	}
 	

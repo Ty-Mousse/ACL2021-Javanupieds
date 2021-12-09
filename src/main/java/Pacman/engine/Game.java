@@ -52,7 +52,6 @@ public class Game {
 				timeRef = System.currentTimeMillis();
 				this.displayer.render(allElement); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
-
 		}
 		
 	}
@@ -84,8 +83,7 @@ public class Game {
 		 * differents de 0 chacun (autrement : aucun
 		 * input donc la direction reste la meme).
 		 */
-		String input = this.controller.getInput();
-		int[] direction = this.controller.getDirection(input);
+		int[] direction = this.controller.getInputEnCours();
 		
 		int dx = direction[0];
 		int dy = direction[1];
@@ -94,6 +92,7 @@ public class Game {
 			this.inputX=dx;
 			this.inputY=dy;
 		}
+		System.out.println(Integer.toString(dx)+Integer.toString(dx));
 	}
 	
 	private void updateState() {
@@ -164,6 +163,7 @@ public class Game {
 		 */
 		
 		for(NPC npc : this.npcs) {
+			System.out.println("prout");
 			
 			int x = npc.getX();
 			int y = npc.getY();
@@ -179,6 +179,7 @@ public class Game {
 			int[] newPosition = this.checkMouvement(npc, x, y, dx, dy, v, width, height);
 			
 			while(newPosition[0]==x & newPosition[1]==y) {
+				System.out.println("nonnon");
 				newDir = npc.deplacementRandom();
 				dx=newDir[0];
 				dy=newDir[1];
@@ -203,10 +204,13 @@ public class Game {
 		 * afin de ne pas traverser un mur si la vitesse est grande.
 		 */
 		if (cpt == 0) {
+			System.out.println("fini");
 			int[] newposition = {x,y};
 			return newposition;
 		}
 		else {
+			int oldx=x;
+			int oldy=y;
 			x=x+dx;
 			y=y+dy;
 			
@@ -220,13 +224,14 @@ public class Game {
 			}
 			
 			char obstacle = getObstacle(x,y);
+			System.out.println("obstacle");
 			boolean franchissable = objet.isFranchissable(obstacle);
 			
 			if (franchissable) {
 				return this.checkMouvement(objet, x, y, dx, dy, cpt-1, width, height);
 			}
 			else {
-				int[] newposition = {x,y};
+				int[] newposition = {oldx,oldy};
 				return newposition; 
 			}
 		}
@@ -262,7 +267,7 @@ public class Game {
 	private List<Element> getListAll() {
 		List<Element> murs = this.level.getLevel();
 		List<Element> pieces = this.level.getPieces();
-		List<Element> mobiles = null;
+		List<Element> mobiles = new ArrayList<>();
 		mobiles.add(this.player);
 		for (NPC npc : this.npcs) {
 			mobiles.add(npc);
