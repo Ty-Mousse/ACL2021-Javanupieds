@@ -41,7 +41,6 @@ public class Game {
 	public void start() throws Exception {
 		
 		while(this.player.getLives() > 0) {
-			
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
 			this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
 			this.updateState(); // Mise a jour des etats en fonction des deplacements
@@ -50,8 +49,8 @@ public class Game {
 			if (time - timeRef >= delay) {
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
-				this.displayer.render(allElement); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
-			}
+				this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+				}
 		}
 		
 	}
