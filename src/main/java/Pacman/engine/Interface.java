@@ -34,12 +34,12 @@ public class Interface extends JFrame{
 		this.setResizable(false);
 		this.setVisible(true);
 		this.addKeyListener(controller);
-		this.interfacepainter= new InterfacePainter(level, this.windowHeight, this.windowWidth, player);
+		this.interfacepainter= new InterfacePainter(level, this.windowHeight, this.windowWidth, player, 0);
 		};
 		
-		public void render(List<Element> level, Player player) {
+		public void render(List<Element> level, Player player, int score) {
 			interfacepainter.removeAll();
-			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player);
+			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player, score);
 			this.add(interfacepainter);
 		}
 

@@ -31,7 +31,7 @@ public class InterfacePainter extends JPanel{
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
 	private Image ghost, pacman, heart;
 
-	public InterfacePainter(List<Element> level, int height, int width, Player player) {
+	public InterfacePainter(List<Element> level, int height, int width, Player player, int score) {
 		loadImages();
 		this.level = level;
 		this.gameOver = false;
@@ -40,7 +40,7 @@ public class InterfacePainter extends JPanel{
 		this.windowHeight= height;
 		this.windowWidth= width;
 		this.lives = player.getLives();
-		this.score=0;
+		this.score=score;
 	}
 	
 	

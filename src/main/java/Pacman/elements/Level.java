@@ -84,12 +84,16 @@ public class Level {
 		return level;
 	}	
 	
-	public void removeCoin(int x, int y) {
+	public int removeCoin(int x, int y) {
 		for (Element piece : this.pieces) {
 			if (piece.getX()==x & piece.getY()==y) {
-				piece.setType(' '); //on enleve virtuellement la piece
+				// On enleve la piece de la liste
+				piece.setType(' ');
+				this.pieces.remove(piece);
+				return 100;
 			}
 		}
+		return 0;
 	}
 	
 	public List<Element> getPieces() {

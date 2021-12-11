@@ -24,6 +24,7 @@ public class Game {
 	private Player player;
 	private List<NPC> npcs;
 	private Interface displayer;
+	private int score = 0; // Stoque le score du joueur
 	
 	private Controller controller;
 	private int inputX;
@@ -58,12 +59,12 @@ public class Game {
 			if (time - timeRef >= delay) {
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
-				this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+				this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
 		}
 		// Dernier render pour afficher le cas où il reste zéro vie
 		List<Element> allElement = this.getListAll();
-		this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+		this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 	}
 	
 	// Méthode permettant d'initialiser une instance de player à partir du tableau d'initialisation venant de la classe Level
@@ -110,7 +111,8 @@ public class Game {
 		int xPlayer = this.player.getX();
 		int yPlayer = this.player.getY();
 		
-		this.level.removeCoin(xPlayer,yPlayer); // on onlève la pièce		
+		this.score += this.level.removeCoin(xPlayer, yPlayer); // on onleve la pièce		
+		System.out.println(this.score);
 		
 		for (NPC npc : this.npcs) { //on regarde pour chaque npc s'il est en contact avec le player
 			if (npc.getX()==xPlayer & npc.getY()==yPlayer) {
