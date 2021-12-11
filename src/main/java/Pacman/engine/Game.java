@@ -43,7 +43,7 @@ public class Game {
 		
 		while(this.player.getLives() > 0) {
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
-			//this.updateState(); // Mise a jour des etats en fonction des deplacements
+			this.updateState(); // Mise a jour des etats en fonction des deplacements
 			List<Element> allElement = this.getListAll();
 			
 			// Boucle de déplacement du joueur
@@ -58,6 +58,7 @@ public class Game {
 			if (time - timeRef >= delay) {
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
+				System.out.println("boucle: "+this.player.getLives());
 				this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
 		}
