@@ -14,7 +14,7 @@ import main.java.Pacman.elements.Element;
 
 public class Game {
 	
-	private int delay = 17; // Delai de temps en ms (permet 60fps)
+	private int delay = 50; // Delai de temps en ms (permet 60fps)
 	private long timeRef = System.currentTimeMillis();;
 	private long time;
 	
@@ -31,22 +31,22 @@ public class Game {
 		this.controller = new Controller();
 		this.inputX = 0;
 		this.inputY = 0;
-		
 		this.level = new Level("src/main/java/Pacman/level.txt");
 		this.initPlayer(this.level.getMobiles());
 		this.initNPC(this.level.getMobiles());
-		this.displayer = new Interface(this.level.getWidth(), this.level.getHeight());
+		this.displayer = new Interface(this.level.getWidth(), this.level.getHeight(), this.player, this.getListAll(), this.controller);
 	}
 	
 	public void start() throws Exception {
 		
 		while(this.player.getLives() > 0) {
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
-			this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
-			this.updateState(); // Mise a jour des etats en fonction des deplacements
+			
+			//this.updateState(); // Mise a jour des etats en fonction des deplacements
 			List<Element> allElement = this.getListAll();
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
+				this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
 				this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
@@ -87,11 +87,11 @@ public class Game {
 		int dx = direction[0];
 		int dy = direction[1];
 		
-		if (dx != 0 & dy !=0) {
+		if (dx != 0 | dy !=0) {
 			this.inputX=dx;
 			this.inputY=dy;
 		}
-		System.out.println(Integer.toString(dx)+Integer.toString(dx));
+		//System.out.println(Integer.toString(dx)+Integer.toString(dx));
 	}
 	
 	private void updateState() {
@@ -126,7 +126,7 @@ public class Game {
 		 * Met a jour les positions des elements mobiles du jeu
 		 */
 		this.updatePlayerPosition();
-		this.updateNPCPositions();
+		//this.updateNPCPositions();
 		
 	}
 	
