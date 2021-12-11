@@ -13,6 +13,10 @@ public class NPC extends MobileElement {
 	}
 	
 	public int[] deplacementRandom(){
+		/***
+		 * Renvoie une direction aleatoire valide (les deplacements
+		 * diagonaux ne sont pas valides)
+		 */
 		Random rn = new Random();
 		int[] dir = {0,0};
 		int newdx;

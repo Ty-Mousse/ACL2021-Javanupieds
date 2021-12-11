@@ -6,7 +6,7 @@ public class Player extends MobileElement{
 	
 	public Player(int x, int y) {
 		super(x, y, 1, '2');
-		this.getInfranchissable().add('3');
+		this.getInfranchissable().add('3'); //les ennemis sont infranchissables
 	}
 
 	public int getLives() {

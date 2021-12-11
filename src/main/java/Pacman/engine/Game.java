@@ -24,6 +24,7 @@ public class Game {
 	private Player player;
 	private List<NPC> npcs;
 	private Interface displayer;
+	private int goal;
 	private int score = 0; // Stoque le score du joueur
 	
 	private Controller controller;
@@ -35,6 +36,7 @@ public class Game {
 		this.inputX = 0;
 		this.inputY = 0;
 		this.level = new Level("src/main/java/Pacman/level.txt");
+		this.goal = this.level.getPieces().size()*100;
 		this.initPlayer(this.level.getMobiles());
 		this.initNPC(this.level.getMobiles());
 		this.displayer = new Interface(this.level.getWidth(), this.level.getHeight(), this.player, this.getListAll(), this.controller);
@@ -42,7 +44,7 @@ public class Game {
 	
 	public void start() throws Exception {
 		
-		while(this.player.getLives() > 0) {
+		while(this.player.getLives() > 0 & this.score != this.goal) {
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
 			List<Element> allElement = this.getListAll();
 			
@@ -77,8 +79,11 @@ public class Game {
 			}
 		}
 	}
-	
+
 	public void initNPC(List<Element> initList) {
+		/***
+		 * Initialise la liste de npcs a partir du tableau du level
+		 */
 		List<NPC> npcs = new ArrayList<NPC>();
 		for (Element e:initList) {
 			if (e.getType() == 'N') { // pas sur pour le 'N', a modifier si besoin !
@@ -87,6 +92,31 @@ public class Game {
 			}
 		}
 		this.npcs = npcs;
+	}
+	
+	public void replaceNPC(List<Element> initList) {
+		/***
+		 * Replace les npcs a leurs positions initiale
+		 */
+		
+		List<Integer> npcsX = new ArrayList<Integer>();
+		List<Integer> npcsY = new ArrayList<Integer>();
+		int n =0;
+		for (Element e:initList) {
+			if (e.getType() == 'N') { // pas sur pour le 'N', a modifier si besoin !
+				npcsX.add(e.getX());
+				npcsY.add(e.getY());
+				n++;
+			}
+		}
+				
+		for (int i = 0; i<n ; i++) {
+			this.npcs.get(i).setX(npcsX.get(i));
+			this.npcs.get(i).setY(npcsY.get(i));
+
+			
+		}
+		
 	}
 	
 	private void updateInput() throws Exception {
@@ -111,6 +141,9 @@ public class Game {
 	}
 	
 	private void updateState() {
+		/***
+		 * Met a jour les etats des elements en fonction de leurs positions
+		 */
 		
 		int xPlayer = this.player.getX();
 		int yPlayer = this.player.getY();
@@ -130,7 +163,9 @@ public class Game {
 						}
 					}
 				
-				//this.initNPC(this.level.getMobiles());
+				this.replaceNPC(this.level.getMobiles());
+				int[] reset = {0,0};
+				this.controller.setInputEnCours(reset);
 				
 				}
 		
@@ -143,6 +178,7 @@ public class Game {
 		 * Met a jour les positions des elements mobiles du jeu
 		 */
 		this.updatePlayerPosition();
+		this.updateState(); //correction du bug de traversement d'ennemi
 		this.updateNPCPositions();
 		
 	}
@@ -182,6 +218,7 @@ public class Game {
 			
 			int x = npc.getX();
 			int y = npc.getY();
+			
 			int v = npc.getV();
 			int[] newDir;
 			
@@ -289,6 +326,9 @@ public class Game {
 	
 	@SuppressWarnings("null")
 	private List<Element> getListAll() {
+		/***
+		 * Renvoie une liste contenant tous les elements d'une partie en cours
+		 */
 		List<Element> murs = this.level.getLevel();
 		List<Element> pieces = this.level.getPieces();
 		List<Element> mobiles = new ArrayList<>();

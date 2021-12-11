@@ -65,8 +65,6 @@ public class Level {
 	public Element getElement(int x, int y) throws Exception {
 		/**
 		 * Prend en parametres des coordonnees x,y et renvoie l'element qui correspond.
-		 * Leve une exception si coo ne correspondent pas a la hauteur et largeur de la
-		 * grille.
 		 */
 		// labirynthe infini
 					if (x>this.width) {
@@ -98,6 +96,10 @@ public class Level {
 	}	
 	
 	public int removeCoin(int x, int y) {
+		/***
+		 * Si une piece non recuperee se trouve (x,y), elle devient
+		 * recuperee et on revoie 100. Sinon on renvoie 0.
+		 */
 		for (Element piece : this.pieces) {
 			if (piece.getX()==x & piece.getY()==y) {
 				// On enleve la piece de la liste

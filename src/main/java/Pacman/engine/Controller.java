@@ -6,13 +6,17 @@ import java.awt.event.KeyListener;
 public class Controller implements KeyListener{
 	
 	private int[] inputEnCours= {0,0};
-	
+
 	public Controller() {
 		
 	}
 	
 	public int[] getInputEnCours() {
 		return inputEnCours;
+	}
+	
+	public void setInputEnCours(int[] inputEnCours) {
+		this.inputEnCours = inputEnCours;
 	}
 
 	@Override
