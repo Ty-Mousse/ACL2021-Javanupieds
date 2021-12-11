@@ -47,14 +47,14 @@ public class Game {
 			this.updateState(); // Mise a jour des etats en fonction des deplacements
 			List<Element> allElement = this.getListAll();
 			
-			// Boucle de déplacement du joueur
-			// Optimisation probablement faisable sur les délais de temps différents
+			// Boucle de deplacement du joueur
+			// Optimisation probablement faisable sur les délais de temps differents
 			time= System.currentTimeMillis();
 			if (time - speedTimeRef >= speedDelay) {
 				this.updatePosition();
 				speedTimeRef = System.currentTimeMillis();
 			}
-			// Boucle de déplacement du joueur
+			// Boucle de deplacement du joueur
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
@@ -142,7 +142,7 @@ public class Game {
 		 * Met a jour les positions des elements mobiles du jeu
 		 */
 		this.updatePlayerPosition();
-		//this.updateNPCPositions();
+		this.updateNPCPositions();
 		
 	}
 	
