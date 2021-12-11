@@ -88,7 +88,7 @@ public class InterfacePainter extends JPanel{
 	}
 	
 	private void drawScore(Graphics2D g2d) {
-		System.out.println(lives);
+	//	System.out.println(lives);
 		g2d.setFont(smallFont);
 		g2d.setColor(new Color(5, 181, 79));
 		String s = "Score: " + score;

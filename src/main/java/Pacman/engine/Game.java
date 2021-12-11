@@ -130,7 +130,7 @@ public class Game {
 						}
 					}
 				
-				this.initNPC(this.level.getMobiles());
+				//this.initNPC(this.level.getMobiles());
 				
 				}
 		

@@ -37,7 +37,7 @@ public class Controller implements KeyListener{
 			break;
 		}
 		this.inputEnCours=dir;
-		System.out.println("Direction : " + this.inputEnCours[0] + ", " + this.inputEnCours[1]);
+	//	System.out.println("Direction : " + this.inputEnCours[0] + ", " + this.inputEnCours[1]);
 	}
 
 	@Override

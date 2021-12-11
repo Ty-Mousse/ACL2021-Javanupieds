@@ -68,9 +68,22 @@ public class Level {
 		 * Leve une exception si coo ne correspondent pas a la hauteur et largeur de la
 		 * grille.
 		 */
-		if (x > this.width | y > this.height) {
-			throw new Exception("Coordinate out of the grid");
-		}
+		// labirynthe infini
+					if (x>this.width) {
+						x=x-this.width;
+					}
+					
+					if (y>this.height) {
+						y=y-height;
+					}
+					
+					if (x<0) {
+						x=x+this.width;
+					}
+					
+					if (y<0) {
+						y=y+this.height;
+					}
 		Element res = null ;
 		for(Element elt : this.level) {
 			if(x==elt.getX() & y==elt.getY()) {
