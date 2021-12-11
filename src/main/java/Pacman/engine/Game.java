@@ -62,6 +62,7 @@ public class Game {
 				this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
 		}
+		
 		// Dernier render pour afficher le cas ou il reste zero vie
 		List<Element> allElement = this.getListAll();
 		this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
@@ -87,7 +88,7 @@ public class Game {
 		this.npcs = npcs;
 	}
 	
-	private void updateInput() {
+	private void updateInput() throws Exception {
 		/**
 		 * Recupere la direction grace au controller.
 		 * Met a jour les input seulement s'ils sont
@@ -98,8 +99,10 @@ public class Game {
 		
 		int dx = direction[0];
 		int dy = direction[1];
+		char obstacle = this.getObstacle(this.player.getX()+dx, this.player.getY()+dy);
+		boolean directionPossible = this.player.isFranchissable(obstacle);
 		
-		if (dx != 0 | dy !=0) {
+		if (directionPossible) {
 			this.inputX=dx;
 			this.inputY=dy;
 		}
@@ -175,7 +178,6 @@ public class Game {
 		 */
 		
 		for(NPC npc : this.npcs) {
-			System.out.println("prout");
 			
 			int x = npc.getX();
 			int y = npc.getY();
@@ -191,7 +193,6 @@ public class Game {
 			int[] newPosition = this.checkMouvement(npc, x, y, dx, dy, v, width, height);
 			
 			while(newPosition[0]==x & newPosition[1]==y) {
-				System.out.println("nonnon");
 				newDir = npc.deplacementRandom();
 				dx=newDir[0];
 				dy=newDir[1];

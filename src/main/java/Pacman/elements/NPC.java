@@ -20,18 +20,17 @@ public class NPC extends MobileElement {
 		boolean invalid = true;
 		
 		while (invalid) { // tourne a l'infini,Remi doit corriger
-			newdx = rn.nextInt(1);
-			newdy = rn.nextInt(1);
+			newdx = rn.nextInt(3)-1;
+			newdy = rn.nextInt(3)-1;
 			
-			if (dx!=0 & dy==0 | dx==0 & dy!=0) {
-				
+			
+			if ((newdx!=0 & newdy==0) | (newdx==0 & newdy!=0)) {
+
 				invalid=false;
 				dir[0] = newdx;
 				dir[1] = newdy;
-			}
-			
+			}			
 		}
-		
 		return dir;
 	}
 	
