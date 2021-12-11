@@ -51,10 +51,10 @@ public class Game {
 			time= System.currentTimeMillis();
 			if (time - speedTimeRef >= speedDelay) {
 				this.updatePosition();
+				this.updateState(); // Mise a jour des etats en fonction des deplacements
 				speedTimeRef = System.currentTimeMillis();
 			}
 			
-			this.updateState(); // Mise a jour des etats en fonction des deplacements
 			// Boucle de deplacement du joueur
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
@@ -231,6 +231,7 @@ public class Game {
 			// labirynthe infini
 			if (x>width) {
 				x=x-width;
+				System.out.println("a droite");
 			}
 			
 			if (y>height) {
@@ -239,6 +240,7 @@ public class Game {
 			
 			if (x<0) {
 				x=x+width;
+				System.out.println("a gauche");
 			}
 			
 			if (y<0) {
