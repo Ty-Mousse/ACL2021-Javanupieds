@@ -62,7 +62,7 @@ public class Game {
 				this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
 		}
-		// Dernier render pour afficher le cas où il reste zéro vie
+		// Dernier render pour afficher le cas ou il reste zero vie
 		List<Element> allElement = this.getListAll();
 		this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 	}
