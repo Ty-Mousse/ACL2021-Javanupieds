@@ -21,11 +21,9 @@ public class MobileElement extends Element {
 	public boolean isFranchissable(char obstacle) {
 		Boolean franchissable = true;
 		if (this.infranchissable.contains(obstacle)) {
-			System.out.println("non !");
 			franchissable = false;
 		}
 		else {
-			System.out.println("oui !");
 		}
 		return franchissable;
 	}

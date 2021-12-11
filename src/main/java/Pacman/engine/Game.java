@@ -44,7 +44,6 @@ public class Game {
 		
 		while(this.player.getLives() > 0) {
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
-			this.updateState(); // Mise a jour des etats en fonction des deplacements
 			List<Element> allElement = this.getListAll();
 			
 			// Boucle de deplacement du joueur
@@ -54,6 +53,8 @@ public class Game {
 				this.updatePosition();
 				speedTimeRef = System.currentTimeMillis();
 			}
+			
+			this.updateState(); // Mise a jour des etats en fonction des deplacements
 			// Boucle de deplacement du joueur
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
@@ -115,7 +116,7 @@ public class Game {
 		int yPlayer = this.player.getY();
 		
 		this.score += this.level.removeCoin(xPlayer, yPlayer); // on onleve la pièce		
-		System.out.println(this.score);
+		//System.out.println(this.score);
 		
 		for (NPC npc : this.npcs) { //on regarde pour chaque npc s'il est en contact avec le player
 			if (npc.getX()==xPlayer & npc.getY()==yPlayer) {
