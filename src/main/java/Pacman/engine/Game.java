@@ -61,6 +61,9 @@ public class Game {
 				this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
 		}
+		// Dernier render pour afficher le cas où il reste zéro vie
+		List<Element> allElement = this.getListAll();
+		this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 	}
 	
 	// Méthode permettant d'initialiser une instance de player à partir du tableau d'initialisation venant de la classe Level
