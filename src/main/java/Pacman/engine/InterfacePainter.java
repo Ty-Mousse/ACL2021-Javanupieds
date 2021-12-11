@@ -92,7 +92,7 @@ public class InterfacePainter extends JPanel{
 		g2d.setFont(smallFont);
 		g2d.setColor(new Color(5, 181, 79));
 		String s = "Score: " + score;
-		g2d.drawString(s, windowWidth - 6*tileSize, windowHeight - 4*tileSize);//x width y height
+		g2d.drawString(s, windowWidth - 8*tileSize, windowHeight - 4*tileSize);//x width y height
 		for (int i = 0; i < lives; i++) {
 			g2d.drawImage(heart, i * 28 + 8, windowWidth + 4*(tileSize + 1), this);
         }
