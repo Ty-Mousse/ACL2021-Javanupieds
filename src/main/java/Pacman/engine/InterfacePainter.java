@@ -21,80 +21,83 @@ import main.java.Pacman.elements.Player;
 public class InterfacePainter extends JPanel{
 	
 	private List<Element> level;
-	private Interface dimension;
+	private Game game;
 	
 	private static boolean gameOver;
 	private boolean victory;
 	private int tileSize;
 	private int windowWidth;
 	private int windowHeight;
-	private Image ghost = new ImageIcon("src/main/java/Pacman/images/ghost.gif").getImage();
-	private Image pacman = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
+	private int lives, score;
+    private final Font smallFont = new Font("Arial", Font.BOLD, 14);
+	private Image ghost, pacman, heart;
 
-
-	public InterfacePainter(List<Element> level, int height, int width) {
+	public InterfacePainter(List<Element> level, int height, int width, Player player) {
+		loadImages();
 		this.level = level;
 		this.gameOver = false;
 		this.victory = false;
 		this.tileSize = 16;
 		this.windowHeight= height;
 		this.windowWidth= width;
+		lives = player.getLives();
+		score=0;
 	}
 	
 	
+	private void loadImages() {
+		ghost = new ImageIcon("src/main/java/Pacman/images/ghost.gif").getImage();
+		pacman = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
+		heart = new ImageIcon("src/main/java/Pacman/images/heart.png").getImage();
+
+	}
+	
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.black);
-		g.fillRect(0, 0, windowWidth*tileSize, windowHeight*tileSize);
-        int x, y;
+        super.paintComponent(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+
+		g2d.setColor(Color.black);
+		g2d.fillRect(0, 0, windowWidth, windowHeight);
+		
+		drawMaze(g2d);
+		drawScore(g2d);
+    }
+	
+	private void drawMaze(Graphics2D g2d){
+		int x, y;
         for(Element e:level) {
         	x=e.getX()*15;
         	y=e.getY()*15-5;
         	if(e.getType() == ' ') {
-        		g.setColor(Color.black);
-        		g.fillRect(x, y, 15, 15);
+        		g2d.setColor(Color.black);
+        		g2d.fillRect(x, y, 15, 15);
         	}if(e.getType() == '#') {
-        		g.setColor(new Color(0,72,251));
-        		g.fillRect(x, y, 15, 15);
+        		g2d.setColor(new Color(0,72,251));
+        		g2d.fillRect(x, y, 15, 15);
         	}if(e.getType() == '.') {
-                g.setColor(new Color(255,255,255));
-                g.fillOval(x + 5, y + 5, 6, 6);
+        		g2d.setColor(new Color(255,255,255));
+        		g2d.fillOval(x + 5, y + 5, 6, 6);
         	}if(e.getType() == '2') {
         		x-=3;
         		y-=3;
-        		g.drawImage(pacman, x, y, this);
+        		g2d.drawImage(pacman, x, y, this);
         	}if(e.getType() == '3') {
-        		g.drawImage(ghost, x, y, this);
+        		g2d.drawImage(ghost, x, y, this);
         	}
-        	
-        	
         }
-    	/*for(Element p:level.getPieces()) {
-        	x=p.getX()*15;
-        	y=p.getY()*15-10;
-            g.setColor(new Color(255,255,255));
-            g.fillOval(x + 5, y + 5, 6, 6);
-        	}
-        for(Element e:level.getLevel()) {
-            g.setColor(new Color(0,72,251));
-        	x=e.getX()*15;
-        	y=e.getY()*15-10;
-        	if(e.getType() == ' ') {
-        		g.fillRect(x, y, 15, 15);
-        	}
-        	if(e.getType() == '#') {
-        		g.fillRect(x, y, 15, 15);
-        	}else {
-        	}
-        	for(Element p:level.getMobiles()) {
-            	x=p.getX()*15;
-            	y=p.getY()*15-15;
-            	if(p.getType() == 'O') {
-            		g.drawImage(pacman, x, y, this);
-            	}else{
-            		g.drawImage(ghost, x, y, this);
-            	}
-        }*/
-	  }
+	}
+	
+	private void drawScore(Graphics2D g2d) {
+       g2d.setFont(smallFont);
+       g2d.setColor(new Color(5, 181, 79));
+       String s = "Score: " + score;
+       g2d.drawString(s, windowWidth - 6*tileSize, windowHeight - 4*tileSize);//x width y height
+       for (int i = 0; i < lives; i++) {
+           g2d.drawImage(heart, i * 28 + 8, windowWidth + 4*(tileSize + 1), this);
+        }
+	}
+}
 
 
 
@@ -120,6 +123,6 @@ public class InterfacePainter extends JPanel{
 				g.drawString(str, x, y);
 			}
 */
-}
+
 
 

@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 
 import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Level;
+import main.java.Pacman.elements.Player;
 
 public class Interface extends JFrame{
 	
@@ -25,17 +26,17 @@ public class Interface extends JFrame{
 	public Interface(int width, int height) {
 		super();
 		this.windowWidth = width * this.tileSize;
-		this.windowHeight = height * this.tileSize;
+		this.windowHeight = height * (this.tileSize +2) ;
 		this.setTitle("Loading ...");
 		this.setIconImage(icon);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(this.windowWidth, this.windowHeight);
 		this.setResizable(false);
-		this.setVisible(true);		
+		this.setVisible(true);
 		};
 		
-		public void render(List<Element> level) {
-			InterfacePainter interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth);
+		public void render(List<Element> level, Player player) {
+			InterfacePainter interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player);
 			this.add(interfacepainter);
 		}
 
