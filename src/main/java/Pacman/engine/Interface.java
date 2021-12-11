@@ -1,6 +1,5 @@
 package main.java.Pacman.engine;
 
-
 import java.awt.Image;
 import java.util.List;
 

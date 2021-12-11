@@ -14,8 +14,10 @@ import main.java.Pacman.elements.Element;
 
 public class Game {
 	
-	private int delay = 50; // Delai de temps en ms (permet 60fps)
-	private long timeRef = System.currentTimeMillis();;
+	private int delay = 17; // Delai de temps en ms (permet 60fps)
+	private int speedDelay = 100;
+	private long timeRef = System.currentTimeMillis();
+	private long speedTimeRef = System.currentTimeMillis();
 	private long time;
 	
 	private Level level;
@@ -41,18 +43,24 @@ public class Game {
 		
 		while(this.player.getLives() > 0) {
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
-			
 			//this.updateState(); // Mise a jour des etats en fonction des deplacements
 			List<Element> allElement = this.getListAll();
+			
+			// Boucle de déplacement du joueur
+			// Optimisation probablement faisable sur les délais de temps différents
+			time= System.currentTimeMillis();
+			if (time - speedTimeRef >= speedDelay) {
+				this.updatePosition();
+				speedTimeRef = System.currentTimeMillis();
+			}
+			// Boucle de déplacement du joueur
 			time= System.currentTimeMillis();
 			if (time - timeRef >= delay) {
-				this.updatePosition(); // Mise a jour des position en fonction des autorisations de deplacement (collisions, etc...)
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
 				this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
-				}
+			}
 		}
-		
 	}
 	
 	// Méthode permettant d'initialiser une instance de player à partir du tableau d'initialisation venant de la classe Level
@@ -203,7 +211,7 @@ public class Game {
 		 * afin de ne pas traverser un mur si la vitesse est grande.
 		 */
 		if (cpt == 0) {
-			System.out.println("fini");
+			//System.out.println("fini");
 			int[] newposition = {x,y};
 			return newposition;
 		}
@@ -222,8 +230,8 @@ public class Game {
 				y=y-height;
 			}
 			
-			char obstacle = getObstacle(x,y);
-			System.out.println("obstacle");
+			char obstacle = getObstacle(x, y);
+			//System.out.println("obstacle");
 			boolean franchissable = objet.isFranchissable(obstacle);
 			
 			if (franchissable) {
