@@ -11,7 +11,7 @@ public class MobileElement extends Element {
 	public MobileElement(int x, int y, int v, char type) {
 		super(x, y, type);
 		this.v = v;
-		this.infranchissable.add('#');
+		this.getInfranchissable().add('#');
 	}
 
 	public int getV() {
@@ -20,12 +20,20 @@ public class MobileElement extends Element {
 	
 	public boolean isFranchissable(char obstacle) {
 		Boolean franchissable = true;
-		if (this.infranchissable.contains(obstacle)) {
+		if (this.getInfranchissable().contains(obstacle)) {
 			franchissable = false;
 		}
 		else {
 		}
 		return franchissable;
+	}
+
+	public List<Object> getInfranchissable() {
+		return infranchissable;
+	}
+
+	public void setInfranchissable(List<Object> infranchissable) {
+		this.infranchissable = infranchissable;
 	}
 
 }

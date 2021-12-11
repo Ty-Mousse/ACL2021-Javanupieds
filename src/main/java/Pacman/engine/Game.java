@@ -237,6 +237,14 @@ public class Game {
 				y=y-height;
 			}
 			
+			if (x<0) {
+				x=x+width;
+			}
+			
+			if (y<0) {
+				y=y+height;
+			}
+			
 			char obstacle = getObstacle(x, y);
 			//System.out.println("obstacle");
 			boolean franchissable = objet.isFranchissable(obstacle);
