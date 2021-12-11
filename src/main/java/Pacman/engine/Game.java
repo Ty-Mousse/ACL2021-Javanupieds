@@ -58,7 +58,6 @@ public class Game {
 			if (time - timeRef >= delay) {
 				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 				timeRef = System.currentTimeMillis();
-				System.out.println("boucle: "+this.player.getLives());
 				this.displayer.render(allElement, this.player); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			}
 		}
@@ -112,8 +111,8 @@ public class Game {
 		
 		for (NPC npc : this.npcs) { //on regarde pour chaque npc s'il est en contact avec le player
 			if (npc.getX()==xPlayer & npc.getY()==yPlayer) {
-				int curentLife = this.player.getLives();
-				this.player.setLives(curentLife-1);
+				int currentLife = this.player.getLives();
+				this.player.setLives(currentLife - 1);
 			
 				for (Element e: this.level.getMobiles()) { // si oui vie-=1 et on reset position joueur/npc
 					if (e.getType() == 'O') {

@@ -39,7 +39,6 @@ public class Interface extends JFrame{
 		
 		public void render(List<Element> level, Player player) {
 			interfacepainter.removeAll();
-			System.out.println("render: "+player.getLives());
 			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player);
 			this.add(interfacepainter);
 		}

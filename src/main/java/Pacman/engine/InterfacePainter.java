@@ -21,14 +21,13 @@ import main.java.Pacman.elements.Player;
 public class InterfacePainter extends JPanel{
 	
 	private List<Element> level;
-	private Game game;
 	
 	private static boolean gameOver;
 	private boolean victory;
 	private int tileSize;
 	private int windowWidth;
 	private int windowHeight;
-	private int lives, score;
+	private static int lives, score;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
 	private Image ghost, pacman, heart;
 
@@ -89,14 +88,13 @@ public class InterfacePainter extends JPanel{
 	}
 	
 	private void drawScore(Graphics2D g2d) {
-		System.out.println("painter: "+lives);
-	   System.out.println(lives);
-       g2d.setFont(smallFont);
-       g2d.setColor(new Color(5, 181, 79));
-       String s = "Score: " + score;
-       g2d.drawString(s, windowWidth - 6*tileSize, windowHeight - 4*tileSize);//x width y height
-       for (int i = 0; i < lives; i++) {
-           g2d.drawImage(heart, i * 28 + 8, windowWidth + 4*(tileSize + 1), this);
+		System.out.println(lives);
+		g2d.setFont(smallFont);
+		g2d.setColor(new Color(5, 181, 79));
+		String s = "Score: " + score;
+		g2d.drawString(s, windowWidth - 6*tileSize, windowHeight - 4*tileSize);//x width y height
+		for (int i = 0; i < lives; i++) {
+			g2d.drawImage(heart, i * 28 + 8, windowWidth + 4*(tileSize + 1), this);
         }
 	}
 }
