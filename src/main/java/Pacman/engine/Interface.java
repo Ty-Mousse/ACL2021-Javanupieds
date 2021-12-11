@@ -21,9 +21,10 @@ public class Interface extends JFrame{
 	private int tileSize = 16;
 	private int windowWidth;
 	private int windowHeight;
+	private InterfacePainter interfacepainter;
 	private Image icon = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
 	
-	public Interface(int width, int height) {
+	public Interface(int width, int height, Player player, List<Element> level) {
 		super();
 		this.windowWidth = width * this.tileSize;
 		this.windowHeight = height * (this.tileSize +2) ;
@@ -33,10 +34,12 @@ public class Interface extends JFrame{
 		this.setSize(this.windowWidth, this.windowHeight);
 		this.setResizable(false);
 		this.setVisible(true);
+		this.interfacepainter= new InterfacePainter(level, this.windowHeight, this.windowWidth, player);
 		};
 		
 		public void render(List<Element> level, Player player) {
-			InterfacePainter interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player);
+			interfacepainter.removeAll();
+			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player);
 			this.add(interfacepainter);
 		}
 
