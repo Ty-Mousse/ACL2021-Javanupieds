@@ -101,10 +101,9 @@ public class Level {
 		 * recuperee et on revoie 100. Sinon on renvoie 0.
 		 */
 		for (Element piece : this.pieces) {
-			if (piece.getX()==x & piece.getY()==y) {
+			if (piece.getX()==x & piece.getY()==y & piece.getType()=='.') {
 				// On enleve la piece de la liste
 				piece.setType(' ');
-				this.pieces.remove(piece);
 				return 100;
 			}
 		}

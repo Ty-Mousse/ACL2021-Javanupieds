@@ -3,12 +3,14 @@ package main.java.Pacman.elements;
 import java.util.Random;
 
 public class NPC extends MobileElement {
-	int dx;
-	int dy;
+	private int dx;
+	private int dy;
 	
 	
 	public NPC(int x, int y) {
 		super(x, y, 1, '3'); //le '3' est a modifer, c'etait en attendant
+		this.dx = 0;
+		this.dy = 0;
 		
 	}
 	

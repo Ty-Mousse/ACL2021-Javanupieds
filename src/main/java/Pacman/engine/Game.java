@@ -43,7 +43,7 @@ public class Game {
 	}
 	
 	public void start() throws Exception {
-		
+
 		while(this.player.getLives() > 0 & this.score != this.goal) {
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
 			List<Element> allElement = this.getListAll();
