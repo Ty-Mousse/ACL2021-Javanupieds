@@ -1,9 +1,9 @@
 ############################### SPRINT 3 #################################
 
-Backlog S2
+Backlog S3
 	1 - Améliorer l’affichage (mur, pacman et menus)
-2 - Lancement d’un nouveau niveau après défaite/victoire
-3 - Musique et bruitages 
+	2 - Lancement d’un nouveau niveau après défaite/victoire
+	3 - Musique et bruitages 
 
 Répartition des tâches : 
 Xavier : Musique et bruitages
