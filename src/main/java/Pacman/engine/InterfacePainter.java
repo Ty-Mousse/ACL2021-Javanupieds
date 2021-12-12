@@ -14,8 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import main.java.Pacman.elements.Element;
-import main.java.Pacman.elements.Level;
-import main.java.Pacman.elements.NPC;
 import main.java.Pacman.elements.Player;
 
 public class InterfacePainter extends JPanel{

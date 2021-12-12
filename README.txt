@@ -45,7 +45,7 @@ Décisions pour le sprint suivant :
 	- nombre de vies modulable
     	  - Correction des bugs
 
-
+Diagramme de Classe -> diagrammeClasseAuto.png
 _________________________________________________________________________
 
 Recquiert java 1.8
