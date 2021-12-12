@@ -95,6 +95,14 @@ public class InterfacePainter extends JPanel{
 			g2d.drawImage(heart, i * 28 + 8, windowWidth + 4*(tileSize + 1), this);
         }
 	}
+	
+	private void drawMenu(Graphics2D g2d) {
+		
+	}
+	
+	private void drawSwitchScreen(Graphics2D g2d) {
+		
+	}
 }
 
 
