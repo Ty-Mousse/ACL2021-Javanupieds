@@ -1,17 +1,49 @@
-############################### SPRINT 3 #################################
-_________________________________________________________________________
+############################### SPRINT 2 #################################
 
 Backlog S2
-1 - Ameliorer l’affichage (mur, pacman et menus)
-2 - Lancement d’un nouveau niveau apres defaite/victoire
-3 - Musique et bruitages 
+	1 - Avoir des vies
+	2 - Montrer un compteur de score
+	3 - Plusieurs ennemis présents dans le labyrinthe
+
+Répartition des tâches :
+Xavier : interface graphique (classe interface, méthode render, )
+Clément : level (load, listes d’éléments), boucle
+Paul : fonction controller ()
+Rémi : gestion du déplacement, 
+
+Boucle :
+get control (récupère les commande)
+update_position (met à jour les positions en fonction des commandes)
+update_state (met à jour le jeux en fonction des positions)
+render
 _________________________________________________________________________
 
-Repartition des taches : 
-Xavier : Musique et bruitages
-Clement : back lancement des niveaux les uns apres les autres
-Paul : Murs (angles), pacman (bouche) et pseudo-menus (entre les niveaux)
-Remi : correction des bugs (vitesse = 2)
+Review :
+Fonctionnalités réalisées et validées (ou pas)
+	1 - Avoir des vies
+	2 - Montrer un compteur de score
+	3 - Plusieurs ennemis présents dans le labyrinthe
+
+Rétrospective:
+Ce qui s’est bien passé (ou pas) et les décision pour le sprint suivant
+Positif :
+Meilleure communication
+Meilleure gestion du temps
+Meilleur respect du diagramme de classe
+	
+Négatif :
+Mauvaise répartition du travail
+Bugs résiduels et problèmes d’optimisation
+
+Décisions pour le sprint suivant :
+Augmenter nombre réunions
+Affichage début et fin de partie
+Menu :
+- deux levels
+- vitesse modulable des ennemis (x1 ou x2)
+- nombre de vies modulable
+      - Correction des bugs
+
 
 _________________________________________________________________________
 
