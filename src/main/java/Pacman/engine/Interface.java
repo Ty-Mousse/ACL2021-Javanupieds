@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Level;
@@ -40,9 +41,9 @@ public class Interface extends JFrame{
 		
 		
 		public void render(List<Element> level, Player player, int score) {
-			interfacepainter.removeAll();
 			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player, score);
 			this.add(interfacepainter);
+			SwingUtilities.updateComponentTreeUI(interfacepainter);
 		}
 
 	}
