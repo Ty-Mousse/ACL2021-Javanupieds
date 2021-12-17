@@ -35,7 +35,9 @@ public class Interface extends JFrame{
 		this.setVisible(true);
 		this.addKeyListener(controller);
 		this.interfacepainter= new InterfacePainter(level, this.windowHeight, this.windowWidth, player, 0);
-		};
+		this.add(interfacepainter);
+	};
+		
 		
 		public void render(List<Element> level, Player player, int score) {
 			interfacepainter.removeAll();
