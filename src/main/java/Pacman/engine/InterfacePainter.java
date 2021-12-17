@@ -40,7 +40,7 @@ public class InterfacePainter extends JPanel{
 		this.windowWidth= width;
 		this.lives = player.getLives();
 		this.score=score;
-		this.cpt=1;
+		this.cpt=0;
 	}
 	
 	
@@ -105,7 +105,7 @@ public class InterfacePainter extends JPanel{
 	
 	private void drawMenu(Graphics2D g2d) {
 		g2d.setColor(Color.red);
-		g2d.fillRect(10, 10, windowWidth-50, windowHeight-50);
+		g2d.fillRect((windowWidth/2)-50, (windowHeight/2)-50, 100, 50);
 		
 	}
 	
