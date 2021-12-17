@@ -28,6 +28,7 @@ public class InterfacePainter extends JPanel{
 	private static int lives, score;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
 	private Image ghost, pacman, heart;
+	private int cpt;
 
 	public InterfacePainter(List<Element> level, int height, int width, Player player, int score) {
 		loadImages();
@@ -39,6 +40,7 @@ public class InterfacePainter extends JPanel{
 		this.windowWidth= width;
 		this.lives = player.getLives();
 		this.score=score;
+		this.cpt=0;
 	}
 	
 	
@@ -57,8 +59,13 @@ public class InterfacePainter extends JPanel{
 		g2d.setColor(Color.black);
 		g2d.fillRect(0, 0, windowWidth, windowHeight);
 		
-		drawMaze(g2d);
-		drawScore(g2d);
+		if (cpt==0) {
+			drawMenu(g2d);
+		}
+		if (cpt!=0) {
+			drawMaze(g2d);
+			drawScore(g2d);
+		}
     }
 	
 	private void drawMaze(Graphics2D g2d){
@@ -97,6 +104,8 @@ public class InterfacePainter extends JPanel{
 	}
 	
 	private void drawMenu(Graphics2D g2d) {
+		g2d.setColor(Color.red);
+		g2d.fillRect(10, 10, 15, 15);
 		
 	}
 	
@@ -108,27 +117,6 @@ public class InterfacePainter extends JPanel{
 
 
 
-/*		// affichage du game over
-			if (this.gameOver) {
-
-				String str = "Game Over!";
-				g.setColor(Color.RED);
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
-				FontMetrics fm = g.getFontMetrics();
-				int x = (g.getClipBounds().width - fm.stringWidth(str)) / 2;
-				int y = (g.getClipBounds().height / 2) + fm.getMaxDescent();
-				g.drawString(str, x, y);
-			}
-			if (this.victory) {
-				String str = "Victoire!";
-				g.setColor(Color.BLUE);
-				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 50));
-				FontMetrics fm = g.getFontMetrics();
-				int x = (g.getClipBounds().width - fm.stringWidth(str)) / 2;
-				int y = (g.getClipBounds().height / 2) + fm.getMaxDescent();
-				g.drawString(str, x, y);
-			}
-*/
 
 
 
