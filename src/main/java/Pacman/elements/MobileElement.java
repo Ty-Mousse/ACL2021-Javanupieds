@@ -26,7 +26,9 @@ public class MobileElement extends Element {
 		if (this.getInfranchissable().contains(obstacle)) {
 			franchissable = false;
 		}
+		
 		return franchissable;
+
 	}
 
 	public List<Object> getInfranchissable() {

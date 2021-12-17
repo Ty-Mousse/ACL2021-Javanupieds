@@ -43,7 +43,7 @@ public class Game {
 	}
 	
 	public void start() throws Exception {
-
+		System.out.println(this.level.getWidth());
 		while(this.player.getLives() > 0 & this.score != this.goal) {
 			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
 			List<Element> allElement = this.getListAll();
@@ -178,7 +178,6 @@ public class Game {
 		 * Met a jour les positions des elements mobiles du jeu
 		 */
 		this.updatePlayerPosition();
-		this.updateState(); //correction du bug de traversement d'ennemi
 		this.updateNPCPositions();
 		
 	}
@@ -228,13 +227,13 @@ public class Game {
 			int width = this.level.getWidth();
 			int height = this.level.getHeight();
 			
-			int[] newPosition = this.checkMouvement(npc, x, y, dx, dy, v, width, height);
+			int[] newPosition = this.checkNPCMouvement(npc, x, y, dx, dy, v, width, height);
 			
 			while(newPosition[0]==x & newPosition[1]==y) {
 				newDir = npc.deplacementRandom();
 				dx=newDir[0];
 				dy=newDir[1];
-				newPosition = this.checkMouvement(npc, x, y, dx, dy, v, width, height);
+				newPosition = this.checkNPCMouvement(npc, x, y, dx, dy, v, width, height);
 				
 			}
 			
@@ -266,23 +265,10 @@ public class Game {
 			y=y+dy;
 			
 			// labirynthe infini
-			if (x>width) {
-				x=x-width;
-				System.out.println("a droite");
-			}
+			int[] newPos = this.labyrintheInfini(x, y);
+			x = newPos[0];
+			y = newPos[1];
 			
-			if (y>height) {
-				y=y-height;
-			}
-			
-			if (x<0) {
-				x=x+width;
-				System.out.println("a gauche");
-			}
-			
-			if (y<0) {
-				y=y+height;
-			}
 			
 			char obstacle = getObstacle(x, y);
 			//System.out.println("obstacle");
@@ -298,12 +284,73 @@ public class Game {
 		}
 	}
 	
+	private int[] checkNPCMouvement(MobileElement objet, int x, int y, int dx, int dy, int cpt, int width, int height) throws Exception {
+		/**
+		 * A partir d'un element mobile, de sa position, de sa vitesse et
+		 * d'une direction, renvoie sa nouvelle position. Procede par recurence
+		 * afin de ne pas traverser un mur si la vitesse est grande.
+		 */
+		if (cpt == 0 | (x==this.player.getX() & y==this.player.getY())) {
+			int[] newposition = {x,y};
+			return newposition;
+		}
+		else {
+			int oldx=x;
+			int oldy=y;
+			x=x+dx;
+			y=y+dy;
+			
+			// labirynthe infini
+			int[] newPos = this.labyrintheInfini(x, y);
+			x = newPos[0];
+			y = newPos[1];
+			
+			char obstacle = getObstacle(x, y);
+			//System.out.println("obstacle");
+			boolean franchissable = objet.isFranchissable(obstacle);
+			
+			if (franchissable) {
+				return this.checkNPCMouvement(objet, x, y, dx, dy, cpt-1, width, height);
+			}
+			else {
+				int[] newposition = {oldx,oldy};
+				return newposition; 
+			}
+		}
+	}
+	
+	private int[] labyrintheInfini(int x, int y) {
+		
+		int width = this.level.getWidth();
+		int height = this.level.getHeight();
+		
+		if (x>width-1) {
+			x=x-width;
+			System.out.println("a droite");
+		}
+		
+		if (y>height-1) {
+			y=y-height;
+		}
+		
+		if (x<0) {
+			x=x+width;
+			System.out.println("a gauche");
+		}
+		
+		if (y<0) {
+			y=y+height;
+		}
+		int[] newPos = {x,y};
+		return newPos;
+	}
+	
 	private char getObstacle(int x, int y) throws Exception {
 		/**
 		 * Prend en parametres des coordonnees et renvoie le type d'obstacle qui
 		 * correspond parmis ceux de l'objet this.level
 		 */
-		Element res = this.level.getElement(x, y);
+		Element res = this.getElement(x, y);
 		if (res==null) {
 			return ' ';
 		}
@@ -312,6 +359,26 @@ public class Game {
 		}
 	}
 	
+	private Element getElement(int x, int y) {
+		List<Element> listAll = this.getListAll();
+		
+		int width=this.level.getWidth();
+		int height=this.level.getHeight();
+		
+		int[] newPos = this.labyrintheInfini(x, y);
+		x = newPos[0];
+		y = newPos[1];
+		
+	Element res = null ;
+	for(Element elt : listAll) {
+		if(x==elt.getX() & y==elt.getY()) {
+			res = elt;
+			}
+		}
+	return res;
+
+	}
+
 	public Level getLevel() {
 		return level;
 	}
