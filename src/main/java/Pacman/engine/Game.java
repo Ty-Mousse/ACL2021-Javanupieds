@@ -20,6 +20,8 @@ public class Game {
 	private long speedTimeRef = System.currentTimeMillis();
 	private long time;
 	
+	private String[] levels = {"level1.txt", "level2.txt", "level3.txt", "level4.txt", "level5.txt"}; // Liste de niveaux (fichiers texte)
+	private int currentLevel = 0;
 	private Level level;
 	private Player player;
 	private List<NPC> npcs;
@@ -35,7 +37,7 @@ public class Game {
 		this.controller = new Controller();
 		this.inputX = 0;
 		this.inputY = 0;
-		this.level = new Level("src/main/java/Pacman/level.txt");
+		this.level = new Level("src/main/java/Pacman/" + this.levels[this.currentLevel]);
 		this.goal = this.level.getPieces().size()*100;
 		this.initPlayer(this.level.getMobiles());
 		this.initNPC(this.level.getMobiles());
