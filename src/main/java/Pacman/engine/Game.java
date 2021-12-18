@@ -21,7 +21,6 @@ public class Game {
 	private long time;
 	
 	private String[] levels = {"level1.txt", "level2.txt", "level3.txt", "level4.txt", "level5.txt"}; // Liste de niveaux (fichiers texte)
-	private int currentLevel = 0;
 	private Level level;
 	private Player player;
 	private List<NPC> npcs;
@@ -37,7 +36,7 @@ public class Game {
 		this.controller = new Controller();
 		this.inputX = 0;
 		this.inputY = 0;
-		this.level = new Level("src/main/java/Pacman/" + this.levels[this.currentLevel]);
+		this.level = new Level("src/main/java/Pacman/" + this.levels[0]);
 		this.goal = this.level.getPieces().size()*100;
 		this.initPlayer(this.level.getMobiles());
 		this.initNPC(this.level.getMobiles());
@@ -45,27 +44,38 @@ public class Game {
 	}
 	
 	public void start() throws Exception {
-		System.out.println(this.level.getWidth());
-		while(this.player.getLives() > 0 & this.score != this.goal) {
-			this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
-			List<Element> allElement = this.getListAll();
+		
+		for (String filename : this.levels) {
 			
-			// Boucle de deplacement du joueur
-			// Optimisation probablement faisable sur les délais de temps differents
-			time= System.currentTimeMillis();
-			if (time - speedTimeRef >= speedDelay) {
-				this.updatePosition();
-				this.updateState(); // Mise a jour des etats en fonction des deplacements
-				speedTimeRef = System.currentTimeMillis();
-			}
+			// Réinitialisation des paramètres de jeux
+			this.level = new Level("src/main/java/Pacman/" + filename);
+			this.goal = this.level.getPieces().size()*100;
+			this.initPlayer(this.level.getMobiles());
+			this.initNPC(this.level.getMobiles());
 			
-			// Boucle de deplacement du joueur
-			time= System.currentTimeMillis();
-			if (time - timeRef >= delay) {
-				this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
-				timeRef = System.currentTimeMillis();
-				this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+			System.out.println(this.level.getWidth());
+			while(this.player.getLives() > 0 & this.score != this.goal) {
+				this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
+				List<Element> allElement = this.getListAll();
+				
+				// Boucle de deplacement du joueur
+				// Optimisation probablement faisable sur les délais de temps differents
+				time= System.currentTimeMillis();
+				if (time - speedTimeRef >= speedDelay) {
+					this.updatePosition();
+					this.updateState(); // Mise a jour des etats en fonction des deplacements
+					speedTimeRef = System.currentTimeMillis();
+				}
+				
+				// Boucle de deplacement du joueur
+				time= System.currentTimeMillis();
+				if (time - timeRef >= delay) {
+					this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
+					timeRef = System.currentTimeMillis();
+					this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+				}
 			}
+
 		}
 		
 		// Dernier render pour afficher le cas ou il reste zero vie
