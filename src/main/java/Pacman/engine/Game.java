@@ -26,7 +26,9 @@ public class Game {
 	private List<NPC> npcs;
 	private Interface displayer;
 	private int goal;
-	private int score = 0; // Stoque le score du joueur
+	private int score = 0; // Stocke le score du joueur sur la totalité des niveaux
+	private int currentScore = 0; // Stocke le score du joueur du niveau en cours
+	private boolean startNPC = false; // Retiens les NPCs tant que le joueur n'a pas commencé à bouger
 	
 	private Controller controller;
 	private int inputX;
@@ -40,7 +42,7 @@ public class Game {
 		this.goal = this.level.getPieces().size()*100;
 		this.initPlayer(this.level.getMobiles());
 		this.initNPC(this.level.getMobiles());
-		this.displayer = new Interface(this.level.getWidth(), this.level.getHeight(), this.player, this.getListAll(), this.controller);
+		this.displayer = new Interface(21, 27, this.player, this.getListAll(), this.controller);
 	}
 	
 	public void start() throws Exception {
@@ -49,12 +51,13 @@ public class Game {
 			
 			// Réinitialisation des paramètres de jeux
 			this.level = new Level("src/main/java/Pacman/" + filename);
+			this.currentScore = 0;
 			this.goal = this.level.getPieces().size()*100;
 			this.initPlayer(this.level.getMobiles());
 			this.initNPC(this.level.getMobiles());
+			this.startNPC = false;
 			
-			System.out.println(this.level.getWidth());
-			while(this.player.getLives() > 0 & this.score != this.goal) {
+			while(this.player.getLives() > 0 & this.currentScore != this.goal) {
 				this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
 				List<Element> allElement = this.getListAll();
 				
@@ -75,16 +78,17 @@ public class Game {
 					this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 				}
 			}
-
+			
+			// Dernier render pour afficher le cas ou il reste zero vie
+			List<Element> allElement = this.getListAll();
+			this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+			
 		}
 		
-		// Dernier render pour afficher le cas ou il reste zero vie
-		List<Element> allElement = this.getListAll();
-		this.displayer.render(allElement, this.player, this.score); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 	}
 	
 	// Méthode permettant d'initialiser une instance de player à partir du tableau d'initialisation venant de la classe Level
-	public void initPlayer(List<Element> initList) {
+	private void initPlayer(List<Element> initList) {
 		for (Element e:initList) {
 			if (e.getType() == 'O') {
 				this.player = new Player(e.getX(), e.getY());
@@ -92,7 +96,7 @@ public class Game {
 		}
 	}
 
-	public void initNPC(List<Element> initList) {
+	private void initNPC(List<Element> initList) {
 		/***
 		 * Initialise la liste de npcs a partir du tableau du level
 		 */
@@ -106,10 +110,12 @@ public class Game {
 		this.npcs = npcs;
 	}
 	
-	public void replaceNPC(List<Element> initList) {
+	private void replaceNPC(List<Element> initList) {
 		/***
 		 * Replace les npcs a leurs positions initiale
 		 */
+		
+		this.startNPC = false;
 		
 		List<Integer> npcsX = new ArrayList<Integer>();
 		List<Integer> npcsY = new ArrayList<Integer>();
@@ -160,7 +166,10 @@ public class Game {
 		int xPlayer = this.player.getX();
 		int yPlayer = this.player.getY();
 		
-		this.score += this.level.removeCoin(xPlayer, yPlayer); // on onleve la pièce		
+		int scorePlus = this.level.removeCoin(xPlayer, yPlayer); // on enleve la pièce		
+		this.score += scorePlus;
+		this.currentScore += scorePlus;
+		
 		//System.out.println(this.score);
 		
 		for (NPC npc : this.npcs) { //on regarde pour chaque npc s'il est en contact avec le player
@@ -211,6 +220,10 @@ public class Game {
 		int newx = newposition[0];
 		int newy = newposition[1];
 		
+		if ((newx != x)||(newy != y)) {
+			this.startNPC = true;
+		}
+		
 		this.player.setX(newx);
 		this.player.setY(newy);
 	}
@@ -224,37 +237,38 @@ public class Game {
 		 * position du npc.
 		 * - Met a jour la position du npc
 		 */
-		
-		for(NPC npc : this.npcs) {
-			
-			int x = npc.getX();
-			int y = npc.getY();
-			
-			int v = npc.getV();
-			int[] newDir;
-			
-			int dx = npc.getdx();
-			int dy = npc.getdy();
-			
-			int width = this.level.getWidth();
-			int height = this.level.getHeight();
-			
-			int[] newPosition = this.checkNPCMouvement(npc, x, y, dx, dy, v, width, height);
-			
-			while(newPosition[0]==x & newPosition[1]==y) {
-				newDir = npc.deplacementRandom();
-				dx=newDir[0];
-				dy=newDir[1];
-				newPosition = this.checkNPCMouvement(npc, x, y, dx, dy, v, width, height);
+		if (this.startNPC) {
+			for(NPC npc : this.npcs) {
+				
+				int x = npc.getX();
+				int y = npc.getY();
+				
+				int v = npc.getV();
+				int[] newDir;
+				
+				int dx = npc.getdx();
+				int dy = npc.getdy();
+				
+				int width = this.level.getWidth();
+				int height = this.level.getHeight();
+				
+				int[] newPosition = this.checkNPCMouvement(npc, x, y, dx, dy, v, width, height);
+				
+				while(newPosition[0]==x & newPosition[1]==y) {
+					newDir = npc.deplacementRandom();
+					dx=newDir[0];
+					dy=newDir[1];
+					newPosition = this.checkNPCMouvement(npc, x, y, dx, dy, v, width, height);
+					
+				}
+				
+				npc.setdx(dx);
+				npc.setdy(dy);
+				
+				npc.setX(newPosition[0]);
+				npc.setY(newPosition[1]);
 				
 			}
-			
-			npc.setdx(dx);
-			npc.setdy(dy);
-			
-			npc.setX(newPosition[0]);
-			npc.setY(newPosition[1]);
-			
 		}
 		
 	}
