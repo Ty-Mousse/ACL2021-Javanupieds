@@ -43,10 +43,10 @@ public class Game {
 		this.initPlayer(this.level.getMobiles());
 		this.initNPC(this.level.getMobiles());
 		this.displayer = new Interface(21, 27, this.player, this.getListAll(), this.controller);
+		Sound.playMusic();
 	}
 	
 	public void start() throws Exception {
-		
 		for (String filename : this.levels) {
 			
 			// Réinitialisation des paramètres de jeux
@@ -60,7 +60,6 @@ public class Game {
 			while(this.player.getLives() > 0 & this.currentScore != this.goal) {
 				this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
 				List<Element> allElement = this.getListAll();
-				
 				// Boucle de deplacement du joueur
 				// Optimisation probablement faisable sur les délais de temps differents
 				time= System.currentTimeMillis();
