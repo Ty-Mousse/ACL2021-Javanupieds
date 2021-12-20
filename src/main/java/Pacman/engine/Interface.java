@@ -37,10 +37,12 @@ public class Interface extends JFrame{
 		this.addKeyListener(controller);
 		this.interfacepainter= new InterfacePainter(level, this.windowHeight, this.windowWidth, player, 0);
 		this.add(interfacepainter);
+		SwingUtilities.updateComponentTreeUI(interfacepainter);
 	};
 		
 		
 		public void render(List<Element> level, Player player, int score) {
+			this.getContentPane().removeAll();
 			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player, score);
 			this.add(interfacepainter);
 			SwingUtilities.updateComponentTreeUI(interfacepainter);
