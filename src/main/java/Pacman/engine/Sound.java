@@ -8,7 +8,7 @@ public class Sound {
 
 	public static void playMusic() {
 		try {
-			File file = new File("src/main/java/Pacman/sounds/pacman.wav");
+			File file = new File("src/main/java/Pacman/sounds/inGame.wav");
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));			
 			clip.start();
