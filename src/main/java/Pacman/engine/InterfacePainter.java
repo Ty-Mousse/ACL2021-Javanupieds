@@ -13,10 +13,19 @@ import java.awt.FontMetrics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import java.awt.GradientPaint;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException; 
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+
+
 import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Player;
 
-public class InterfacePainter extends JPanel{
+public class InterfacePainter extends JButton{
 	
 	private List<Element> level;
 	
@@ -29,6 +38,7 @@ public class InterfacePainter extends JPanel{
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
 	private Image ghost, pacman, heart;
 	private int cpt;
+	private String bouton;
 
 	public InterfacePainter(List<Element> level, int height, int width, Player player, int score) {
 		loadImages();
@@ -41,7 +51,17 @@ public class InterfacePainter extends JPanel{
 		this.lives = player.getLives();
 		this.score=score;
 		this.cpt=0;
-	}
+		this.bouton="start";
+		try {
+			heart = ImageIO.read(new File("src/main/java/Pacman/images/heart.png"));
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    }
+		    //Grâce à cette instruction, notre objet va s'écouter
+		    //Dès qu'un événement de la souris sera intercepté, il en sera averti
+		    this.addMouseListener((MouseListener) this);
+		  }
+	
 	
 	
 	private void loadImages() {
@@ -102,12 +122,20 @@ public class InterfacePainter extends JPanel{
 			g2d.drawImage(heart, i * 28 + 8, windowWidth + 4*(tileSize + 1), this);
         }
 	}
+
 	
 	private void drawMenu(Graphics2D g2d) {
-		g2d.setColor(Color.red);
-		g2d.fillRect((windowWidth/2)-50, (windowHeight/2)-50, 100, 50);
+	//	g2d.setColor(Color.red);
+		//g2d.fillRect((windowWidth/2)-50, (windowHeight/2)-50, 100, 50);
+		GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
+		g2d.setPaint(gp);
+	    g2d.fillRect( windowWidth / 2 - (windowWidth/ 2 /4), (windowHeight/2)-10, windowWidth / 2 - (windowWidth/ 2 /4)-100, (windowHeight/2)+5-225);
+	    g2d.setColor(Color.white);
+	    g2d.drawString(bouton, windowWidth / 2 - (windowWidth/ 2 /4), (windowHeight / 2) + 5);
 		
 	}
+	//Méthode appelée lors du clic de souris
+	public void mouseClicked(MouseEvent event) { }
 	
 	private void drawSwitchScreen(Graphics2D g2d) {
 		
