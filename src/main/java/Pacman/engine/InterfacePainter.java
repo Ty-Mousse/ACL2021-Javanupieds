@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException; 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-
+import javax.swing.JFrame;
 
 import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Player;
@@ -51,15 +51,7 @@ public class InterfacePainter extends JButton{
 		this.lives = player.getLives();
 		this.score=score;
 		this.cpt=0;
-		this.bouton="start";
-		try {
-			heart = ImageIO.read(new File("src/main/java/Pacman/images/heart.png"));
-		    } catch (IOException e) {
-		      e.printStackTrace();
-		    }
-		    //Grâce à cette instruction, notre objet va s'écouter
-		    //Dès qu'un événement de la souris sera intercepté, il en sera averti
-		    this.addMouseListener((MouseListener) this);
+	
 		  }
 	
 	
@@ -125,17 +117,18 @@ public class InterfacePainter extends JButton{
 
 	
 	private void drawMenu(Graphics2D g2d) {
-	//	g2d.setColor(Color.red);
-		//g2d.fillRect((windowWidth/2)-50, (windowHeight/2)-50, 100, 50);
-		GradientPaint gp = new GradientPaint(0, 0, Color.blue, 0, 20, Color.cyan, true);
-		g2d.setPaint(gp);
-	    g2d.fillRect( windowWidth / 2 - (windowWidth/ 2 /4), (windowHeight/2)-10, windowWidth / 2 - (windowWidth/ 2 /4)-100, (windowHeight/2)+5-225);
-	    g2d.setColor(Color.white);
-	    g2d.drawString(bouton, windowWidth / 2 - (windowWidth/ 2 /4), (windowHeight / 2) + 5);
-		
-	}
-	//Méthode appelée lors du clic de souris
-	public void mouseClicked(MouseEvent event) { }
+		JFrame frame = new JFrame("menu");
+	
+		//Créer le bouton
+	    JButton btn = new JButton("Start");
+	    //Définir la position du bouton
+	    btn.setBounds(100,100,100,40);
+	    //Ajouter le bouton au frame
+	    frame.add(btn);
+	    frame.setSize(300,300);
+	    frame.setLayout(null);
+	    frame.setVisible(true);  
+	  }
 	
 	private void drawSwitchScreen(Graphics2D g2d) {
 		
