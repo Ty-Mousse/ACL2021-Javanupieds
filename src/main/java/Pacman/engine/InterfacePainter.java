@@ -21,6 +21,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Player;
@@ -49,7 +51,7 @@ public class InterfacePainter extends JPanel{
 		this.windowWidth= width;
 		this.lives = player.getLives();
 		this.score=score;
-		this.cpt=0;
+		this.cpt=2;
 	
 		  }
 	
@@ -127,6 +129,11 @@ public class InterfacePainter extends JPanel{
 		String a = "appuyez sur entrer";
 		g2d.setColor(new Color(5, 70, 181));
 		g2d.drawString(a, 115, 250);
+		//switch(e.getKeyCode()) {
+		//case KeyEvent.VK_ENTER:
+		//	cpt=1;
+		//	break;
+		//}
 	  }
 	
 	private void drawFin(Graphics2D g2d) {
