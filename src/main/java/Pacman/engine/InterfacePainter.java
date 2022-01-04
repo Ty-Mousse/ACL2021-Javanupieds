@@ -25,7 +25,7 @@ import javax.swing.JFrame;
 import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Player;
 
-public class InterfacePainter extends JButton{
+public class InterfacePainter extends JPanel{
 	
 	private List<Element> level;
 	
@@ -36,9 +36,8 @@ public class InterfacePainter extends JButton{
 	private int windowHeight;
 	private static int lives, score;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
-	private Image ghost, pacman, heart;
+	private Image ghost, pacman, heart,fin,start;
 	private int cpt;
-	private String bouton;
 
 	public InterfacePainter(List<Element> level, int height, int width, Player player, int score) {
 		loadImages();
@@ -60,6 +59,8 @@ public class InterfacePainter extends JButton{
 		ghost = new ImageIcon("src/main/java/Pacman/images/ghost.gif").getImage();
 		pacman = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
 		heart = new ImageIcon("src/main/java/Pacman/images/heart.png").getImage();
+		fin = new ImageIcon("src/main/java/Pacman/images/fin.gif").getImage();
+		start = new ImageIcon("src/main/java/Pacman/images/start.jpeg").getImage();
 
 	}
 	
@@ -74,9 +75,12 @@ public class InterfacePainter extends JButton{
 		if (cpt==0) {
 			drawMenu(g2d);
 		}
-		if (cpt!=0) {
+		if (cpt==1) {
 			drawMaze(g2d);
 			drawScore(g2d);
+		}
+		if (cpt==2) {
+			drawFin(g2d);
 		}
     }
 	
@@ -117,21 +121,17 @@ public class InterfacePainter extends JButton{
 
 	
 	private void drawMenu(Graphics2D g2d) {
-		JFrame frame = new JFrame("menu");
-	
-		//Créer le bouton
-	    JButton btn = new JButton("Start");
-	    //Définir la position du bouton
-	    btn.setBounds(100,100,100,40);
-	    //Ajouter le bouton au frame
-	    frame.add(btn);
-	    frame.setSize(300,300);
-	    frame.setLayout(null);
-	    frame.setVisible(true);  
+		
+	    g2d.setColor(Color.black);
+		g2d.drawImage(start, -5 , 10, this);
+		String a = "appuyez sur entrer";
+		g2d.setColor(new Color(5, 70, 181));
+		g2d.drawString(a, 115, 250);
 	  }
 	
-	private void drawSwitchScreen(Graphics2D g2d) {
-		
+	private void drawFin(Graphics2D g2d) {
+		g2d.setColor(Color.black);
+		g2d.drawImage(fin, 15-windowWidth/2 , -10, this);
 	}
 }
 
