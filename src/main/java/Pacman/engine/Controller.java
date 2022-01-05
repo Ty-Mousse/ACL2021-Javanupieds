@@ -6,7 +6,8 @@ import java.awt.event.KeyListener;
 public class Controller implements KeyListener{
 	
 	private int[] inputEnCours= {0,0};
-
+	private int state = 0;
+	
 	public Controller() {
 		
 	}
@@ -19,6 +20,10 @@ public class Controller implements KeyListener{
 		this.inputEnCours = inputEnCours;
 	}
 
+	public int getState() {
+		return state;
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int[] dir = {0,0};
@@ -39,6 +44,11 @@ public class Controller implements KeyListener{
 			dir[0]=-1;
 			dir[1]=0;
 			break;
+		case KeyEvent.VK_ENTER:
+			if (this.state == 0){
+				this.state = 1;
+			}
+			break;
 		}
 		this.inputEnCours=dir;
 	//	System.out.println("Direction : " + this.inputEnCours[0] + ", " + this.inputEnCours[1]);
@@ -53,6 +63,5 @@ public class Controller implements KeyListener{
 	public void keyReleased(KeyEvent e) {
 		
 	}
-	
 
 }

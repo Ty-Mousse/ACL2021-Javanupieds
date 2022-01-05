@@ -24,6 +24,7 @@ public class Interface extends JFrame{
 	private int[] i= {0,0};
 	private InterfacePainter interfacepainter;
 	private Image icon = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
+	private Controller controller;
 	
 	public Interface(int width, int height, Player player, List<Element> level, Controller controller) {
 		super();
@@ -36,6 +37,7 @@ public class Interface extends JFrame{
 		this.setResizable(false);
 		this.setVisible(true);
 		this.addKeyListener(controller);
+		this.controller = controller;
 		this.interfacepainter= new InterfacePainter(level, this.windowHeight, this.windowWidth, player, 0,i) ;
 		this.add(interfacepainter);
 		SwingUtilities.updateComponentTreeUI(interfacepainter);
@@ -46,6 +48,9 @@ public class Interface extends JFrame{
 			this.getContentPane().removeAll();
 			System.out.print(direction);
 			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player, score,direction);
+			if (this.controller.getState() == 1) {
+				this.interfacepainter.setCpt(1);
+			}
 			this.add(interfacepainter);
 			SwingUtilities.updateComponentTreeUI(interfacepainter);
 		}

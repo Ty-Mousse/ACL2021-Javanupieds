@@ -39,9 +39,9 @@ public class InterfacePainter extends JPanel{
 	private static int lives, score;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
 	private Image ghost, pacman, heart,fin,start,PacUp,PacDown,PacD,PacG;
-	private int cpt;
+	static private int cpt;
 
-	public InterfacePainter(List<Element> level, int height, int width, Player player, int score,int[]direction) {
+	public InterfacePainter(List<Element> level, int height, int width, Player player, int score, int[]direction) {
 		loadImages();
 		this.level = level;
 		this.gameOver = false;
@@ -51,10 +51,9 @@ public class InterfacePainter extends JPanel{
 		this.windowWidth= width;
 		this.lives = player.getLives();
 		this.score=score;
-		this.cpt=1;
+		cpt=0;
 		this.direction=direction;
-	
-		  }
+	}
 	
 	
 	
@@ -154,17 +153,17 @@ public class InterfacePainter extends JPanel{
 		String a = "appuyez sur entrer";
 		g2d.setColor(new Color(5, 70, 181));
 		g2d.drawString(a, 115, 250);
-		//switch(e.getKeyCode()) {
-		//case KeyEvent.VK_ENTER:
-		//	cpt=1;
-		//	break;
-		//}
 	  }
 	
 	private void drawFin(Graphics2D g2d) {
 		g2d.setColor(Color.black);
 		g2d.drawImage(fin, 15-windowWidth/2 , -10, this);
 	}
+
+	public void setCpt(int cpt) {
+		InterfacePainter.cpt = cpt;
+	}
+
 }
 
 
