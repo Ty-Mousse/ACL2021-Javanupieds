@@ -13,6 +13,17 @@ import java.awt.FontMetrics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import java.awt.GradientPaint;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException; 
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import main.java.Pacman.elements.Element;
 import main.java.Pacman.elements.Player;
 
@@ -27,7 +38,7 @@ public class InterfacePainter extends JPanel{
 	private int windowHeight;
 	private static int lives, score;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
-	private Image ghost, pacman, heart;
+	private Image ghost, pacman, heart,fin,start;
 	private int cpt;
 
 	public InterfacePainter(List<Element> level, int height, int width, Player player, int score) {
@@ -40,14 +51,18 @@ public class InterfacePainter extends JPanel{
 		this.windowWidth= width;
 		this.lives = player.getLives();
 		this.score=score;
-		this.cpt=1;
-	}
+		this.cpt=2;
+	
+		  }
+	
 	
 	
 	private void loadImages() {
 		ghost = new ImageIcon("src/main/java/Pacman/images/ghost.gif").getImage();
 		pacman = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
 		heart = new ImageIcon("src/main/java/Pacman/images/heart.png").getImage();
+		fin = new ImageIcon("src/main/java/Pacman/images/fin.gif").getImage();
+		start = new ImageIcon("src/main/java/Pacman/images/start.jpeg").getImage();
 
 	}
 	
@@ -62,9 +77,12 @@ public class InterfacePainter extends JPanel{
 		if (cpt==0) {
 			drawMenu(g2d);
 		}
-		if (cpt!=0) {
+		if (cpt==1) {
 			drawMaze(g2d);
 			drawScore(g2d);
+		}
+		if (cpt==2) {
+			drawFin(g2d);
 		}
     }
 	
@@ -102,15 +120,25 @@ public class InterfacePainter extends JPanel{
 			g2d.drawImage(heart, i * 28 + 8, windowWidth + 4*(tileSize + 1), this);
         }
 	}
+
 	
 	private void drawMenu(Graphics2D g2d) {
-		g2d.setColor(Color.red);
-		g2d.fillRect(10, 10, windowWidth-50, windowHeight-50);
 		
-	}
+	    g2d.setColor(Color.black);
+		g2d.drawImage(start, -5 , 10, this);
+		String a = "appuyez sur entrer";
+		g2d.setColor(new Color(5, 70, 181));
+		g2d.drawString(a, 115, 250);
+		//switch(e.getKeyCode()) {
+		//case KeyEvent.VK_ENTER:
+		//	cpt=1;
+		//	break;
+		//}
+	  }
 	
-	private void drawSwitchScreen(Graphics2D g2d) {
-		
+	private void drawFin(Graphics2D g2d) {
+		g2d.setColor(Color.black);
+		g2d.drawImage(fin, 15-windowWidth/2 , -10, this);
 	}
 }
 
