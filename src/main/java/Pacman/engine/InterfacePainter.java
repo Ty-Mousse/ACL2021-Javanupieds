@@ -30,7 +30,7 @@ import main.java.Pacman.elements.Player;
 public class InterfacePainter extends JPanel{
 	
 	private List<Element> level;
-	
+	private int[]direction;
 	private static boolean gameOver;
 	private boolean victory;
 	private int tileSize;
@@ -38,10 +38,10 @@ public class InterfacePainter extends JPanel{
 	private int windowHeight;
 	private static int lives, score;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
-	private Image ghost, pacman, heart,fin,start;
+	private Image ghost, pacman, heart,fin,start,PacUp,PacDown,PacD,PacG;
 	private int cpt;
 
-	public InterfacePainter(List<Element> level, int height, int width, Player player, int score) {
+	public InterfacePainter(List<Element> level, int height, int width, Player player, int score,int[]direction) {
 		loadImages();
 		this.level = level;
 		this.gameOver = false;
@@ -51,7 +51,8 @@ public class InterfacePainter extends JPanel{
 		this.windowWidth= width;
 		this.lives = player.getLives();
 		this.score=score;
-		this.cpt=2;
+		this.cpt=1;
+		this.direction=direction;
 	
 		  }
 	
@@ -63,6 +64,10 @@ public class InterfacePainter extends JPanel{
 		heart = new ImageIcon("src/main/java/Pacman/images/heart.png").getImage();
 		fin = new ImageIcon("src/main/java/Pacman/images/fin.gif").getImage();
 		start = new ImageIcon("src/main/java/Pacman/images/start.jpeg").getImage();
+		PacUp = new ImageIcon("src/main/java/Pacman/images/up.gif").getImage();
+		PacDown = new ImageIcon("src/main/java/Pacman/images/down.gif").getImage();
+		PacD = new ImageIcon("src/main/java/Pacman/images/right.gif").getImage();
+		PacG = new ImageIcon("src/main/java/Pacman/images/left.gif").getImage();
 
 	}
 	
@@ -103,7 +108,27 @@ public class InterfacePainter extends JPanel{
         	}if(e.getType() == '2') {
         		x-=3;
         		y-=3;
-        		g2d.drawImage(pacman, x, y, this);
+        		System.out.print(direction);
+        		int[]i= {-1,0};
+        		if (direction == i ){
+        			g2d.drawImage(PacUp, x, y, this);
+        		}
+        		int[]j= {1,0};
+        		if (direction == j ){
+        			g2d.drawImage(PacDown, x, y, this);
+        		}
+        		int[]k= {0,-1};
+        		if (direction == k ){
+        			g2d.drawImage(PacG, x, y, this);
+        		}
+        		int[]l= {-1,0};
+        		if (direction == l ){
+        			g2d.drawImage(PacD, x, y, this);
+        		}
+        		else {
+        			g2d.drawImage(pacman, x, y, this);
+        		}
+        		
         	}if(e.getType() == '3') {
         		g2d.drawImage(ghost, x, y, this);
         	}

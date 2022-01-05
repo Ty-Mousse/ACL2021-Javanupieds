@@ -21,6 +21,7 @@ public class Interface extends JFrame{
 	private int tileSize = 16;
 	private int windowWidth;
 	private int windowHeight;
+	private int[] i= {0,0};
 	private InterfacePainter interfacepainter;
 	private Image icon = new ImageIcon("src/main/java/Pacman/images/pacman.png").getImage();
 	
@@ -35,15 +36,16 @@ public class Interface extends JFrame{
 		this.setResizable(false);
 		this.setVisible(true);
 		this.addKeyListener(controller);
-		this.interfacepainter= new InterfacePainter(level, this.windowHeight, this.windowWidth, player, 0);
+		this.interfacepainter= new InterfacePainter(level, this.windowHeight, this.windowWidth, player, 0,i) ;
 		this.add(interfacepainter);
 		SwingUtilities.updateComponentTreeUI(interfacepainter);
 	};
 		
 		
-		public void render(List<Element> level, Player player, int score) {
+		public void render(List<Element> level, Player player, int score,int[] direction) {
 			this.getContentPane().removeAll();
-			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player, score);
+			System.out.print(direction);
+			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player, score,direction);
 			this.add(interfacepainter);
 			SwingUtilities.updateComponentTreeUI(interfacepainter);
 		}
