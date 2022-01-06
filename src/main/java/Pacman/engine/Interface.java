@@ -47,12 +47,17 @@ public class Interface extends JFrame{
 		public void render(List<Element> level, Player player, int score,int[] direction) {
 			this.getContentPane().removeAll();
 			//System.out.println(direction[0]+' '+direction[1]);
-			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player, score,direction);
+			interfacepainter = new InterfacePainter(level, this.windowHeight, this.windowWidth, player, score, direction);
 			if (this.controller.getState() == 1) {
-				this.interfacepainter.setCpt(1);
+				InterfacePainter.setCpt(1);
+			} else if (this.controller.getState() == 2) {
+				InterfacePainter.setCpt(2);
 			}
 			this.add(interfacepainter);
 			SwingUtilities.updateComponentTreeUI(interfacepainter);
 		}
 
+		public InterfacePainter getInterfacepainter() {
+			return interfacepainter;
+		}
 	}

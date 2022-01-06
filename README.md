@@ -3,15 +3,20 @@
 ## Sprint 3
 
 ### Backlog
-	1 - AmÃ©liorer l'affichage (mur, pacman et menus)\
-	2 - Lancement d'un nouveau niveau aprÃ¨s dÃ©faite/victoire\
+	1 - Améliorer l'affichage (mur, pacman et menus)\
+	2 - Lancement d'un nouveau niveau aprÃ¨s défaite/victoire\
 	3 - Musique et bruitages
 
-### RÃ©partition des tÃ¢ches
+### Répartition des tâches
 Xavier : Musique et bruitages\
-ClÃ©ment : back lancement des niveaux les uns aprÃ¨s les autres\
+Clément : back lancement des niveaux les uns après les autres\
 Paul : Murs (angles), pacman (bouche) et pseudo-menus (entre les niveaux)\
-RÃ©mi : correction des bugs (vitesse = 2)
+Rémi : correction des bugs (vitesse = 2)
+
+### Review
+
+
+### Rétrospective
 
 _________________________________________________________________________
 
@@ -22,4 +27,4 @@ Recquiert java 1.8\
 Pour lancer le programme, entrer la commande (Maven) :\
 `java -cp target/Pacman-2.0.jar main.java.Pacman.engine.Main`
 
-Si la fenÃªtre est blanche lors du lancement. Essayer de rÃ©duire et ouvrir Ã  nouveau la fenÃªtre de jeu.
+Si la fenêtre est blanche lors du lancement. Essayer de réduire et ouvrir à nouveau la fenêtre de jeu.

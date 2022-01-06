@@ -21,6 +21,7 @@ public class Game {
 	private long time;
 	
 	private String[] levels = {"level1.txt", "level2.txt", "level3.txt", "level4.txt", "level5.txt"}; // Liste de niveaux (fichiers texte)
+	private String[] levelsTest = {"level2.txt"};
 	private Level level;
 	private Player player;
 	private List<NPC> npcs;
@@ -84,7 +85,10 @@ public class Game {
 			this.displayer.render(allElement, this.player, this.score, direction); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			
 		}
-		
+		// Affichage de l'ecran de fin
+		this.controller.setState(2);
+		List<Element> allElement = this.getListAll();
+		this.displayer.render(allElement, this.player, this.score, direction);
 	}
 	
 	// Méthode permettant d'initialiser une instance de player à partir du tableau d'initialisation venant de la classe Level

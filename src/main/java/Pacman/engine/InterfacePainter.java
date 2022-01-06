@@ -72,7 +72,7 @@ public class InterfacePainter extends JPanel{
 	
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        System.out.println("flag painter");
         Graphics2D g2d = (Graphics2D) g;
 
 		g2d.setColor(Color.black);
@@ -88,6 +88,7 @@ public class InterfacePainter extends JPanel{
 		if (cpt==2) {
 			drawFin(g2d);
 		}
+		System.out.println(cpt);
     }
 	
 	private void drawMaze(Graphics2D g2d){
@@ -146,20 +147,26 @@ public class InterfacePainter extends JPanel{
 		
 	    g2d.setColor(Color.black);
 		g2d.drawImage(start, -5 , 10, this);
-		String a = "appuyez sur entrer";
+		String a = "Appuyez sur entrer";
 		g2d.setColor(new Color(5, 70, 181));
 		g2d.drawString(a, 115, 250);
 	  }
 	
 	private void drawFin(Graphics2D g2d) {
+		System.out.println("flag drawFin");
 		g2d.setColor(Color.black);
 		g2d.drawImage(fin, 15-windowWidth/2 , -10, this);
 	}
 
-	public void setCpt(int cpt) {
+	public static void setCpt(int cpt) {
 		InterfacePainter.cpt = cpt;
 	}
 
+	public static int getCpt() {
+		return cpt;
+	}
+	
+	
 }
 
 

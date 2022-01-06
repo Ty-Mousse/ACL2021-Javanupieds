@@ -24,6 +24,10 @@ public class Controller implements KeyListener{
 		return state;
 	}
 	
+	public void setState(int state) {
+		this.state = state;
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int[] dir = {0,0};
