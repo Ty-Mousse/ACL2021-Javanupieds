@@ -20,7 +20,7 @@ Rémi : correction des bugs (vitesse = 2)
 	3 - Musique et bruitages OK (choisir le bon fichier son)
 
 ### Rétrospective
-Ce qui s’est bien passé (ou pas) et les décision pour le sprint suivant
+Ce qui s’est bien passé (ou pas) et les décisions pour le sprint suivant
 #### Positif :
 	- La plupart des objectifs ont été atteint malgré plusieurs cas positif de covid dans l’équipe
 	- Affichage fiabilisé
@@ -37,7 +37,7 @@ _________________________________________________________________________
 Diagramme de Classe -> diagrammeClasseAuto.png
 _________________________________________________________________________
 
-Recquiert java 1.8\
+Requiert java 1.8\
 Pour lancer le programme, entrer la commande (Maven) :\
 `java -cp target/Pacman-2.0.jar main.java.Pacman.engine.Main`
 
