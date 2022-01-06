@@ -124,7 +124,9 @@ public class InterfacePainter extends JPanel{
         		else {
         			g2d.drawImage(pacman, x, y, this);
         		}
+        	if(e.getType() == '3') {
         		
+        	}
         	}if(e.getType() == '3') {
         		g2d.drawImage(ghost, x, y, this);
         	}
