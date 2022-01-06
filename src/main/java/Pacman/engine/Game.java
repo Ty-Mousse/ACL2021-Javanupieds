@@ -33,6 +33,7 @@ public class Game {
 	private Controller controller;
 	private int inputX;
 	private int inputY;
+	private int[] direction;
 	
 	public Game() throws IOException {
 		this.controller = new Controller();
@@ -74,13 +75,13 @@ public class Game {
 				if (time - timeRef >= delay) {
 					this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 					timeRef = System.currentTimeMillis();
-					this.displayer.render(allElement, this.player, this.score,this.controller.getInputEnCours()); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+					this.displayer.render(allElement, this.player, this.score,direction); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 				}
 			}
 			
 			// Dernier render pour afficher le cas ou il reste zero vie
 			List<Element> allElement = this.getListAll();
-			this.displayer.render(allElement, this.player, this.score, this.controller.getInputEnCours()); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+			this.displayer.render(allElement, this.player, this.score, direction); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 			
 		}
 		
@@ -143,7 +144,7 @@ public class Game {
 		 * differents de 0 chacun (autrement : aucun
 		 * input donc la direction reste la meme).
 		 */
-		int[] direction = this.controller.getInputEnCours();
+		direction = this.controller.getInputEnCours();
 		
 		int dx = direction[0];
 		int dy = direction[1];

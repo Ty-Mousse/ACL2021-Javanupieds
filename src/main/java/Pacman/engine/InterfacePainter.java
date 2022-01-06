@@ -107,21 +107,17 @@ public class InterfacePainter extends JPanel{
         	}if(e.getType() == '2') {
         		x-=3;
         		y-=3;
-        		System.out.print(direction);
         		int[]i= {-1,0};
-        		if (direction == i ){
+        		if (direction[0] == 0 && direction[1]==-1){
         			g2d.drawImage(PacUp, x, y, this);
         		}
-        		int[]j= {1,0};
-        		if (direction == j ){
+        		else if (direction[0] == 0 && direction[1]==1 ){
         			g2d.drawImage(PacDown, x, y, this);
         		}
-        		int[]k= {0,-1};
-        		if (direction == k ){
+        		else if (direction[0] == -1 && direction[1]==0){
         			g2d.drawImage(PacG, x, y, this);
         		}
-        		int[]l= {-1,0};
-        		if (direction == l ){
+        		else if (direction[0] == 1 && direction[1]==0){
         			g2d.drawImage(PacD, x, y, this);
         		}
         		else {
