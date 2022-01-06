@@ -22,12 +22,12 @@ Rémi : correction des bugs (vitesse = 2)
 ### Rétrospective
 Ce qui s’est bien passé (ou pas) et les décision pour le sprint suivant
 #### Positif :
-		- La plupart des objectifs ont été atteint malgré plusieurs cas positif de covid dans l’équipe
-		- Affichage fiabilisé
-		- Clareté dans la répartition des tâches
-		- Meilleur connaissance de la structure du projet
+	- La plupart des objectifs ont été atteint malgré plusieurs cas positif de covid dans l’équipe
+	- Affichage fiabilisé
+	- Clareté dans la répartition des tâches
+	- Meilleur connaissance de la structure du projet
 #### Négatif :
-	  	- Moins de communication avec les vacances et les fêtes
+	- Moins de communication avec les vacances et les fêtes
 
 ### Décisions pour le sprint suivant
 Sprint 4 court donc l'objectif ici est de finir la tâche confiée tout en revoyant
