@@ -59,6 +59,7 @@ public class Game {
 			this.goal = this.level.getPieces().size()*100;
 			this.initPlayer(this.level.getMobiles());
 			this.initNPC(this.level.getMobiles());
+			this.bullets = new ArrayList<Bullet>();
 			this.startNPC = false;
 			
 			while(this.player.getLives() > 0 & this.currentScore != this.goal) {
@@ -218,22 +219,45 @@ public class Game {
 	};
 	
 	private void updateBulletPosition() throws Exception {
+		List<Bullet> toDeleteBullets = new ArrayList<Bullet>();
 		for (Bullet bullet : this.bullets) {
 			int x = bullet.getX();
 			int y = bullet.getY();
 			int dx = bullet.getdx();
 			int dy = bullet.getdy();
 			int v = bullet.getV();
-			if (this.checkBulletMouvement(x, y, dx, dy)) { // Si le mouvement est possible alors il se deplace
-				bullet.setX(x + v*dx);
-				bullet.setY(y + v*dy);
+			if (this.checkBulletMouvement(bullet, x, y, dx, dy, v)) { // Si le mouvement est possible alors il se deplace
+				int[] newPos = this.labyrintheInfini(x + v*dx, y + v*dy);
+				bullet.setX(newPos[0]);
+				bullet.setY(newPos[1]);
 			} else { // Sinon le projectile se detruit et sort de la liste
-				bullets.remove(bullet);
+				toDeleteBullets.add(bullet);
 			}
+		}
+		for (Bullet bullet : toDeleteBullets) {
+			bullets.remove(bullet);
 		}
 	}
 	
-	private boolean checkBulletMouvement(int x, int y, int dx, int dy) {
+	private boolean checkBulletMouvement(Bullet bullet, int x, int y, int dx, int dy, int v) {
+		// Checking des murs
+		for (Element e : this.level.getLevel()) {
+			for (int i = 0; i < v; i++) {
+				if (e.getType() == '#'){
+					if ((x + v*dx == e.getX()) && (y + v*dy == e.getY())) {
+						return false;
+					}
+				}
+			}
+		}
+		for (NPC npc : this.npcs) {
+			for (int i = 0; i < v; i++) {
+				if ((x + v*dx == npc.getX()) && (y + v*dy == npc.getY())) {
+					this.npcs.remove(npc);
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 	

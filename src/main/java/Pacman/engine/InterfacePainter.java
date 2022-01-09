@@ -72,7 +72,6 @@ public class InterfacePainter extends JPanel{
 	
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        System.out.println("flag painter");
         Graphics2D g2d = (Graphics2D) g;
 
 		g2d.setColor(Color.black);
@@ -88,7 +87,6 @@ public class InterfacePainter extends JPanel{
 		if (cpt==2) {
 			drawFin(g2d);
 		}
-		System.out.println(cpt);
     }
 	
 	private void drawMaze(Graphics2D g2d){
