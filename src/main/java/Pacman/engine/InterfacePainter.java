@@ -107,7 +107,7 @@ public class InterfacePainter extends JPanel{
         		g2d.setColor(new Color(255,255,255));
         		g2d.fillOval(x + 5, y + 5, 6, 6);
         	}
-        	if(e.getType() == 'p') {
+        	if(e.getType() == 'm') {
             	g2d.setColor(new Color(255,0,0));
             	g2d.fillOval(x + 5, y + 5, 6, 6);
             }
@@ -131,9 +131,9 @@ public class InterfacePainter extends JPanel{
         			g2d.drawImage(pacman, x, y, this);
         		}
         	}
-        	if(e.getType() == '4') {
-        		x-=3;
-        		y-=3;
+        	if(e.getType() == 'p') {
+        		x=+5;
+        		y=+5;
         		if (direction[0] == 0 && direction[1]==-1){
         			g2d.drawImage(bulletHaut, x, y, this);
         		}
