@@ -51,7 +51,7 @@ public class Game {
 	}
 	
 	public void start() throws Exception {
-		for (String filename : this.levelsTest) {
+		for (String filename : this.levels) {
 			
 			// Réinitialisation des paramètres de jeux
 			this.level = new Level("src/main/java/Pacman/" + filename);
