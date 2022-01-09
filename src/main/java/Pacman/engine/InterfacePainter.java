@@ -38,7 +38,7 @@ public class InterfacePainter extends JPanel{
 	private int windowHeight;
 	private static int lives, score;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
-	private Image ghost, pacman, heart,fin,start,PacUp,PacDown,PacD,PacG, bullet;
+	private Image ghost, pacman, heart,fin,start,PacUp,PacDown,PacD,PacG, bulletD, bulletG, bulletBas, bulletHaut;
 	static private int cpt;
 
 	public InterfacePainter(List<Element> level, int height, int width, Player player, int score, int[]direction) {
@@ -67,7 +67,10 @@ public class InterfacePainter extends JPanel{
 		PacDown = new ImageIcon("src/main/java/Pacman/images/down.gif").getImage();
 		PacD = new ImageIcon("src/main/java/Pacman/images/right.gif").getImage();
 		PacG = new ImageIcon("src/main/java/Pacman/images/left.gif").getImage();
-		bullet = new ImageIcon("src/main/java/Pacman/images/bullet.png").getImage();
+		bulletD = new ImageIcon("src/main/java/Pacman/images/bulletD.png").getImage();
+		bulletG = new ImageIcon("src/main/java/Pacman/images/bulletG.png").getImage();
+		bulletBas = new ImageIcon("src/main/java/Pacman/images/bulletBas.png").getImage();
+		bulletHaut = new ImageIcon("src/main/java/Pacman/images/bulletHaut.png").getImage();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -129,9 +132,27 @@ public class InterfacePainter extends JPanel{
         		else {
         			g2d.drawImage(pacman, x, y, this);
         		}
-        	if(e.getType() == '3') {
-        		
         	}
+        	if(e.getType() == '4') {
+        		x-=3;
+        		y-=3;
+        		if (direction[0] == 0 && direction[1]==-1){
+        			g2d.drawImage(bulletHaut, x, y, this);
+        		}
+        		else if (direction[0] == 0 && direction[1]==1 ){
+        			g2d.drawImage(bulletBas, x, y, this);
+        		}
+        		else if (direction[0] == -1 && direction[1]==0){
+        			g2d.drawImage(bulletG, x, y, this);
+        		}
+        		else if (direction[0] == 1 && direction[1]==0){
+        			g2d.drawImage(bulletD, x, y, this);
+        		}
+        		else {
+        			g2d.drawImage(bulletD, x, y, this);
+        		}
+        		
+        	
         	}if(e.getType() == '3') {
         		g2d.drawImage(ghost, x, y, this);
         	}
