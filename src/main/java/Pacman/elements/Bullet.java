@@ -6,7 +6,7 @@ public class Bullet extends MobileElement{
 	
 	
 	public Bullet(int x, int y, int dx, int dy) {
-		super(x, y, 1, 'p'); //le '3' est a modifer, c'etait en attendant
+		super(x, y, 1, 'p');
 		this.dx = dx;
 		this.dy = dy;
 	}

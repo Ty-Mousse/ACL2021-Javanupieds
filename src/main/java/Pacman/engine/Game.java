@@ -250,6 +250,7 @@ public class Game {
 				}
 			}
 		}
+		// Checking des NPCs et mort si necessaire
 		for (NPC npc : this.npcs) {
 			for (int i = 0; i < v; i++) {
 				if ((x + v*dx == npc.getX()) && (y + v*dy == npc.getY())) {
