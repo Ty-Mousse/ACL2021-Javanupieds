@@ -214,7 +214,9 @@ public class Game {
 	private void addBullet() {
 		if (this.controller.getShoot() == 1) {
 			this.controller.setShoot(0); // Réinitialisation de la variable d'etat de tir
-			bullets.add(new Bullet(this.player.getX(), this.player.getY(), this.direction[0], this.direction[1]));
+			if ((this.direction[0] != 0) || (this.direction[1] != 0)) {
+				bullets.add(new Bullet(this.player.getX(), this.player.getY(), this.direction[0], this.direction[1]));
+			}
 		}
 	};
 	
