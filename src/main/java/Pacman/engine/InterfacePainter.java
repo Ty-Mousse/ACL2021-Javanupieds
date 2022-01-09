@@ -38,7 +38,7 @@ public class InterfacePainter extends JPanel{
 	private int windowHeight;
 	private static int lives, score;
     private final Font smallFont = new Font("Arial", Font.BOLD, 14);
-	private Image ghost, pacman, heart,fin,start,PacUp,PacDown,PacD,PacG;
+	private Image ghost, pacman, heart,fin,start,PacUp,PacDown,PacD,PacG, bullet;
 	static private int cpt;
 
 	public InterfacePainter(List<Element> level, int height, int width, Player player, int score, int[]direction) {
@@ -67,7 +67,7 @@ public class InterfacePainter extends JPanel{
 		PacDown = new ImageIcon("src/main/java/Pacman/images/down.gif").getImage();
 		PacD = new ImageIcon("src/main/java/Pacman/images/right.gif").getImage();
 		PacG = new ImageIcon("src/main/java/Pacman/images/left.gif").getImage();
-
+		bullet = new ImageIcon("src/main/java/Pacman/images/bullet.png").getImage();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -105,7 +105,12 @@ public class InterfacePainter extends JPanel{
         	}if(e.getType() == '.') {
         		g2d.setColor(new Color(255,255,255));
         		g2d.fillOval(x + 5, y + 5, 6, 6);
-        	}if(e.getType() == '2') {
+        	}
+        	if(e.getType() == 'p') {
+            	g2d.setColor(new Color(255,0,0));
+            	g2d.fillOval(x + 5, y + 5, 6, 6);
+            }
+        	if(e.getType() == '2') {
         		x-=3;
         		y-=3;
         		int[]i= {-1,0};

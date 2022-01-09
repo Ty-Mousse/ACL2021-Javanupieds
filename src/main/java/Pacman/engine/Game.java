@@ -10,6 +10,7 @@ import main.java.Pacman.elements.Level;
 import main.java.Pacman.elements.MobileElement;
 import main.java.Pacman.elements.NPC;
 import main.java.Pacman.elements.Player;
+import main.java.Pacman.elements.Bullet;
 import main.java.Pacman.elements.Element;
 
 public class Game {
@@ -25,6 +26,7 @@ public class Game {
 	private Level level;
 	private Player player;
 	private List<NPC> npcs;
+	private List<Bullet> bullets = new ArrayList<Bullet>(); // Contient tous les projectiles en cours
 	private Interface displayer;
 	private int goal;
 	private int score = 0; // Stocke le score du joueur sur la totalité des niveaux
@@ -61,11 +63,11 @@ public class Game {
 			
 			while(this.player.getLives() > 0 & this.currentScore != this.goal) {
 				this.updateInput(); // Recuperation de l'entrée clavier du joueur (si presente) et envoi au controlleur
-				List<Element> allElement = this.getListAll();
 				// Boucle de deplacement du joueur
 				// Optimisation probablement faisable sur les délais de temps differents
 				time= System.currentTimeMillis();
 				if (time - speedTimeRef >= speedDelay) {
+					this.addBullet();
 					this.updatePosition();
 					this.updateState(); // Mise a jour des etats en fonction des deplacements
 					speedTimeRef = System.currentTimeMillis();
@@ -76,7 +78,8 @@ public class Game {
 				if (time - timeRef >= delay) {
 					this.displayer.setTitle("Pacman @" + 1000/(time - timeRef) + "fps");
 					timeRef = System.currentTimeMillis();
-					this.displayer.render(allElement, this.player, this.score,direction); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
+					List<Element> allElement = this.getListAll();
+					this.displayer.render(allElement, this.player, this.score, direction); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
 				}
 			}
 			
@@ -193,7 +196,6 @@ public class Game {
 				this.controller.setInputEnCours(reset);
 				
 				}
-		
 			}
 		
 		}
@@ -204,7 +206,35 @@ public class Game {
 		 */
 		this.updatePlayerPosition();
 		this.updateNPCPositions();
+		this.updateBulletPosition();
 		
+	}
+	
+	private void addBullet() {
+		if (this.controller.getShoot() == 1) {
+			this.controller.setShoot(0); // Réinitialisation de la variable d'etat de tir
+			bullets.add(new Bullet(this.player.getX(), this.player.getY(), this.direction[0], this.direction[1]));
+		}
+	};
+	
+	private void updateBulletPosition() throws Exception {
+		for (Bullet bullet : this.bullets) {
+			int x = bullet.getX();
+			int y = bullet.getY();
+			int dx = bullet.getdx();
+			int dy = bullet.getdy();
+			int v = bullet.getV();
+			if (this.checkBulletMouvement(x, y, dx, dy)) { // Si le mouvement est possible alors il se deplace
+				bullet.setX(x + v*dx);
+				bullet.setY(y + v*dy);
+			} else { // Sinon le projectile se detruit et sort de la liste
+				bullets.remove(bullet);
+			}
+		}
+	}
+	
+	private boolean checkBulletMouvement(int x, int y, int dx, int dy) {
+		return true;
 	}
 	
 	private void updatePlayerPosition() throws Exception {
@@ -429,9 +459,15 @@ public class Game {
 		List<Element> murs = this.level.getLevel();
 		List<Element> pieces = this.level.getPieces();
 		List<Element> mobiles = new ArrayList<>();
+		
 		mobiles.add(this.player);
 		for (NPC npc : this.npcs) {
 			mobiles.add(npc);
+		}
+		if (this.bullets.size() > 0) {
+			for (Bullet bullet : this.bullets) {
+				mobiles.add(bullet);
+			}	
 		}
 		List<Element> listImobiles = Stream.concat(murs.stream(), pieces.stream()).collect(Collectors.toList());
 		List<Element> listAll = Stream.concat(listImobiles.stream(), mobiles.stream()).collect(Collectors.toList());

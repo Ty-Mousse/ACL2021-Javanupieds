@@ -7,6 +7,7 @@ public class Controller implements KeyListener{
 	
 	private int[] inputEnCours= {0,0};
 	private int state = 0;
+	private int shoot = 0;
 	
 	public Controller() {
 		
@@ -28,9 +29,17 @@ public class Controller implements KeyListener{
 		this.state = state;
 	}
 	
+	public int getShoot() {
+		return shoot;
+	}
+
+	public void setShoot(int shoot) {
+		this.shoot = shoot;
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int[] dir = {0,0};
+		int[] dir = this.inputEnCours;
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_UP:
 			dir[0]=0;
@@ -47,6 +56,9 @@ public class Controller implements KeyListener{
 		case KeyEvent.VK_LEFT:
 			dir[0]=-1;
 			dir[1]=0;
+			break;
+		case KeyEvent.VK_SPACE: // Touche pour envoyer un projectile
+			this.shoot = 1;
 			break;
 		case KeyEvent.VK_ENTER:
 			if (this.state == 0){
