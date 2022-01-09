@@ -51,7 +51,7 @@ public class Game {
 	}
 	
 	public void start() throws Exception {
-		for (String filename : this.levels) {
+		for (String filename : this.levelsTest) {
 			
 			// Réinitialisation des paramètres de jeux
 			this.level = new Level("src/main/java/Pacman/" + filename);
@@ -193,6 +193,7 @@ public class Game {
 			if (npc.getX()==xPlayer & npc.getY()==yPlayer) {
 				int currentLife = this.player.getLives();
 				this.player.setLives(currentLife - 1);
+				Sound.loseLive();
 			
 				for (Element e: this.level.getMobiles()) { // si oui vie-=1 et on reset position joueur/npc
 					if (e.getType() == 'O') {
