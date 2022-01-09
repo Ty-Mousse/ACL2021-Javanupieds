@@ -87,12 +87,21 @@ public class Game {
 			// Dernier render pour afficher le cas ou il reste zero vie
 			List<Element> allElement = this.getListAll();
 			this.displayer.render(allElement, this.player, this.score, direction); // Mise a jour de l'affichage une fois toutes les mise a jours faites (60fps)
-			
+			if(filename != "level5.txt") {
+				Sound.nextStage();
+			}
 		}
 		// Affichage de l'ecran de fin
 		this.controller.setState(2);
 		List<Element> allElement = this.getListAll();
 		this.displayer.render(allElement, this.player, this.score, direction);
+		Sound.stop();
+		if(this.currentScore == this.goal) {
+			Sound.victory();
+		} else {
+			Sound.gameOver();
+		}
+
 	}
 	
 	// Méthode permettant d'initialiser une instance de player à partir du tableau d'initialisation venant de la classe Level

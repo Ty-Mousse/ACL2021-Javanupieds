@@ -109,7 +109,7 @@ public class InterfacePainter extends JPanel{
         	}
         	if(e.getType() == 'p') {
             	g2d.setColor(new Color(255,0,0));
-            	g2d.fillOval(x + 5, y + 5, 6, 6);
+            	g2d.fillOval(x + 6, y + 6, 8, 8);
             }
         	if(e.getType() == '2') {
         		x-=3;
@@ -129,8 +129,8 @@ public class InterfacePainter extends JPanel{
         		else {
         			g2d.drawImage(pacman, x, y, this);
         		}
-        	}
-        	if(e.getType() == '4') {
+        	//}
+/*        	if(e.getType() == '4') {
         		x=-3;
         		y=-3;
         		if (direction[0] == 0 && direction[1]==-1){
@@ -147,7 +147,7 @@ public class InterfacePainter extends JPanel{
         		}
         		else {
         			g2d.drawImage(bulletD, x, y, this);
-        		}
+        		}*/
         		
         	
         	}if(e.getType() == '3') {
