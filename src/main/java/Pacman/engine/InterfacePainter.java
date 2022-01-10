@@ -31,8 +31,6 @@ public class InterfacePainter extends JPanel{
 	
 	private List<Element> level;
 	private int[]direction;
-	private static boolean gameOver;
-	private boolean victory;
 	private int tileSize;
 	private int windowWidth;
 	private int windowHeight;
@@ -44,8 +42,6 @@ public class InterfacePainter extends JPanel{
 	public InterfacePainter(List<Element> level, int height, int width, Player player, int score, int[]direction) {
 		loadImages();
 		this.level = level;
-		this.gameOver = false;
-		this.victory = false;
 		this.tileSize = 16;
 		this.windowHeight= height;
 		this.windowWidth= width;
@@ -128,28 +124,7 @@ public class InterfacePainter extends JPanel{
         		}
         		else {
         			g2d.drawImage(pacman, x, y, this);
-        		}
-        	//}
-/*        	if(e.getType() == '4') {
-        		x=-3;
-        		y=-3;
-        		if (direction[0] == 0 && direction[1]==-1){
-        			g2d.drawImage(bulletHaut, x, y, this);
-        		}
-        		else if (direction[0] == 0 && direction[1]==1 ){
-        			g2d.drawImage(bulletBas, x, y, this);
-        		}
-        		else if (direction[0] == -1 && direction[1]==0){
-        			g2d.drawImage(bulletG, x, y, this);
-        		}
-        		else if (direction[0] == 1 && direction[1]==0){
-        			g2d.drawImage(bulletD, x, y, this);
-        		}
-        		else {
-        			g2d.drawImage(bulletD, x, y, this);
-        		}*/
-        		
-        	
+        		}  	
         	}if(e.getType() == '3') {
         		g2d.drawImage(ghost, x, y, this);
         	}
@@ -157,7 +132,6 @@ public class InterfacePainter extends JPanel{
 	}
 	
 	private void drawScore(Graphics2D g2d) {
-	//	System.out.println(lives);
 		g2d.setFont(smallFont);
 		g2d.setColor(new Color(5, 181, 79));
 		String s = "Score: " + score;
