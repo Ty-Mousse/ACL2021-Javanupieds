@@ -21,8 +21,8 @@ Rémi : Diagramme de séquence (si tu veux)
 
 _________________________________________________________________________
 
-Diagramme de Classes -> diagrammeClasseAuto.jpg
-Diagramme de Séquences -> SequenceDiagram.jpg
+Diagramme de Classe -> diagrammeClasseAuto.jpg
+Diagramme de Séquence -> SequenceDiagram.jpg
 _________________________________________________________________________
 
 Requiert java 1.8\
