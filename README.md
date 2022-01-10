@@ -10,10 +10,19 @@
 Xavier : Synchronisation des sons avec les actions\
 Clément : Mécanique du projectile et interaction avec le jeu\
 Paul : Affichage du projectile\
-Rémi : Diagramme de séquence (si tu veux)\
+Rémi : Diagramme de séquence (si tu veux)
+
+### Review
+#### Fonctionnalités réalisées et validées (ou pas)
+	1 - Faire tirer un projectile par le personnage pouvant tuer un fantôme
+	et pouvant traverser le niveau OK
+
+### Rétrospective
+
 _________________________________________________________________________
 
-Diagramme de Classe -> diagrammeClasseAuto.png
+Diagramme de Classes -> diagrammeClasseAuto.jpg
+Diagramme de Séquences -> SequenceDiagram.jpg
 _________________________________________________________________________
 
 Requiert java 1.8\
