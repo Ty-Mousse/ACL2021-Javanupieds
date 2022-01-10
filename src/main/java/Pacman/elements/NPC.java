@@ -11,6 +11,7 @@ public class NPC extends MobileElement {
 		super(x, y, 1, '3'); //le '3' est a modifer, c'etait en attendant
 		this.dx = 0;
 		this.dy = 0;
+		this.getInfranchissable().add('p');
 		
 	}
 	

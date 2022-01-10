@@ -4,7 +4,6 @@ public class Bullet extends MobileElement{
 	private int dx;
 	private int dy;
 	
-	
 	public Bullet(int x, int y, int dx, int dy) {
 		super(x, y, 2, 'p');
 		this.dx = dx;
