@@ -136,16 +136,14 @@ public class Game {
 		
 		List<Integer> npcsX = new ArrayList<Integer>();
 		List<Integer> npcsY = new ArrayList<Integer>();
-		int n =0;
 		for (Element e:initList) {
 			if (e.getType() == 'N') { // pas sur pour le 'N', a modifier si besoin !
 				npcsX.add(e.getX());
 				npcsY.add(e.getY());
-				n++;
 			}
 		}
 				
-		for (int i = 0; i<n ; i++) {
+		for (int i = 0; i<this.npcs.size(); i++) {
 			this.npcs.get(i).setX(npcsX.get(i));
 			this.npcs.get(i).setY(npcsY.get(i));
 
@@ -253,10 +251,14 @@ public class Game {
 	
 	private boolean checkBulletMouvement(Bullet bullet, int x, int y, int dx, int dy, int v) {
 		// Checking des murs
+		int[] newPos = this.labyrintheInfini(x + v*dx, y + v*dy);
+		int newx = newPos[0];
+		int newy = newPos[1];
 		for (Element e : this.level.getLevel()) {
 			for (int i = 0; i < v; i++) {
 				if (e.getType() == '#'){
-					if ((x + v*dx == e.getX()) && (y + v*dy == e.getY())) {
+					
+					if ((newx == e.getX()) && (newy == e.getY())) {
 						return false;
 					}
 				}
