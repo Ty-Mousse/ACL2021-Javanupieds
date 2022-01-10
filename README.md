@@ -21,7 +21,7 @@ Rémi : Diagramme de séquence (si tu veux)
 
 _________________________________________________________________________
 
-Diagramme de Classe -> diagrammeClasseAuto.jpg
+Diagramme de Classe -> diagrammeClasseAuto.jpg\
 Diagramme de Séquence -> SequenceDiagram.jpg
 _________________________________________________________________________
 
